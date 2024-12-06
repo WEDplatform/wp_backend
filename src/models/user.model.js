@@ -28,4 +28,10 @@ userSchema.pre("save",function(next){
         })
     })
 })
+userSchema.methods.validatePassword=async function(password){
+    return await bcryptjs.compare(password,this.password)
+}
+userSchema.methods.generateRefreshToken=async function(){
+    
+}
 const userModel=mongoose.model('User',userSchema)
