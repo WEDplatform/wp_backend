@@ -31,9 +31,24 @@ userSchema.pre("save",function(next){
 userSchema.methods.validatePassword=async function(password){
     return await bcryptjs.compare(password,this.password)
 }
-userSchema.methods.generateRefreshToken=async function(){
-    jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' }, function(err, token) {
-        return token
-      });
+userSchema.methods.generateRefreshToken= function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            username: this.username
+        }, process.env.JWT_SECRET,{
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        },
+         { algorithm: 'RS256' });
+}
+userSchema.methods.generateAccessToken= function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            username: this.username
+        }, process.env.JWT_SECRET,{
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        },
+         { algorithm: 'RS256' });
 }
 const userModel=mongoose.model('User',userSchema)
