@@ -1,23 +1,31 @@
 import mongoose, { Schema } from "mongoose";
+import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
 const userSchema=new Schema({
     username:{
         type:String,
-        unique:true,
-        index:true
-    }.trim().lowercase(),
-    email:{
-        type:String,
-        unique:true,
-        required:true
-    }.trim().lowercase(),
-    fullname:{
-        type:String,
-        trim:true,
-    }.trim().lowercase(),
+        min:[3,'Username must be at least 3 characters long'],
+        index:true,
+        lowercase:true,
+        unique:true
+    },
     password:{
         type:String,
-    }.trim()
+        min:[6,'Password must be at least 6 characters long'],
+        required:[true,'Password is required']
+    }
 },{
     timestamps:true
 })
-const userModel=mongoose.model('user',userSchema)
+userSchema.pre("save",function(next){
+    if(!this.isModified('password')) return next()
+    bcryptjs.genSalt(10,function(err,salt){
+        if(err) throw err;
+        bcryptjs.hash(this.password,salt,function(err,hash){
+            if(err) throw err;
+            this.password=hash
+            next()
+        })
+    })
+})
+const userModel=mongoose.model('User',userSchema)
