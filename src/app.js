@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
+import { userRouter } from "./routes/user.routes.js";
 let app=express();
 app.use(cors(
     {
@@ -14,4 +15,5 @@ app.use(express.json({
 }))
 app.use(express.urlencoded({extended:true,limit:""}))
 app.use(express.static("public"))
+app.use("/user",userRouter);
 export {app}
