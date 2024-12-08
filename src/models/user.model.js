@@ -13,6 +13,11 @@ const userSchema=new Schema({
         type:String,
         min:[6,'Password must be at least 6 characters long'],
         required:[true,'Password is required']
+    },
+    phoneNumber:{
+        type:String,
+        required:[true,'Phone number is required'],
+        length:10,
     }
 },{
     timestamps:true
@@ -45,10 +50,12 @@ userSchema.methods.generateAccessToken= function(){
     return jwt.sign(
         {
             _id: this._id,
-            username: this.username
+            username: this.username,
+            phoneNumber: this.phoneNumber
         }, process.env.JWT_SECRET,{
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         },
          { algorithm: 'RS256' });
 }
 const userModel=mongoose.model('User',userSchema)
+export {userModel}
