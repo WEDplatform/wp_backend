@@ -44,6 +44,9 @@ const userSchema=new Schema({
     isMobileVerified:{
         type:Boolean,
         default:false
+    },
+    refreshToken:{
+        type:String
     }
 },{
     timestamps:true
@@ -75,7 +78,7 @@ userSchema.methods.generateAccessToken= function(){
         {
             _id: this._id,
             username: this.username,
-            phoneNumber: this.phoneNumber
+            email: this.email
         }, process.env.JWT_SECRET,{
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         },
