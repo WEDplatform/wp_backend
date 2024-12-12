@@ -1,6 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
+const userPreferenceSchema=new Schema({
+    title:{
+        type:String
+    },
+    value:[String]
+})
 const userSchema=new Schema({
     username:{
         type:String,
@@ -11,27 +17,45 @@ const userSchema=new Schema({
     },
     password:{
         type:String,
-        min:[6,'Password must be at least 6 characters long'],
-        required:[true,'Password is required']
+        min:[8,'Password must be at least 6 characters long']
+    },
+    email:{
+        type:String,
+        required:true
     },
     phoneNumber:{
         type:String,
         required:[true,'Phone number is required'],
         length:10,
+    },
+    usertype:{
+        type:String,
+        default:"user"
+    },
+    isGoogleAuthenticated:{
+        type:Boolean,
+        default:false
+    },
+    locationCity:{
+        type:String,
+        required:[true,"Provide city name"]
+    },
+    userPreference:[userPreferenceSchema],
+    isMobileVerified:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true
 })
 userSchema.pre("save",function(next){
+    console.log(this.password);
+    
     if(!this.isModified('password')) return next()
-    bcryptjs.genSalt(10,function(err,salt){
-        if(err) throw err;
-        bcryptjs.hash(this.password,salt,function(err,hash){
-            if(err) throw err;
-            this.password=hash
-            next()
-        })
-    })
+        let salt = bcryptjs.genSaltSync(10);
+        this.password=bcryptjs.hashSync(this.password,salt)
+        next()
+
 })
 userSchema.methods.validatePassword=async function(password){
     return await bcryptjs.compare(password,this.password)
