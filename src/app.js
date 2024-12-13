@@ -6,7 +6,7 @@ import { userRouter } from "./routes/user.routes.js";
 let app=express();
 app.use(cors(
     {
-        origin:["http://localhost:3000","https://wp-frontend-eight.vercel.app/"],
+        origin:["http://localhost:3000","https://wp-frontend-eight.vercel.app"],
         credentials:true
     }
 ))
