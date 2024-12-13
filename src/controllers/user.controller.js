@@ -41,8 +41,11 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     },"User created successfully"))
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
-    const {userid,password}=req.body;    
+    console.log(req.body);
+    const {userid,password}=req.body;   
+     
     let loggedUser=await userModel.findOne({email:userid})
+    
     
     if(!loggedUser){
         resp.status(404).send(new ApiResponse(404,{
