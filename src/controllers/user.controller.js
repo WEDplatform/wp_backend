@@ -41,14 +41,30 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     },"User created successfully"))
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
-    const {email,password}=req.body;
-    let loggedUser=await userModel.findOne({email:email})
+    const {userid,password}=req.body;    
+    let loggedUser=await userModel.findOne({email:userid})
+    
     if(!loggedUser){
-        resp.status(404).send(new ApiResponse(404,null,"no user found"))
+        resp.status(404).send(new ApiResponse(404,{
+            message:"no user was there"
+        },"no user found"))
         return
     }
+    if(loggedUser.isGoogleAuthenticated){
+        
+        let {accessToken,refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
+            resp.status(202)
+            .cookie("refreshToken",refreshToken,refreshTokenOption)
+            .cookie("accessToken",accessToken,accessTokenOption)
+            .send(new ApiResponse(202,{
+                email:loggedUser.email,
+                isMobileVerified:loggedUser.isMobileVerified,
+                username:loggedUser.username,
+                isGoogleAuthenticated:loggedUser.isGoogleAuthenticated
+            },"user found"))
+            return
+    }
     let passComp=await loggedUser.validatePassword(password)
-    console.log(passComp);
     if(passComp){
         if(!(loggedUser.isMobileVerified)){
             resp.status(401).send(new ApiResponse(401,{
@@ -76,4 +92,14 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     resp.status(403).send(new ApiResponse(403,null,"invalid credentials"))
     
 })
-export {userRegisterHandler,userLoginHandler}
+let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
+    let userName=await userModel.findOne({username:req.body.username})
+    if(userName){
+        resp.status(226).send(new ApiResponse(226,null,"username already taken")) 
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,null,"username available"))
+
+
+})
+export {userRegisterHandler,userLoginHandler,usernameAvailability}
