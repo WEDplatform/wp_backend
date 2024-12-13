@@ -10,6 +10,9 @@ app.use(cors(
         credentials:true
     }
 ))
+app.use(function(req,resp,next){
+    resp.header("Access-Control-Allow-Origin","https://wp-frontend-eight.vercel.app")
+})
 app.use(cookieParser())
 app.use(express.json({
     limit:""
