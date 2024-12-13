@@ -60,11 +60,11 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
             return
         }
         else{
-            const options={
-                httpOnly:true,
-                secure:true
-            }
-            resp.status(202).send(new ApiResponse(202,{
+            let {accessToken,refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
+            resp.status(202)
+            .cookie("refreshToken",refreshToken,refreshTokenOption)
+            .cookie("accessToken",accessToken,accessTokenOption)
+            .send(new ApiResponse(202,{
                 email:loggedUser.email,
                 isMobileVerified:loggedUser.isMobileVerified,
                 username:loggedUser.username
