@@ -26,7 +26,7 @@ const userSchema=new Schema({
     phoneNumber:{
         type:String,
         required:[true,'Phone number is required'],
-        length:10,
+        length:12,
     },
     usertype:{
         type:String,
@@ -52,8 +52,6 @@ const userSchema=new Schema({
     timestamps:true
 })
 userSchema.pre("save",function(next){
-    console.log(this.password);
-    
     if(!this.isModified('password')) return next()
         let salt = bcryptjs.genSaltSync(10);
         this.password=bcryptjs.hashSync(this.password,salt)
@@ -69,9 +67,8 @@ userSchema.methods.generateRefreshToken= function(){
             _id: this._id,
             username: this.username
         }, process.env.JWT_SECRET,{
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-        },
-         { algorithm: 'RS256' });
+            expiresIn: "10h"
+        });
 }
 userSchema.methods.generateAccessToken= function(){
     return jwt.sign(
@@ -80,9 +77,8 @@ userSchema.methods.generateAccessToken= function(){
             username: this.username,
             email: this.email
         }, process.env.JWT_SECRET,{
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
-        },
-         { algorithm: 'RS256' });
+            expiresIn: "1h"
+        });
 }
 const userModel=mongoose.model('User',userSchema)
 export {userModel}

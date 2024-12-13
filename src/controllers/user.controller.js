@@ -3,6 +3,7 @@ import { asyncHandler, tryCatchWrapper } from "../../utils/asyncHandler.js";
 import { userModel } from "../models/user.model.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
 import { ApiError } from "../../utils/Apierror.js";
+import { accessTokenOption, refreshTokenOption } from "../constants.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await userModel.findOne({_id:id})
     let accessToken=await userFound.generateAccessToken()
@@ -13,7 +14,7 @@ let generateRefreshAndAccessToken=async(id)=>{
     
 }
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
-    let userExistense=await userModel.findOne({email:req.body.email}).select("-password")
+    let userExistense=await userModel.findOne({email:req.body.email})
     if(userExistense){
         resp.status(409).send(new ApiResponse(409,{
             email:userExistense.email,
@@ -21,23 +22,23 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         },"User already exists"))
         return
     }
-    let userSavingInstance=await userModel.create(req.body).select("-password -refreshToken -userPreference")
+    let userSavingInstance=await userModel.create(req.body)
     console.log(userSavingInstance);
     if(!userSavingInstance){
         //throw new ApiError(500,"internal server error")
         resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
         return
     }
-    
-    const options={
-        httpOnly:true,
-        secure:true
-    }
+
     let {accessToken,refreshToken}=await generateRefreshAndAccessToken(userSavingInstance._id)
     resp.status(201)
-    .cookie("refreshToken",refreshToken,options)
-    .cookie("accessToken",accessToken,options)
-    .send(new ApiResponse(201,userSavingInstance,"User no exists"))
+    .cookie("refreshToken",refreshToken,refreshTokenOption)
+    .cookie("accessToken",accessToken,accessTokenOption)
+    .send(new ApiResponse(201,{
+        username:userSavingInstance.username,
+        email:userSavingInstance.email,
+        isMobileVerified:userSavingInstance.isMobileVerified
+    },"User created successfully"))
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {email,password}=req.body;
