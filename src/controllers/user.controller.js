@@ -56,10 +56,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     if(loggedUser.isGoogleAuthenticated){
         
         let {accessToken,refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
-            resp.status(202)
-            // .cookie("refreshToken",refreshToken,refreshTokenOption)
-            // .cookie("accessToken",accessToken,accessTokenOption)
-            .send(new ApiResponse(202,{
+            resp.status(202).send(new ApiResponse(202,{
                 email:loggedUser.email,
                 isMobileVerified:loggedUser.isMobileVerified,
                 username:loggedUser.username,
