@@ -11,7 +11,6 @@ let generateRefreshAndAccessToken=async(id)=>{
     userFound.refreshToken=refreshToken
     userFound.save({validateBeforeSave:false})
     return {accessToken,refreshToken}
-    
 }
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userExistense=await userModel.findOne({email:req.body.email})
@@ -23,7 +22,6 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         return
     }
     let userSavingInstance=await userModel.create(req.body)
-    console.log(userSavingInstance);
     if(!userSavingInstance){
         //throw new ApiError(500,"internal server error")
         resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
@@ -32,16 +30,15 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
 
     let {accessToken,refreshToken}=await generateRefreshAndAccessToken(userSavingInstance._id)
     resp.status(201)
-    .cookie("refreshToken",refreshToken,refreshTokenOption)
-    .cookie("accessToken",accessToken,accessTokenOption)
     .send(new ApiResponse(201,{
         username:userSavingInstance.username,
         email:userSavingInstance.email,
-        isMobileVerified:userSavingInstance.isMobileVerified
+        isMobileVerified:userSavingInstance.isMobileVerified,
+        refreshToken:refreshToken,
+        accessToken:accessToken
     },"User created successfully"))
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
-    console.log(req.body);
     const {userid,password}=req.body;   
      
     let loggedUser=await userModel.findOne({email:userid})
@@ -67,25 +64,28 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
             return
     }
     let passComp=await loggedUser.validatePassword(password)
+    
     if(passComp){
+        let {accessToken,refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
+
         if(!(loggedUser.isMobileVerified)){
-            resp.status(401).send(new ApiResponse(401,{
+            resp.status(203).send(new ApiResponse(203,{
                 email:loggedUser.email,
                 isMobileVerified:loggedUser.isMobileVerified,
                 username:loggedUser.username,
-                phoneNumber:loggedUser.phoneNumber
+                phoneNumber:loggedUser.phoneNumber,
+                refreshToken:refreshToken,
+                accessToken:accessToken
             },"Mobile number not verified"))
             return
         }
         else{
-            let {accessToken,refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
-            resp.status(202)
-            .cookie("refreshToken",refreshToken,refreshTokenOption)
-            .cookie("accessToken",accessToken,accessTokenOption)
-            .send(new ApiResponse(202,{
+            resp.status(202).send(new ApiResponse(202,{
                 email:loggedUser.email,
                 isMobileVerified:loggedUser.isMobileVerified,
-                username:loggedUser.username
+                username:loggedUser.username,
+                refreshToken:refreshToken,
+                accessToken:accessToken
             },"user found"))
             return
         }
