@@ -97,12 +97,12 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     
 })
 let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
-    let userName=await userModel.findOne({username:req.body.username})
-    if(userName){
-        resp.status(226).send(new ApiResponse(226,null,"username already taken")) 
+    let username=await userModel.findOne({username:req.body.username})
+    if(!username){
+        resp.status(200).send(new ApiResponse(200,null,"Username available"))
         return
     }
-    resp.status(200).send(new ApiResponse(200,null,"username available"))
+    resp.status(409).send(new ApiResponse(409,null,"Username not available"))
 
 
 })
