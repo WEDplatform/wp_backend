@@ -21,4 +21,7 @@ app.use(express.json({
 app.use(express.urlencoded({extended:true,limit:""}))
 app.use(express.static("public"))
 app.use("/api/v1/user",userRouter);
+app.get("/",(req,resp)=>{
+    resp.send("Running")
+})
 export {app}
