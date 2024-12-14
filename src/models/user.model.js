@@ -77,7 +77,7 @@ userSchema.methods.generateAccessToken= function(){
             username: this.username,
             email: this.email
         }, process.env.JWT_SECRET,{
-            expiresIn: "1h"
+            expiresIn: "1h",
         });
 }
 const userModel=mongoose.model('User',userSchema)
