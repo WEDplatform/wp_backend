@@ -91,7 +91,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
         }
     }
     
-    resp.status(403).send(new ApiResponse(403,null,"invalid credentials"))
+    resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
     
 })
 let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
