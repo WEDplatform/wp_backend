@@ -106,4 +106,7 @@ let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
 
 
 })
-export {userRegisterHandler,userLoginHandler,usernameAvailability}
+let pseudoApi=tryCatchWrapper(async(req,resp)=>{
+    resp.status(200).send(new ApiResponse(200,req.user,"Pseudo api"))
+})
+export {userRegisterHandler,userLoginHandler,usernameAvailability,pseudoApi}
