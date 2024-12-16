@@ -1,0 +1,42 @@
+import { Schema } from "mongoose";
+const vendorSchema=new Schema({
+    businessOwnerName:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    businessName:{
+        type:String,
+        required:true,
+        unique:true,
+        lowercase:true,
+        trim:true
+    },
+    email:{
+        type:String,
+        required:true,
+        lowercase:true,
+        trim:true
+    },
+    phoneNumber:{
+        type:String,
+        required:true,
+        unique:true,
+        trim:true
+    },
+    password:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    dateJoined:{
+        type:Date,
+        default:Date.now
+    },
+    type:{
+        type:String,
+        default:"vendor"
+    }
+},{
+    timestamps:true
+})
