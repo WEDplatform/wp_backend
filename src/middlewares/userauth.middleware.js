@@ -7,18 +7,18 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
     let credentials=req.get("wedoraCredentials")
     
     if(!credentials){
-        throw new ApiError(400,"bad request")
+       response.status(401).send(new ApiError(401,"Unauthorized request"))
         return
     }
     jwt.verify(credentials,process.env.JWT_SECRET,async(err,user)=>{
         if(err){
             console.log(err);
-            throw new ApiError(400,"Unable to verify credentials")
+           response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
         }
         let foundUser=await userModel.findById({_id:user._id})
         if(!foundUser){
-            throw new ApiError(404,"User not found")
+           response.status(404).send(new ApiError(404,"User not found"))
             return
         }
         req.user=foundUser
