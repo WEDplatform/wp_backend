@@ -67,7 +67,7 @@ userSchema.methods.generateRefreshToken= function(){
             _id: this._id,
             username: this.username
         }, process.env.JWT_SECRET,{
-            expiresIn: "10h"
+            expiresIn: 60
         });
 }
 userSchema.methods.generateAccessToken= function(){
@@ -77,7 +77,7 @@ userSchema.methods.generateAccessToken= function(){
             username: this.username,
             email: this.email
         }, process.env.JWT_SECRET,{
-            expiresIn: "1h",
+            expiresIn: 60,
         });
 }
 const userModel=mongoose.model('User',userSchema)

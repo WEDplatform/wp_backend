@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { pseudoApi, userLoginHandler, userRegisterHandler } from "../controllers/user.controller.js";
+import { pseudoApi, refreshAccessToken, userLoginHandler, userRegisterHandler } from "../controllers/user.controller.js";
 import { usernameAvailability } from "../controllers/user.controller.js";
 import { openapiMiddleware } from "../middlewares/openapi.middleware.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 const userRouter=Router();
 userRouter.route("/signup").post(userRegisterHandler)
 userRouter.route("/login").post(userLoginHandler)
-
+userRouter.route("/generateToken").post(refreshAccessToken)
 //secure routes
  
 userRouter.route("/usernameAvalaiblity").post(openapiMiddleware,usernameAvailability)
