@@ -12,6 +12,11 @@ let generateRefreshAndAccessToken=async(id)=>{
     userFound.save({validateBeforeSave:false})
     return {refreshToken}
 }
+let incrementLoginCount=tryCatchWrapper(async(id)=>{
+    let userFound=await userModel.findByIdAndUpdate({_id:id},{
+        $inc:{loginCounts:1}
+    })
+})
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userExistense=await userModel.findOne({email:req.body.email})
     if(userExistense){
@@ -36,6 +41,7 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         isMobileVerified:userSavingInstance.isMobileVerified,
         refreshToken:refreshToken
     },"User created successfully"))
+    await incrementLoginCount(userSavingInstance._id)
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
@@ -61,6 +67,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
                 isGoogleAuthenticated:loggedUser.isGoogleAuthenticated,
                 refreshToken:refreshToken
             },"user found"))
+            await incrementLoginCount(loggedUser._id)
             return
     }
     let passComp=await loggedUser.validatePassword(password)
@@ -76,6 +83,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
                 phoneNumber:loggedUser.phoneNumber,
                 refreshToken:refreshToken
             },"Mobile number not verified"))
+            await incrementLoginCount(loggedUser._id)
             return
         }
         else{
@@ -85,8 +93,10 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
                 username:loggedUser.username,
                 refreshToken:refreshToken
             },"user found"))
+            await incrementLoginCount(loggedUser._id)
             return
         }
+        
     }
     
     resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
