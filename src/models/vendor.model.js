@@ -29,10 +29,6 @@ const vendorSchema=new Schema({
         required:true,
         trim:true
     },
-    dateJoined:{
-        type:Date,
-        default:Date.now
-    },
     type:{
         type:String,
         default:"vendor"
