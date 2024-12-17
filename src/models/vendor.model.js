@@ -1,24 +1,17 @@
 import { Schema } from "mongoose";
 const vendorSchema=new Schema({
-    businessOwnerName:{
-        type:String,
-        required:true,
-        trim:true
-    },
     businessName:{
         type:String,
         required:true,
-        unique:true,
-        lowercase:true,
         trim:true
     },
-    email:{
+    businessEmail:{
         type:String,
         required:true,
         lowercase:true,
         trim:true
     },
-    phoneNumber:{
+    businessPhone:{
         type:String,
         required:true,
         unique:true,
@@ -29,9 +22,30 @@ const vendorSchema=new Schema({
         required:true,
         trim:true
     },
-    type:{
+    city:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    address:{
+        type:String,
+        trim:true
+    },
+    gstNumber:{
+        type:String,
+        trim:true
+    },
+    usertype:{
         type:String,
         default:"vendor"
+    },
+    citiesActive:{
+        type:[String],
+        default:[]
+    },
+    servicesProvided:{
+        type:[String],
+        default:[]
     }
 },{
     timestamps:true
