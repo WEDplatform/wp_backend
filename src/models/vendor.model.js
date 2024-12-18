@@ -53,7 +53,15 @@ const vendorSchema=new Schema({
     isMobileVerified:{
         type:Boolean,
         default:false
+    },
+    refreshToken:{
+        type:String
+    },
+    loginCounts:{
+        type:Number,
+        default:0
     }
+},{
 },{
     timestamps:true
 })
