@@ -69,7 +69,8 @@ userSchema.methods.generateRefreshToken= function(){
     return jwt.sign(
         {
             _id: this._id,
-            username: this.username
+            username: this.username,
+            typeClient:"user"
         }, process.env.JWT_SECRET,{
             expiresIn: 3600
         });

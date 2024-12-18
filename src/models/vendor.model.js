@@ -1,9 +1,12 @@
 import mongoose, { mongo, Schema } from "mongoose";
+import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
 const vendorSchema=new Schema({
     businessName:{
         type:String,
         required:true,
-        trim:true
+        trim:true,
+        lowercase:true
     },
     businessEmail:{
         type:String,
@@ -68,7 +71,8 @@ vendorSchema.methods.generateRefreshToken= function(){
     return jwt.sign(
         {
             _id: this._id,
-            username: this.businessName
+            username: this.businessName,
+            typeClient:"vendor"
         }, process.env.JWT_SECRET,{
             expiresIn: 3600
         });

@@ -1,6 +1,6 @@
 import { upload } from "../middlewares/multer.middleware.js";
 import { asyncHandler, tryCatchWrapper } from "../../utils/asyncHandler.js";
-import { vendorModel } from "../models/user.model.js";
+import { vendorModel } from "../models/vendor.model.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
 import { ApiError } from "../../utils/Apierror.js";
 import jwt from "jsonwebtoken"
@@ -47,7 +47,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
      
     let loggedUser=await vendorModel.findOne({
-        $or:[{email:userid},{username:userid}]
+        $or:[{businessEmail:userid},{businessName:userid}]
     })
     
     
@@ -146,8 +146,8 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
             let {refreshToken}=await generateRefreshAndAccessToken(userFound._id)
             resp.status(200).send(new ApiResponse(200,{
                 refreshToken:refreshToken,
-                username:userFound.username,
-                email:userFound.email
+                username:userFound.businessName,
+                email:userFound.businessEmail
             },"Refresh token"))
         })
 })
