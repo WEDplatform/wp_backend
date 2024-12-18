@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { mongo, Schema } from "mongoose";
 const vendorSchema=new Schema({
     businessName:{
         type:String,
@@ -50,3 +50,24 @@ const vendorSchema=new Schema({
 },{
     timestamps:true
 })
+vendorSchema.pre("save",function(next){
+    if(!this.isModified('password')) return next()
+        let salt = bcryptjs.genSaltSync(10);
+        this.password=bcryptjs.hashSync(this.password,salt)
+        next()
+
+})
+vendorSchema.methods.validatePassword=async function(password){
+    return await bcryptjs.compare(password,this.password)
+}
+vendorSchema.methods.generateRefreshToken= function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            username: this.businessName
+        }, process.env.JWT_SECRET,{
+            expiresIn: 3600
+        });
+}
+const vendorModel=mongoose.model('vendor',vendorSchema)
+export {vendorModel}
