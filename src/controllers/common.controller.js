@@ -7,7 +7,7 @@ import { ApiResponse } from "../../utils/Apiresponse.js";
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
-    if(!credentials){
+    if(!credentials){ 
        response.status(401).send(new ApiError(401,"Unauthorized request"))
         return
     }
@@ -17,7 +17,7 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
            response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
         }
-        console.log(user);
+        //console.log(user);
         
         response.status(200).send(new ApiResponse(200,user,"user authenticated"))
         
