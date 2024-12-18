@@ -18,10 +18,10 @@ let incrementLoginCount=tryCatchWrapper(async(id)=>{
     })
 })
 const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
-    let userExistense=await vendorModel.findOne({email:req.body.email})
+    let userExistense=await vendorModel.findOne({email:req.body.businessEmail})
     if(userExistense){
         resp.status(409).send(new ApiResponse(409,{
-            email:userExistense.email,
+            email:userExistense.businessEmail,
             isMobileVerified:userExistense.isMobileVerified
         },"User already exists"))
         return
@@ -36,8 +36,8 @@ const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let {refreshToken}=await generateRefreshAndAccessToken(userSavingInstance._id)
     resp.status(201)
     .send(new ApiResponse(201,{
-        username:userSavingInstance.username,
-        email:userSavingInstance.email,
+        username:userSavingInstance.businessName,
+        email:userSavingInstance.businessEmail,
         isMobileVerified:userSavingInstance.isMobileVerified,
         refreshToken:refreshToken
     },"User created successfully"))
@@ -57,19 +57,19 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
         },"no user found"))
         return
     }
-    if(loggedUser.isGoogleAuthenticated){
+    // if(loggedUser.isGoogleAuthenticated){
         
-        let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
-            resp.status(202).send(new ApiResponse(202,{
-                email:loggedUser.email,
-                isMobileVerified:loggedUser.isMobileVerified,
-                username:loggedUser.username,
-                isGoogleAuthenticated:loggedUser.isGoogleAuthenticated,
-                refreshToken:refreshToken
-            },"user found"))
-            await incrementLoginCount(loggedUser._id)
-            return
-    }
+    //     let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
+    //         resp.status(202).send(new ApiResponse(202,{
+    //             email:loggedUser.email,
+    //             isMobileVerified:loggedUser.isMobileVerified,
+    //             username:loggedUser.username,
+    //             isGoogleAuthenticated:loggedUser.isGoogleAuthenticated,
+    //             refreshToken:refreshToken
+    //         },"user found"))
+    //         await incrementLoginCount(loggedUser._id)
+    //         return
+    // }
     let passComp=await loggedUser.validatePassword(password)
     
     if(passComp){
@@ -77,10 +77,10 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
 
         if(!(loggedUser.isMobileVerified)){
             resp.status(203).send(new ApiResponse(203,{
-                email:loggedUser.email,
+                email:loggedUser.businessEmail,
                 isMobileVerified:loggedUser.isMobileVerified,
-                username:loggedUser.username,
-                phoneNumber:loggedUser.phoneNumber,
+                username:loggedUser.businessName,
+                phoneNumber:loggedUser.businessPhone,
                 refreshToken:refreshToken
             },"Mobile number not verified"))
             await incrementLoginCount(loggedUser._id)
@@ -88,9 +88,9 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
         }
         else{
             resp.status(202).send(new ApiResponse(202,{
-                email:loggedUser.email,
+                email:loggedUser.businessEmail,
                 isMobileVerified:loggedUser.isMobileVerified,
-                username:loggedUser.username,
+                username:loggedUser.businessName,
                 refreshToken:refreshToken
             },"user found"))
             await incrementLoginCount(loggedUser._id)
@@ -103,7 +103,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     
 })
 let vendorUsernameAvailability=tryCatchWrapper(async(req,resp)=>{
-    let username=await vendorModel.findOne({username:req.body.username})
+    let username=await vendorModel.findOne({username:req.body.businessName})
     if(!username){
         resp.status(200).send(new ApiResponse(200,null,"Username available"))
         return

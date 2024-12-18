@@ -46,6 +46,10 @@ const vendorSchema=new Schema({
     servicesProvided:{
         type:[String],
         default:[]
+    },
+    isMobileVerified:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true
