@@ -18,7 +18,7 @@ let incrementLoginCount=tryCatchWrapper(async(id)=>{
     })
 })
 const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
-    let userExistense=await vendorModel.findOne({email:req.body.businessEmail})
+    let userExistense=await vendorModel.findOne({businessEmail:req.body.businessEmail})
     if(userExistense){
         resp.status(409).send(new ApiResponse(409,{
             email:userExistense.businessEmail,
@@ -36,8 +36,8 @@ const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let {refreshToken}=await generateRefreshAndAccessToken(userSavingInstance._id)
     resp.status(201)
     .send(new ApiResponse(201,{
-        username:userSavingInstance.businessName,
-        email:userSavingInstance.businessEmail,
+        businessName:userSavingInstance.businessName,
+        businessEmail:userSavingInstance.businessEmail,
         isMobileVerified:userSavingInstance.isMobileVerified,
         refreshToken:refreshToken
     },"User created successfully"))
