@@ -13,7 +13,7 @@ let generateRefreshAndAccessToken=async(id)=>{
     return {refreshToken}
 }
 let incrementLoginCount=tryCatchWrapper(async(id)=>{
-    let userFound=await vendorModel.findByIdAndUpdate({_id:id},{
+    await vendorModel.findByIdAndUpdate({_id:id},{
         $inc:{loginCounts:1}
     })
 })
