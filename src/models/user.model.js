@@ -38,7 +38,7 @@ const userSchema=new Schema({
     },
     locationCity:{
         type:String,
-        required:[true,"Provide city name"]
+        //required:[true,"Provide city name"]
     },
     userPreference:[userPreferenceSchema],
     isMobileVerified:{
