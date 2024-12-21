@@ -51,6 +51,10 @@ const userSchema=new Schema({
     loginCounts:{
         type:Number,
         default:0
+    },
+    isPreferencesSet:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true

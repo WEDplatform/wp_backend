@@ -22,7 +22,8 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     if(userExistense){
         resp.status(409).send(new ApiResponse(409,{
             email:userExistense.email,
-            isMobileVerified:userExistense.isMobileVerified
+            isMobileVerified:userExistense.isMobileVerified,
+            isPreferencesSet:userExistense.isPreferencesSet
         },"User already exists"))
         return
     }
@@ -39,10 +40,12 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         username:userSavingInstance.username,
         email:userSavingInstance.email,
         isMobileVerified:userSavingInstance.isMobileVerified,
-        refreshToken:refreshToken
+        refreshToken:refreshToken,
+        isPreferencesSet:userSavingInstance.isPreferencesSet
     },"User created successfully"))
     await incrementLoginCount(userSavingInstance._id)
 })
+const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{})
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
      
