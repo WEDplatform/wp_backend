@@ -45,7 +45,9 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     },"User created successfully"))
     await incrementLoginCount(userSavingInstance._id)
 })
-const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{})
+const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
+    resp.status(200).send(new ApiResponse(200,req.body,"Preferences updated"))
+})
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
      
@@ -154,4 +156,4 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
             },"Refresh token"))
         })
 })
-export {userRegisterHandler,userLoginHandler,usernameAvailability,pseudoApi,logoutUser,refreshAccessToken}
+export {userRegisterHandler,userLoginHandler,usernameAvailability,pseudoApi,logoutUser,refreshAccessToken,updateUserPreferences}

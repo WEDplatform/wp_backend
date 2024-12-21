@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { pseudoApi, refreshAccessToken, userLoginHandler, userRegisterHandler } from "../controllers/user.controller.js";
+import { pseudoApi, refreshAccessToken, updateUserPreferences, userLoginHandler, userRegisterHandler } from "../controllers/user.controller.js";
 import { usernameAvailability } from "../controllers/user.controller.js";
 import { openapiMiddleware } from "../middlewares/openapi.middleware.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
@@ -11,4 +11,5 @@ userRouter.route("/generateToken").post(refreshAccessToken)
  
 userRouter.route("/usernameAvalaiblity").post(openapiMiddleware,usernameAvailability)
 userRouter.route("/pseudo").get(checkUserAuth,pseudoApi)
+userRouter.route("/updatePreferences").post(checkUserAuth,updateUserPreferences)
 export {userRouter}
