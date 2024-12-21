@@ -71,7 +71,8 @@ userSchema.methods.generateRefreshToken= function(){
             _id: this._id,
             username: this.username,
             typeClient:"user"
-        }, process.env.JWT_SECRET,{
+        }, 
+        process.env.JWT_SECRET,{
             expiresIn: 3600
         });
 }
