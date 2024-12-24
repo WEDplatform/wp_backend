@@ -46,7 +46,28 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     await incrementLoginCount(userSavingInstance._id)
 })
 const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
-    resp.status(200).send(new ApiResponse(200,req.body,"Preferences updated"))
+    console.log(req.user);
+    console.log(req.body.userPreference[0])
+    let updatedUserInstance=await userModel.findOneAndUpdate({
+        email:req.body.email
+    
+    },{
+        $set:{
+            locationCity:req.body.locationCity,
+        },
+        $push:{
+            userPreference:{
+                $each:req.body.userPreference
+            }
+        }
+    },{
+        new:true
+    })
+    if(!updatedUserInstance){
+        resp.status(404).send(new ApiResponse(404,null,"Unable to update preferences can do it later"))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,updatedUserInstance,"Preferences updated"))
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
