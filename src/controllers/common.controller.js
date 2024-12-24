@@ -30,3 +30,38 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
         
     })
 })
+export const logout=tryCatchWrapper(async(req,resp)=>{
+    console.log(req?.user);
+    if(req?.user?.usertype=="user"){
+        let userInstance=await userModel.findOneAndUpdate({_id:req.user._id},{
+            $set:{
+                refreshToken:""
+            }
+        },
+        {
+            new:true
+        })
+        if(!userInstance){
+            resp.status(404).send(new ApiResponse(404,null,"User not found"))
+            return
+        }
+        resp.status(200).send(new ApiResponse(200,null,"Logout successful"))
+        return
+    }
+    if(req?.user?.usertype=="vendor"){
+        let userInstance=await vendorModel.findOneAndUpdate({_id:req.user._id},{
+            $set:{
+                refreshToken:""
+            }
+        },
+        {
+            new:true
+        })
+        if(!userInstance){
+            resp.status(404).send(new ApiResponse(404,null,"User not found"))
+            return
+        }
+        resp.status(200).send(new ApiResponse(200,null,"Logout successful"))
+        return
+    }
+})
