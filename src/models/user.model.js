@@ -64,7 +64,6 @@ userSchema.pre("save",function(next){
         let salt = bcryptjs.genSaltSync(10);
         this.password=bcryptjs.hashSync(this.password,salt)
         next()
-
 })
 userSchema.methods.validatePassword=async function(password){
     return await bcryptjs.compare(password,this.password)
