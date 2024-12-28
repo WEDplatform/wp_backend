@@ -82,7 +82,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     if(loggedUser.isGoogleAuthenticated){
         
         let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
-            resp.status(202).send(new ApiResponse(202,{
+            resp.status(203).send(new ApiResponse(203,{
                 email:loggedUser.email,
                 isMobileVerified:loggedUser.isMobileVerified,
                 username:loggedUser.username,
