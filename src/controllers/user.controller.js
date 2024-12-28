@@ -46,7 +46,6 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
 })
 const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
     console.log(req.user);
-    console.log(req.body.userPreference[0])
     let updatedUserInstance=await userModel.findOneAndUpdate({
         email:req.body.email
     
