@@ -47,7 +47,6 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
 const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
     let updatedUserInstance=await userModel.findOneAndUpdate({
         email:req.body.email
-    
     },{
         $set:{
             locationCity:req.body.locationCity,
