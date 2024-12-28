@@ -34,6 +34,5 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
             req.user=foundVendor
             next()
         } 
-        
     })
 })
