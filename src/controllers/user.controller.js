@@ -33,7 +33,6 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
         return
     }
-
     let {refreshToken}=await generateRefreshAndAccessToken(userSavingInstance._id)
     resp.status(201)
     .send(new ApiResponse(201,{
