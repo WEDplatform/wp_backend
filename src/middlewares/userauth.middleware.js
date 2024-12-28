@@ -6,11 +6,13 @@ import { vendorModel } from "../models/vendor.model.js";
 export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
     let credentials=req.get("wedoraCredentials")
     if(!credentials){
+        throw new ApiError(401,"Unauthorized request")
        response.status(401).send(new ApiError(401,"Unauthorized request"))
         return
     }
     jwt.verify(credentials,process.env.JWT_SECRET,async(err,user)=>{
         if(err){
+            throw new ApiError(401,"Auth failed get new token")
             //console.log(err);
            response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
