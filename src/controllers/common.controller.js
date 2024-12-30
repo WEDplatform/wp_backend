@@ -65,7 +65,7 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
         return
     }
 })
-const profile=tryCatchWrapper(async(req,resp)=>{
+export const profile=tryCatchWrapper(async(req,resp)=>{
     if(req?.user?.usertype=="user"){
         let userInstance=await userModel.findById(req.user._id)
         if(!userInstance){
