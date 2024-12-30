@@ -66,22 +66,6 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
     }
 })
 export const profile=tryCatchWrapper(async(req,resp)=>{
-    if(req?.user?.usertype=="user"){
-        let userInstance=await userModel.findById(req.user._id)
-        if(!userInstance){
-            resp.status(404).send(new ApiResponse(404,null,"User not found"))
-            return
-        }
-        resp.status(200).send(new ApiResponse(200,userInstance,"Profile found"))
-        return
-    }
-    if(req?.user?.usertype=="vendor"){
-        let userInstance=await vendorModel.findById(req.user._id)
-        if(!userInstance){
-            resp.status(404).send(new ApiResponse(404,null,"User not found"))
-            return
-        }
-        resp.status(200).send(new ApiResponse(200,userInstance,"Profile found"))
-        return
-    }
+    
+    resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
 })
