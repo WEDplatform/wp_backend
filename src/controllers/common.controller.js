@@ -66,6 +66,12 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
     }
 })
 export const profile=tryCatchWrapper(async(req,resp)=>{
-    
-    resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
+    const fieldsToExclude = ["refreshToken", "__v","loginCounts","_id"];
+    const filteredObject = Object.keys(req.user)
+    .filter(key => !fieldsToExclude.includes(key))
+    .reduce((obj, key) => {
+        obj[key] = req.user[key];
+        return obj;
+    }, {});
+    resp.status(200).send(new ApiResponse(200,filteredObject,"Profile found"))
 })
