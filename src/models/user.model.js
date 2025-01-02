@@ -7,6 +7,14 @@ const userPreferenceSchema=new Schema({
     },
     value:[String]
 })
+const loginStats=new Schema({
+    dateLogin:{
+        type:Date
+    },
+    loginCount:{
+        type:Number
+    }
+})
 const userSchema=new Schema({
     username:{
         type:String,
@@ -48,10 +56,7 @@ const userSchema=new Schema({
     refreshToken:{
         type:String
     },
-    loginCounts:{
-        type:Number,
-        default:0
-    },
+    loginCounts:[loginStats],
     isPreferencesSet:{
         type:Boolean,
         default:false

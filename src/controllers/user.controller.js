@@ -13,9 +13,32 @@ let generateRefreshAndAccessToken=async(id)=>{
     return {refreshToken}
 }
 let incrementLoginCount=tryCatchWrapper(async(id)=>{
-    let userFound=await userModel.findByIdAndUpdate({_id:id},{
-        $inc:{loginCounts:1}
+    const currentDate = new Date().toISOString().split('T')[0];
+    // let userFound=await userModel.findByIdAndUpdate({_id:id},{
+    //     $inc:{loginCounts:1}
+    // })
+    let userFound=await userModel.findOne({_id:id,
+        loginCounts:{
+           $elemMatch:{dateLogin:currentDate} 
+        }
     })
+    if(!userFound){
+        let updatedUser=await userModel.findOneAndUpdate({_id:id},{
+            $push:{loginCounts:{dateLogin:currentDate,loginCount:1}}
+        },{
+            new:true
+        })
+        userFound=updatedUser
+    }else{
+        let updatedUser=await userModel.findOneAndUpdate({_id:id,"loginCounts.dateLogin":currentDate},{
+            $inc:{'loginCounts.$.loginCount':1}
+        },{
+            new:true
+        })
+        userFound=updatedUser
+    }
+    console.log(userFound);
+     
 })
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userExistense=await userModel.findOne({email:req.body.email})
@@ -42,7 +65,7 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         refreshToken:refreshToken,
         isPreferencesSet:userSavingInstance.isPreferencesSet
     },"User created successfully"))
-    await incrementLoginCount(userSavingInstance._id)
+    //await incrementLoginCount(userSavingInstance._id)
 })
 const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
     let updatedUserInstance=await userModel.findOneAndUpdate({
@@ -67,7 +90,8 @@ const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
 })
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
-     
+    const currentDate = new Date().toISOString().split('T')[0];
+    
     let loggedUser=await userModel.findOne({
         $or:[{email:userid},{username:userid}]
     })
