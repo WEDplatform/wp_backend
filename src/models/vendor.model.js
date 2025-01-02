@@ -65,10 +65,7 @@ const vendorSchema=new Schema({
     refreshToken:{
         type:String
     },
-    loginCounts:{
-        type:Number,
-        default:0
-    }
+    loginCounts:[loginStats]
 },{
 },{
     timestamps:true
