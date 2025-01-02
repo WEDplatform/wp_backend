@@ -4,6 +4,7 @@ import { userModel } from "../models/user.model.js";
 import { vendorModel } from "../models/vendor.model.js";
 import { ApiError } from "../../utils/Apierror.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
+import _ from "lodash"
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
@@ -66,12 +67,9 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
     }
 })
 export const profile=tryCatchWrapper(async(req,resp)=>{
+   
     const fieldsToExclude = ["refreshToken", "__v","loginCounts","_id"];
-    const filteredObject = Object.keys(req.user)
-    .filter(key => !fieldsToExclude.includes(key))
-    .reduce((obj, key) => {
-        obj[key] = req.user[key];
-        return obj;
-    }, {});
-    resp.status(200).send(new ApiResponse(200,filteredObject,"Profile found"))
+    let filteredObject=_.omit(req.user, ["refreshToken"])
+    console.log(filteredObject);
+    resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
 })
