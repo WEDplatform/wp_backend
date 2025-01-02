@@ -1,6 +1,14 @@
 import mongoose, { mongo, Schema } from "mongoose";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
+const loginStats=new Schema({
+    dateLogin:{
+        type:Date
+    },
+    loginCount:{
+        type:Number
+    }
+})
 const vendorSchema=new Schema({
     businessName:{
         type:String,
