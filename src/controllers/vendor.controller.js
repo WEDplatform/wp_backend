@@ -13,9 +13,31 @@ let generateRefreshAndAccessToken=async(id)=>{
     return {refreshToken}
 }
 let incrementLoginCount=tryCatchWrapper(async(id)=>{
-    await vendorModel.findByIdAndUpdate({_id:id},{
-        $inc:{loginCounts:1}
+    const currentDate = new Date().toISOString().split('T')[0];
+    // let userFound=await userModel.findByIdAndUpdate({_id:id},{
+    //     $inc:{loginCounts:1}
+    // })
+    let userFound=await vendorModel.findOne({_id:id,
+        loginCounts:{
+           $elemMatch:{dateLogin:currentDate} 
+        }
     })
+    if(!userFound){
+        let updatedUser=await vendorModel.findOneAndUpdate({_id:id},{
+            $push:{loginCounts:{dateLogin:currentDate,loginCount:1}}
+        },{
+            new:true
+        })
+        userFound=updatedUser
+    }else{
+        let updatedUser=await vendorModel.findOneAndUpdate({_id:id,"loginCounts.dateLogin":currentDate},{
+            $inc:{'loginCounts.$.loginCount':1}
+        },{
+            new:true
+        })
+        userFound=updatedUser
+    }
+    //console.log(userFound);
 })
 const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userExistense=await vendorModel.findOne({businessEmail:req.body.businessEmail})
