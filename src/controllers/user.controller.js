@@ -37,7 +37,7 @@ let incrementLoginCount=tryCatchWrapper(async(id)=>{
         })
         userFound=updatedUser
     }
-    console.log(userFound);
+    //console.log(userFound);
      
 })
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
