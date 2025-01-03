@@ -65,7 +65,7 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         refreshToken:refreshToken,
         isPreferencesSet:userSavingInstance.isPreferencesSet
     },"User created successfully"))
-    //await incrementLoginCount(userSavingInstance._id)
+    await incrementLoginCount(userSavingInstance._id)
 })
 const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
     let updatedUserInstance=await userModel.findOneAndUpdate({
