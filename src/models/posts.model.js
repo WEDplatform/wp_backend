@@ -1,4 +1,12 @@
 import { Schema } from "mongoose";
+const interactionModel=new Schema({
+    dateInteraction:{
+        type:Date
+    },
+    interactionCount:{
+        type:Number
+    }
+})
 const postSchema=new Schema({
     postOwner:{
         type:Schema.Types.ObjectId,
@@ -9,7 +17,6 @@ const postSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"user"
     }],
-    interactionHistory:{
-        
-    }
+    interactionHistory:[interactionModel],
+    
 })
