@@ -71,7 +71,7 @@ const vendorSchema=new Schema({
     timestamps:true
 })
 vendorSchema.pre("save",function(next){
-    if(!this.isModified('password')) return next()
+    if(!this.isModified('password')) return next() 
         let salt = bcryptjs.genSaltSync(10);
         this.password=bcryptjs.hashSync(this.password,salt)
         next()
