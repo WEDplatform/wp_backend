@@ -18,5 +18,4 @@ const postSchema=new Schema({
         ref:"user"
     }],
     interactionHistory:[interactionModel],
-    
 })
