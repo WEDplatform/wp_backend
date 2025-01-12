@@ -8,7 +8,6 @@ userRouter.route("/signup").post(userRegisterHandler)
 userRouter.route("/login").post(userLoginHandler)
 userRouter.route("/generateToken").post(refreshAccessToken)
 //secure routes
- 
 userRouter.route("/usernameAvalaiblity").post(openapiMiddleware,usernameAvailability)
 userRouter.route("/pseudo").get(checkUserAuth,pseudoApi)
 userRouter.route("/updatePreferences").post(checkUserAuth,updateUserPreferences)
