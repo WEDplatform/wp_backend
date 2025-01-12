@@ -15,7 +15,6 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
            response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
         }
-        
         if(user?.typeClient=="user"){
             let foundUser=await userModel.findById({_id:user._id})
             if(!foundUser){
