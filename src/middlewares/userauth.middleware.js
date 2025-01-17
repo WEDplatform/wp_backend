@@ -9,6 +9,7 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
        response.status(401).send(new ApiError(401,"Unauthorized request"))
         return
     }
+    
     jwt.verify(credentials,process.env.JWT_SECRET,async(err,user)=>{
         if(err){
             //console.log(err);
