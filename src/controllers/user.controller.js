@@ -102,8 +102,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
         },"no user found"))
         return
     }
-    if(loggedUser.isGoogleAuthenticated){
-        
+    if(loggedUser.isGoogleAuthenticated){     
         let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
             resp.status(203).send(new ApiResponse(203,{
                 email:loggedUser.email,
