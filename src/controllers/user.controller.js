@@ -114,8 +114,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
             await incrementLoginCount(loggedUser._id)
             return
     }
-    let passComp=await loggedUser.validatePassword(password)
-    
+    let passComp=await loggedUser.validatePassword(password) 
     if(passComp){
         let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
 
