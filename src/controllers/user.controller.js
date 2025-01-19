@@ -95,6 +95,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     let loggedUser=await userModel.findOne({
         $or:[{email:userid},{username:userid}]
     })
+    //console.log(loggedUser);
     
     
     if(!loggedUser){
