@@ -97,7 +97,6 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     })
     //console.log(loggedUser);
     
-    
     if(!loggedUser){
         resp.status(404).send(new ApiResponse(404,{
             message:"no user was there"
