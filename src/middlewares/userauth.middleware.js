@@ -12,7 +12,6 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
     
     jwt.verify(credentials,process.env.JWT_SECRET,async(err,user)=>{
         if(err){
-            //console.log(err);
            response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
         }
