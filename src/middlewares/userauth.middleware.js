@@ -35,6 +35,8 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
                response.status(404).send(new ApiError(404,"Vendor not found"))
                 return
             }
+            if(foundVendor?.refreshToken!=credentials){
+            }
             req.user=foundVendor
             next()
         } 
