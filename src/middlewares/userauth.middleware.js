@@ -22,6 +22,9 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
                response.status(404).send(new ApiError(404,"User not found"))
                 return
             }
+            if(foundUser?.refreshToken!=credentials){
+                //
+            }
             req.user=foundUser
             next()
         } 
