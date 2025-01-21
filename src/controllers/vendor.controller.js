@@ -115,8 +115,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
         
     }
     
-    resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
-    
+    resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))   
 })
 let vendorUsernameAvailability=tryCatchWrapper(async(req,resp)=>{
     let username=await vendorModel.findOne({username:req.body.businessName})
