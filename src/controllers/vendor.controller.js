@@ -68,8 +68,6 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     let loggedUser=await vendorModel.findOne({
         $or:[{businessEmail:userid},{businessName:userid}]
     })
-    
-    
     if(!loggedUser){
         resp.status(404).send(new ApiResponse(404,{
             message:"no user was there"
