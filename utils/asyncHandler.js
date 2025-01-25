@@ -15,5 +15,4 @@ const tryCatchWrapper = (fn) => async (req, res, next) => {
     }
   };
   
-  
 export { tryCatchWrapper, asyncHandler }
