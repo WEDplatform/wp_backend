@@ -14,5 +14,4 @@ const tryCatchWrapper = (fn) => async (req, res, next) => {
       res.status(500).json({ error: 'Something went wrong', details: error?.message });
     }
   };
-  
 export { tryCatchWrapper, asyncHandler }
