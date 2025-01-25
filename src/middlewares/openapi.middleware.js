@@ -10,6 +10,7 @@ export const openapiMiddleware=tryCatchWrapper(async(req,resp,next)=>{
         resp.status(404).send(new ApiResponse(404,null,"Unable to verify open api key"))
         return
     }
+    
     next()
     
 })
