@@ -73,3 +73,6 @@ export const profile=tryCatchWrapper(async(req,resp)=>{
     //console.log(filteredObject);
     resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
 })
+export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
+    resp.status(200).send(new ApiResponse(200,null,"Photo media populated"))
+})

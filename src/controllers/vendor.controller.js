@@ -167,13 +167,17 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
         })
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
-    // const vendors=fs.readFileSync('utils/indian_vendors_unique_cities.json')
-    // if(vendors){
-    //     const insertResponse=await vendorModel.insertMany(JSON.parse(vendors))
-    //     resp.status(200).send(new ApiResponse(200,insertResponse,"Vendors populated"))
-    // }else{
-    //     resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
-    // }
+    //  const vendors=fs.readFileSync('utils/indian_vendors_unique_cities.json')
+    // // if(vendors){
+    // //     const insertResponse=await vendorModel.insertMany(JSON.parse(vendors))
+    // //     resp.status(200).send(new ApiResponse(200,insertResponse,"Vendors populated"))
+    // // }else{
+    // //     resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
+    // // }
+    // const creationResponse=Promise.all(JSON.parse(vendors).map(async(user)=>{
+    //     return await vendorModel.create(user)
+    // })) 
+    resp.status(200).send(new ApiResponse(200,null,"Vendors populated"))
 })
 
 export {vendorRegisterHandler,vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken,populateVendor}
