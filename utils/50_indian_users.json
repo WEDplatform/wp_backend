@@ -1,0 +1,2552 @@
+[
+    {
+        "username": "abhay raj",
+        "password": "Abhay726@123",
+        "email": "abhay726@mail.com",
+        "phoneNumber": "919161279552",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Delhi",
+        "userPreference": [
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ritika_singh",
+        "password": "Ritika122@123",
+        "email": "ritika122@mail.com",
+        "phoneNumber": "917999972105",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Bangalore",
+        "userPreference": [
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aditya jyoti",
+        "password": "Aditya789@123",
+        "email": "aditya789@mail.com",
+        "phoneNumber": "914113002098",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Chennai",
+        "userPreference": [
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ananya",
+        "password": "Ananya861@123",
+        "email": "ananya861@mail.com",
+        "phoneNumber": "917024738965",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Kolkata",
+        "userPreference": [
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "kartik454",
+        "password": "Kartik454@123",
+        "email": "kartik454@mail.com",
+        "phoneNumber": "912930258241",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Hyderabad",
+        "userPreference": [
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ishita_nagre",
+        "password": "Ishita482@123",
+        "email": "ishita482@mail.com",
+        "phoneNumber": "917381298591",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Ahmedabad",
+        "userPreference": [
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "rohan_gothwal",
+        "password": "Rohan967@123",
+        "email": "rohan967@mail.com",
+        "phoneNumber": "916833434982",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Pune",
+        "userPreference": [
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "nisha pancholi",
+        "password": "Nisha558@123",
+        "email": "nisha558@mail.com",
+        "phoneNumber": "918545709279",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Jaipur",
+        "userPreference": [
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "pranav mukherjee",
+        "password": "Pranav679@123",
+        "email": "pranav679@mail.com",
+        "phoneNumber": "915489982492",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Lucknow",
+        "userPreference": [
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "madhuri",
+        "password": "Madhuri978@123",
+        "email": "madhuri978@mail.com",
+        "phoneNumber": "916329314921",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Kanpur",
+        "userPreference": [
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "siddharth khare",
+        "password": "Siddharth635@123",
+        "email": "siddharth635@mail.com",
+        "phoneNumber": "912628366773",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Nagpur",
+        "userPreference": [
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "priya_rani",
+        "password": "Priya652@123",
+        "email": "priya652@mail.com",
+        "phoneNumber": "911079728275",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Indore",
+        "userPreference": [
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aaravMehta",
+        "password": "Aarav112@123",
+        "email": "aarav112@mail.com",
+        "phoneNumber": "915331699729",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Thane",
+        "userPreference": [
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "meghaRajput",
+        "password": "Megha335@123",
+        "email": "megha335@mail.com",
+        "phoneNumber": "915260997889",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Bhopal",
+        "userPreference": [
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "kabir_gupta",
+        "password": "Kabir536@123",
+        "email": "kabir536@mail.com",
+        "phoneNumber": "916463562433",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Patna",
+        "userPreference": [
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "simranRahi",
+        "password": "Simran892@123",
+        "email": "simran892@mail.com",
+        "phoneNumber": "919355014040",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Vadodara",
+        "userPreference": [
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aryan meena",
+        "password": "Aryan150@123",
+        "email": "aryan150@mail.com",
+        "phoneNumber": "916225503743",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Ghaziabad",
+        "userPreference": [
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "neha singh rajput",
+        "password": "Neha428@123",
+        "email": "neha428@mail.com",
+        "phoneNumber": "915201079642",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Agra",
+        "userPreference": [
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "rahulMadhav",
+        "password": "Rahul930@123",
+        "email": "rahul930@mail.com",
+        "phoneNumber": "911387068754",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Varanasi",
+        "userPreference": [
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "devanshKumar",
+        "password": "Devansh413@123",
+        "email": "devansh413@mail.com",
+        "phoneNumber": "919386345488",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Surat",
+        "userPreference": [
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "abhay_gupta",
+        "password": "Abhay362@123",
+        "email": "abhay362@mail.com",
+        "phoneNumber": "918979798607",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Mumbai",
+        "userPreference": [
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ritika_dev",
+        "password": "Ritika344@123",
+        "email": "ritika344@mail.com",
+        "phoneNumber": "911215108910",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Delhi",
+        "userPreference": [
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aditya rai",
+        "password": "Aditya962@123",
+        "email": "aditya962@mail.com",
+        "phoneNumber": "917230970239",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Bangalore",
+        "userPreference": [
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ananya grover",
+        "password": "Ananya435@123",
+        "email": "ananya435@mail.com",
+        "phoneNumber": "913827244546",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Chennai",
+        "userPreference": [
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "kartik aryan",
+        "password": "Kartik283@123",
+        "email": "kartik283@mail.com",
+        "phoneNumber": "911170668864",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Kolkata",
+        "userPreference": [
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ishita deshmukh",
+        "password": "Ishita949@123",
+        "email": "ishita949@mail.com",
+        "phoneNumber": "911969475374",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Hyderabad",
+        "userPreference": [
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "rohan pancholi",
+        "password": "Rohan983@123",
+        "email": "rohan983@mail.com",
+        "phoneNumber": "912901327346",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Ahmedabad",
+        "userPreference": [
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "nisha gurgain",
+        "password": "Nisha970@123",
+        "email": "nisha970@mail.com",
+        "phoneNumber": "917995991777",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Pune",
+        "userPreference": [
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "pranav raj saha",
+        "password": "Pranav433@123",
+        "email": "pranav433@mail.com",
+        "phoneNumber": "914971634544",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Jaipur",
+        "userPreference": [
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "madhuri_dixit",
+        "password": "Madhuri840@123",
+        "email": "madhuri840@mail.com",
+        "phoneNumber": "918951675919",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Lucknow",
+        "userPreference": [
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "siddharth_shukla",
+        "password": "Siddharth259@123",
+        "email": "siddharth259@mail.com",
+        "phoneNumber": "912958323481",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Kanpur",
+        "userPreference": [
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "priya mehta",
+        "password": "Priya434@123",
+        "email": "priya434@mail.com",
+        "phoneNumber": "911770803035",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Nagpur",
+        "userPreference": [
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aarav singh gupta",
+        "password": "Aarav621@123",
+        "email": "aarav621@mail.com",
+        "phoneNumber": "917461307469",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Indore",
+        "userPreference": [
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "megha rajput",
+        "password": "Megha307@123",
+        "email": "megha307@mail.com",
+        "phoneNumber": "918436282611",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Thane",
+        "userPreference": [
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "kabir upsen",
+        "password": "Kabir425@123",
+        "email": "kabir425@mail.com",
+        "phoneNumber": "911057859744",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Bhopal",
+        "userPreference": [
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "simran kaur",
+        "password": "Simran234@123",
+        "email": "simran234@mail.com",
+        "phoneNumber": "916795639638",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Patna",
+        "userPreference": [
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aryan997",
+        "password": "Aryan997@123",
+        "email": "aryan997@mail.com",
+        "phoneNumber": "912571893966",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Vadodara",
+        "userPreference": [
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "neha487_singh",
+        "password": "Neha487@123",
+        "email": "neha487@mail.com",
+        "phoneNumber": "918351223883",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Ghaziabad",
+        "userPreference": [
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "rahul dravid",
+        "password": "Rahul286@123",
+        "email": "rahul286@mail.com",
+        "phoneNumber": "915269460467",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Agra",
+        "userPreference": [
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "devansh3122",
+        "password": "Devansh362@123",
+        "email": "devansh362@mail.com",
+        "phoneNumber": "917299404627",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Varanasi",
+        "userPreference": [
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "abhay0012",
+        "password": "Abhay392@123",
+        "email": "abhay392@mail.com",
+        "phoneNumber": "919348825008",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Surat",
+        "userPreference": [
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ritikaKapoor",
+        "password": "Ritika421@123",
+        "email": "ritika421@mail.com",
+        "phoneNumber": "912825345268",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Mumbai",
+        "userPreference": [
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "aditya16712",
+        "password": "Aditya167@123",
+        "email": "aditya167@mail.com",
+        "phoneNumber": "916067777209",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Delhi",
+        "userPreference": [
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            },
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ananyaSaha",
+        "password": "Ananya666@123",
+        "email": "ananya666@mail.com",
+        "phoneNumber": "914631224342",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Bangalore",
+        "userPreference": [
+            {
+                "title": "Food and Catering",
+                "value": [
+                    "Vegetarian Menu",
+                    "Non-Vegetarian Menu",
+                    "Desserts",
+                    "Buffet",
+                    "Live Counters"
+                ]
+            },
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "kartikMukherjee",
+        "password": "Kartik207@123",
+        "email": "kartik207@mail.com",
+        "phoneNumber": "917913570227",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Chennai",
+        "userPreference": [
+            {
+                "title": "Photography Styles",
+                "value": [
+                    "Candid Photography",
+                    "Traditional Photography",
+                    "Pre-Wedding Shoot",
+                    "Drone Photography",
+                    "Cinematic Videography"
+                ]
+            },
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "ishitaNagrik",
+        "password": "Ishita687@123",
+        "email": "ishita687@mail.com",
+        "phoneNumber": "916843121769",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Kolkata",
+        "userPreference": [
+            {
+                "title": "Wedding Decor",
+                "value": [
+                    "Floral Arrangements",
+                    "Lighting Decor",
+                    "Mandap Setup",
+                    "Stage Decor",
+                    "Table Centerpieces"
+                ]
+            },
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "rohan9961",
+        "password": "Rohan996@123",
+        "email": "rohan996@mail.com",
+        "phoneNumber": "914764367009",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Hyderabad",
+        "userPreference": [
+            {
+                "title": "Entertainment Options",
+                "value": [
+                    "Live Band",
+                    "DJ",
+                    "Dance Performances",
+                    "Fireworks",
+                    "Stand-up Comedy"
+                ]
+            },
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "nisha74990",
+        "password": "Nisha749@123",
+        "email": "nisha749@mail.com",
+        "phoneNumber": "911266749548",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Ahmedabad",
+        "userPreference": [
+            {
+                "title": "Wedding Gifts",
+                "value": [
+                    "Customized Hampers",
+                    "Cash Envelopes",
+                    "Home Decor Items",
+                    "Jewelry",
+                    "Gift Cards"
+                ]
+            },
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "pranav mehta",
+        "password": "Pranav630@123",
+        "email": "pranav630@mail.com",
+        "phoneNumber": "914347115926",
+        "usertype": "user",
+        "isGoogleAuthenticated": false,
+        "locationCity": "Pune",
+        "userPreference": [
+            {
+                "title": "Honeymoon Destinations",
+                "value": [
+                    "Maldives",
+                    "Goa",
+                    "Paris",
+                    "Switzerland",
+                    "Kerala"
+                ]
+            },
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            }
+        ]
+    },
+    {
+        "username": "madhuri kumari",
+        "password": "Madhuri364@123",
+        "email": "madhuri364@mail.com",
+        "phoneNumber": "912556739098",
+        "usertype": "user",
+        "isGoogleAuthenticated": true,
+        "locationCity": "Jaipur",
+        "userPreference": [
+            {
+                "title": "Types of Weddings",
+                "value": [
+                    "Hindu Wedding",
+                    "Muslim Wedding",
+                    "Sikh Wedding",
+                    "Christian Wedding",
+                    "Buddhist Wedding"
+                ]
+            },
+            {
+                "title": "Wedding Attire",
+                "value": [
+                    "Sherwani",
+                    "Lehenga",
+                    "Saree",
+                    "Tuxedo",
+                    "Anarkali Suit"
+                ]
+            },
+            {
+                "title": "Wedding Venues",
+                "value": [
+                    "Beach",
+                    "Palace",
+                    "Garden",
+                    "Banquet Hall",
+                    "Farmhouse"
+                ]
+            },
+            {
+                "title": "Wedding Rituals",
+                "value": [
+                    "Mehendi Ceremony",
+                    "Haldi Ceremony",
+                    "Sangeet",
+                    "Pheras",
+                    "Nikah"
+                ]
+            }
+        ]
+    }
+]
