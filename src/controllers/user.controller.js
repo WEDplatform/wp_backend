@@ -52,6 +52,7 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         return
     }
     let userSavingInstance=await userModel.create(req.body)
+    
     if(!userSavingInstance){
         //throw new ApiError(500,"internal server error")
         resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
@@ -198,12 +199,14 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
 // creating a function just for populating user
 const populateUser=tryCatchWrapper(async(req,resp)=>{
     const users=fs.readFileSync('utils/50_indian_users.json')
-    //console.log(users);
-    //const insertResponse=await userModel.insertMany(JSON.parse(users))
-    //console.log(insertResponse);
-    resp.send({
-        message:"run gen user"
-    });
+    const creationResponse=Promise.all(JSON.parse(users).map(async(user)=>{
+        return await userModel.create(user)
+    }))
+    resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))
+    
+    // resp.send({
+    //     message:"run gen user"
+    // });
 })
 
 export {userRegisterHandler,
