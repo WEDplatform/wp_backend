@@ -194,4 +194,5 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
             },"Refresh token"))
         })
 })
+// creating a function just for populating user
 export {userRegisterHandler,userLoginHandler,usernameAvailability,pseudoApi,logoutUser,refreshAccessToken,updateUserPreferences}
