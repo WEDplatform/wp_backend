@@ -4,6 +4,7 @@ import { userModel } from "../models/user.model.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
 import { ApiError } from "../../utils/Apierror.js";
 import jwt from "jsonwebtoken"
+import fs from "fs"
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await userModel.findOne({_id:id})
@@ -195,7 +196,21 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
         })
 })
 // creating a function just for populating user
-const populateUser=()=>{
-    
-}
-export {userRegisterHandler,userLoginHandler,usernameAvailability,pseudoApi,logoutUser,refreshAccessToken,updateUserPreferences}
+const populateUser=tryCatchWrapper(async(req,resp)=>{
+    const users=fs.readFileSync('utils/50_indian_users.json')
+    //console.log(users);
+    //const insertResponse=await userModel.insertMany(JSON.parse(users))
+    //console.log(insertResponse);
+    resp.send({
+        message:"run gen user"
+    });
+})
+
+export {userRegisterHandler,
+    userLoginHandler,
+    usernameAvailability,
+    pseudoApi,
+    logoutUser,
+    refreshAccessToken,
+    updateUserPreferences,
+populateUser}
