@@ -4,6 +4,8 @@ import { vendorModel } from "../models/vendor.model.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
 import { ApiError } from "../../utils/Apierror.js";
 import jwt from "jsonwebtoken"
+import fs from "fs"
+
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await vendorModel.findOne({_id:id})
@@ -165,13 +167,13 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
         })
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
-    const vendors=fs.readFileSync('utils/indian_vendors_unique_cities.json')
-    if(vendors){
-        const insertResponse=await vendorModel.insertMany(JSON.parse(vendors))
-        resp.status(200).send(new ApiResponse(200,insertResponse,"Vendors populated"))
-    }else{
-        resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
-    }
+    // const vendors=fs.readFileSync('utils/indian_vendors_unique_cities.json')
+    // if(vendors){
+    //     const insertResponse=await vendorModel.insertMany(JSON.parse(vendors))
+    //     resp.status(200).send(new ApiResponse(200,insertResponse,"Vendors populated"))
+    // }else{
+    //     resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
+    // }
 })
 
 export {vendorRegisterHandler,vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken,populateVendor}
