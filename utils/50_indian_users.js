@@ -1,4 +1,4 @@
-[
+export const users=[
     {
         "username": "abhay raj",
         "password": "Abhay726@123",
