@@ -164,4 +164,14 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
             },"Refresh token"))
         })
 })
-export {vendorRegisterHandler,vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken}
+const populateVendor=tryCatchWrapper(async(req,resp)=>{
+    const vendors=fs.readFileSync('utils/indian_vendors_unique_cities.json')
+    if(vendors){
+        const insertResponse=await vendorModel.insertMany(JSON.parse(vendors))
+        resp.status(200).send(new ApiResponse(200,insertResponse,"Vendors populated"))
+    }else{
+        resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
+    }
+})
+
+export {vendorRegisterHandler,vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken,populateVendor}
