@@ -94,8 +94,23 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
 })
 
 export const getPics=tryCatchWrapper(async(req,resp)=>{
-    const {indexPage}=req.body;
-    const vendorDetails=await picModel.find({vendorName:""})
-    const filterPics=vendorDetails.slice(0,(indexPage+1)*3)
-    resp.status(200).send(new ApiResponse(200,filterPics,"Pics found"))
+    const srchPage =req.query;
+    let page=srchPage.searchIndex;
+    let pageBreak;
+    const vendorDetails=await vendorPicModel.find()
+    if(!page || page<0){
+        page=0
+        pageBreak=3
+    }else if((parseInt(page)+1)*3 >= vendorDetails.length){
+        pageBreak=vendorDetails.length;
+    }else{
+        pageBreak=(parseInt(page)+1)*3  
+    }
+    if(vendorDetails.length==0 || !vendorDetails){
+        resp.status(200).send(new ApiResponse(200,null,"No vendors found"))
+        return
+    }else{
+        const filterPics=vendorDetails.slice(0,pageBreak)    
+        resp.status(200).send(new ApiResponse(200,filterPics,"Pics found"))
+    }
 })
