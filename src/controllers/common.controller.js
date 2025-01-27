@@ -110,6 +110,9 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
         resp.status(200).send(new ApiResponse(200,null,"No vendors found"))
         return
     }else{
-        resp.status(200).send(new ApiResponse(200,vendorDetails,"Pics found"))
+        resp.status(200).send(new ApiResponse(200,{
+            pics:vendorDetails,
+            hasMore:pageBreak<64
+        },"Pics found"))
     }
 })
