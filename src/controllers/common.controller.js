@@ -134,3 +134,26 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
         },"Pics found"))
     }
 })
+
+export const getReels=tryCatchWrapper(async(req,resp)=>{
+    const srchPage =req.query;
+    
+    let vendorDetails=null;
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak;
+    if(page<0 || page==0){
+        pageBreak=3;
+    }else{
+        pageBreak=page*3
+    }
+    vendorDetails=await videoPostModel.find({}).limit(pageBreak)
+    if(vendorDetails.length==0 || !vendorDetails){
+        resp.status(200).send(new ApiResponse(200,null,"No vendors found"))
+        return
+    }else{
+        resp.status(200).send(new ApiResponse(200,{
+            pics:vendorDetails,
+            hasMore:pageBreak<2000
+        },"videos found"))
+    }
+})

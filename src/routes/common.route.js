@@ -1,6 +1,6 @@
 import { Router } from "express";
 const commonRouter=Router()
-import { checkClientAuth, getPics, getVendor, getVendorReels, groupVideos, logout, populatePhotoMedia, profile } from "../controllers/common.controller.js";
+import { checkClientAuth, getPics, getReels, getVendor, getVendorReels, groupVideos, logout, populatePhotoMedia, profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
@@ -11,4 +11,5 @@ commonRouter.route("/getVideos").get(getVendorReels)
 commonRouter.route('/groupVideos').get(groupVideos)
 //fetching of post data
 commonRouter.route("/getPosts").get(getPics)
+commonRouter.route('/getReels').get(getReels)
 export {commonRouter}
