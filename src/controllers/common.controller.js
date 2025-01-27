@@ -92,3 +92,10 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     }))
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
+
+export const getPics=tryCatchWrapper(async(req,resp)=>{
+    const {indexPage}=req.body;
+    const vendorDetails=await picModel.find({vendorName:""})
+    const filterPics=vendorDetails.slice(0,(indexPage+1)*3)
+    resp.status(200).send(new ApiResponse(200,filterPics,"Pics found"))
+})
