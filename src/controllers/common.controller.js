@@ -10,6 +10,7 @@ import { bizName } from "../../utils/bizname.js";
 const client = createClient(process.env.PEXEL_API_KEY);
 import _ from "lodash"
 import { picModel, vendorPicModel } from "../models/picPost.model.js";
+import { vendorReelModel, videoPostModel } from "../models/reelPost.model.js";
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
@@ -91,6 +92,23 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
     }))
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
+})
+
+export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
+    const {qr,pageIndex}=req.body;
+    const videoResponse=await fetch(`https://pixabay.com/api/videos/?key=&q=${encodeURIComponent(qr)}&pretty=true&per_page=200&page=${pageIndex}`)
+    let videoResponseJSON=await videoResponse.json()
+    let data=videoResponseJSON.hits;
+    data.map((i,p)=>i.vendorName=bizName[getRandomInt(bizName.length)]) 
+    await videoPostModel.insertMany(data)
+    resp.status(200).send(new ApiResponse(200,videoResponseJSON,"Video found"))
+})
+export const groupVideos=tryCatchWrapper(async(req,resp)=>{
+    Promise.all(bizName.map(async(user)=>{
+        const vendorDetails=await videoPostModel.find({vendorName:user})
+       await vendorReelModel.create({vendorName:user,videoData:vendorDetails})
+       }))
+    resp.status(200).send(new ApiResponse(200,null,"Videos found"))
 })
 
 export const getPics=tryCatchWrapper(async(req,resp)=>{
