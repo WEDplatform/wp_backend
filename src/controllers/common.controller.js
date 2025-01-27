@@ -4,7 +4,12 @@ import { userModel } from "../models/user.model.js";
 import { vendorModel } from "../models/vendor.model.js";
 import { ApiError } from "../../utils/Apierror.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
+import { createClient } from "pexels";
+import fs from 'fs'
+import { bizName } from "../../utils/bizname.js";
+const client = createClient(process.env.PEXEL_API_KEY);
 import _ from "lodash"
+import { picModel, vendorPicModel } from "../models/picPost.model.js";
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
@@ -20,15 +25,7 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
         }
         //console.log(user);
         
-        response.status(200).send(new ApiResponse(200,user,"user authenticated"))
-        
-        // let foundUser=await userModel.findById({_id:user._id})
-        // if(!foundUser){
-        //    response.status(404).send(new ApiError(404,"User not found"))
-        //     return
-        // }
-        // req.user=foundUser
-        
+        response.status(200).send(new ApiResponse(200,user,"user authenticated"))  
     })
 })
 export const logout=tryCatchWrapper(async(req,resp)=>{
@@ -66,6 +63,7 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
         return
     }
 })
+
 export const profile=tryCatchWrapper(async(req,resp)=>{
    
     const fieldsToExclude = ["refreshToken", "__v","loginCounts","_id"];
@@ -73,6 +71,24 @@ export const profile=tryCatchWrapper(async(req,resp)=>{
     //console.log(filteredObject);
     resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
 })
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
-    resp.status(200).send(new ApiResponse(200,null,"Photo media populated"))
+    const {qr,pageI}=req.body;
+     const res=await client.photos.search({query:qr,per_page:80,page:pageI,orientation:'landscape'})
+     const Photos=res.photos;
+     Photos.map((i,p)=>i.vendorName=bizName[getRandomInt(bizName.length)])
+     const responseInsertion=await picModel.insertMany(Photos)
+    resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
+})
+export const getVendor=tryCatchWrapper(async(req,resp)=>{
+    //const vendors=fs.readFileSync('utils/vendorlist1.json')
+    // const vendorDetails=await picModel.find({vendorName:"Rajendra Caterers"})
+    // await vendorPicModel.create({vendorName:"Rajendra Caterers",imageData:vendorDetails})
+    Promise.all(bizName.map(async(user)=>{
+     const vendorDetails=await picModel.find({vendorName:user})
+    await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
+    }))
+    resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
