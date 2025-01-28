@@ -168,3 +168,81 @@ export const getReels=tryCatchWrapper(async(req,resp)=>{
         },"videos found"))
     }
 })
+
+export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
+    const query=req.query;
+    if(!query?.vendorName){
+        resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
+        return 
+    }
+    let details=await vendorModel.findOne({businessName:query.vendorName})
+    if(!details){ 
+        resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,details,'invalid query strings'))
+})
+
+export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
+    const srchPage =req.query;
+    if(!srchPage?.vendorName){
+        resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
+        return
+    }
+    let numberOfdata=parseInt(srchPage.per_page)
+    if(!numberOfdata || numberOfdata<=0){
+        numberOfdata=3;
+    }
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak=numberOfdata;
+    if(page<0 || !page){
+        page=0;
+    }
+    const total=await picModel.countDocuments({vendorName:srchPage?.vendorName})
+    const postDetails=await picModel.find({vendorName:srchPage?.vendorName}).limit(numberOfdata).skip(page*numberOfdata)
+    if(postDetails.length==0 || !postDetails){
+        resp.status(404).send(new ApiResponse(404,{
+            total:total,
+            hasMore:false,
+            pics:[]
+        },'no data available'))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,{
+        total:total,
+        hasMore:page*numberOfdata<total,
+        pics:postDetails
+    },'found'))
+})
+export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
+    const srchPage =req.query;
+    if(!srchPage?.vendorName){
+        resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
+        return
+    }
+    let numberOfdata=parseInt(srchPage.per_page)
+    if(!numberOfdata || numberOfdata<=0){
+        numberOfdata=3;
+    }
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak=numberOfdata;
+    if(page<0 || !page){
+        page=0;
+    }
+    const total=await videoPostModel.countDocuments({vendorName:srchPage?.vendorName})
+    const postDetails=await videoPostModel.find({vendorName:srchPage?.vendorName}).limit(numberOfdata).skip(page*numberOfdata)
+    if(postDetails.length==0 || !postDetails){
+        resp.status(404).send(new ApiResponse(404,{
+            total:total,
+            hasMore:false,
+            pics:[]
+        },'no data available'))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,{
+        total:total,
+        hasMore:page*numberOfdata<total,
+        reels:postDetails
+    },'found'))
+})
+

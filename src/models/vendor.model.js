@@ -13,8 +13,7 @@ const vendorSchema=new Schema({
     businessName:{
         type:String,
         required:true,
-        trim:true,
-        lowercase:true
+        trim:true
     },
     businessEmail:{
         type:String,
