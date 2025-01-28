@@ -113,47 +113,58 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
-    console.log(srchPage);
-    let vendorDetails=null;
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak;
-    if(page<0 || page==0){
-        pageBreak=3;
-    }else{
-        pageBreak=page*3
+    let numberOfdata=parseInt(srchPage.per_page)
+    if(!numberOfdata || numberOfdata<=0){
+        numberOfdata=3;
     }
-    vendorDetails=await vendorPicModel.find({}).limit(pageBreak)
+    console.log(srchPage);
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak=numberOfdata;
+    if(page<0 || !page){
+        page=0;
+    }
+    let doc_count=await vendorPicModel.countDocuments()
+    let vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
     
     if(vendorDetails.length==0 || !vendorDetails){
-        resp.status(200).send(new ApiResponse(200,null,"No vendors found"))
+        resp.status(404).send(new ApiResponse(200,{
+            pics:[],
+            hasMore:false 
+        },"No vendors found"))
         return
     }else{
         resp.status(200).send(new ApiResponse(200,{
+            total:doc_count,
             pics:vendorDetails,
-            hasMore:pageBreak<64
+            hasMore:pageBreak<doc_count
         },"Pics found"))
     }
 })
 
 export const getReels=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
-    
-    let vendorDetails=null;
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak;
-    if(page<0 || page==0){
-        pageBreak=3;
-    }else{
-        pageBreak=page*3
+    let numberOfdata=parseInt(srchPage.per_page)
+    if(!numberOfdata || numberOfdata<=0){
+        numberOfdata=3;
     }
-    vendorDetails=await videoPostModel.find({}).limit(pageBreak)
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak=3;
+    if(page<0 || !page){
+        page=0;
+    }
+    let doc_count=await videoPostModel.countDocuments()
+    let vendorDetails=await videoPostModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
     if(vendorDetails.length==0 || !vendorDetails){
-        resp.status(200).send(new ApiResponse(200,null,"No vendors found"))
+        resp.status(404).send(new ApiResponse(200,{
+            hasMore:false,
+            reels:[]
+        },"No vendors found"))
         return
     }else{
         resp.status(200).send(new ApiResponse(200,{
-            pics:vendorDetails,
-            hasMore:pageBreak<2000
+            total:doc_count,
+            hasMore:page*pageBreak<doc_count,
+            reels:vendorDetails
         },"videos found"))
     }
 })
