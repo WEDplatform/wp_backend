@@ -171,6 +171,8 @@ export const getReels=tryCatchWrapper(async(req,resp)=>{
 
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
+    console.log(query);
+    
     if(!query?.vendorName){
         resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
         return 
@@ -180,7 +182,7 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
         return
     }
-    resp.status(200).send(new ApiResponse(200,details,'invalid query strings'))
+    resp.status(200).send(new ApiResponse(200,details,'found'))
 })
 
 export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
