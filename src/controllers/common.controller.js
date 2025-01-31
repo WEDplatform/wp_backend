@@ -168,7 +168,6 @@ export const getReels=tryCatchWrapper(async(req,resp)=>{
         },"videos found"))
     }
 })
-
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
     
