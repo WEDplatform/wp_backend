@@ -181,7 +181,6 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     }
     resp.status(200).send(new ApiResponse(200,details,'found'))
 })
-
 export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     if(!srchPage?.vendorName){
