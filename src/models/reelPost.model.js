@@ -1,5 +1,4 @@
 import mongoose,{Schema} from "mongoose"
-
 const videoSchema = new Schema({
   id: { type: Number},
   pageURL: { type: String },
