@@ -9,7 +9,6 @@ const srcSchema = new Schema({
   landscape: { type: String },
   tiny: { type: String },
 });
-
 const photoSchema = new Schema({
   vendorName:{type:String},
   id: { type: Number },
