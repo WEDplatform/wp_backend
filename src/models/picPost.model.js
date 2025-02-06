@@ -1,5 +1,4 @@
 import mongoose,{ Schema } from "mongoose";
-
 const srcSchema = new Schema({
   original: { type: String },
   large2x: { type: String },
