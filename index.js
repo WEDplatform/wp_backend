@@ -11,4 +11,3 @@ connectDB()
     console.log(`MONGODB CONNECTION ERROR`,err);
 })
 
-
