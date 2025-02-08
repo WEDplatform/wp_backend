@@ -142,8 +142,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
             return
         }
         
-    }
-    
+    }  
     resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
 })
 let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
