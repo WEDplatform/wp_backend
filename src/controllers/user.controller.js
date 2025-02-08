@@ -93,7 +93,6 @@ const updateUserPreferences=tryCatchWrapper(async(req,resp)=>{
 const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
     const currentDate = new Date().toISOString().split('T')[0];
-    
     let loggedUser=await userModel.findOne({
         $or:[{email:userid},{username:userid}]
     })
