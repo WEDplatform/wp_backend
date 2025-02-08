@@ -145,7 +145,6 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     }
     
     resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
-    
 })
 let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
     let username=await userModel.findOne({username:req.body.username})
