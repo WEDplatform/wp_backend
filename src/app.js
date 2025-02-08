@@ -5,6 +5,7 @@ import { userRouter } from "./routes/user.routes.js";
 import { vendorRouter } from "./routes/vendor.routes.js";
 import { commonRouter } from "./routes/common.route.js";
 let app=express();
+
 app.use(cors(
     {
         origin:["http://localhost:3000","https://wed-frontend.vercel.app","https://wed-frontend.onrender.com"],
