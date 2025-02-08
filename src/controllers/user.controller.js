@@ -140,8 +140,7 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
             },"user found"))
             await incrementLoginCount(loggedUser._id)
             return
-        }
-        
+        }  
     }  
     resp.status(403).send(new ApiResponse(403,null,"Authentication failed"))
 })
