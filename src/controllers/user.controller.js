@@ -208,7 +208,6 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
     //     message:"run gen user"
     // });
 })
-
 export {userRegisterHandler,
     userLoginHandler,
     usernameAvailability,
