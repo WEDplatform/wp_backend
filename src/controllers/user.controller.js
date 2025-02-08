@@ -196,7 +196,8 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
     }))
     resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))    
     // resp.send({
-    //     message:"r
+    //    
+    
     // });
 })
 export {userRegisterHandler,
