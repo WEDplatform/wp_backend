@@ -119,7 +119,6 @@ const userLoginHandler=tryCatchWrapper(async(req,resp)=>{
     let passComp=await loggedUser.validatePassword(password) 
     if(passComp){
         let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
-
         if(!(loggedUser.isMobileVerified)){
             resp.status(203).send(new ApiResponse(203,{
                 email:loggedUser.email,
