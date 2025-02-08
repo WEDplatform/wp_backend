@@ -10,4 +10,3 @@ connectDB()
 .catch((err)=>{
     console.log(`MONGODB CONNECTION ERROR`,err);
 })
-
