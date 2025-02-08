@@ -195,8 +195,7 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
         return await userModel.create(user)
     }))
     resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))    
-    // resp.
-    
+    // resp.   
 })
 export {userRegisterHandler,
     userLoginHandler,
