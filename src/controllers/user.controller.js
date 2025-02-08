@@ -149,7 +149,6 @@ let usernameAvailability=tryCatchWrapper(async(req,resp)=>{
     }
     resp.status(409).send(new ApiResponse(409,null,"Username not available"))
 
-
 })
 let pseudoApi=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,{message:"user authenticated"},"Pseudo api"))
