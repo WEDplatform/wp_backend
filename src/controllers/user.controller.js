@@ -196,7 +196,6 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
             },"Refresh token"))
         })
 })
-
 // creating a function just for populating user
 const populateUser=tryCatchWrapper(async(req,resp)=>{
     const users=fs.readFileSync('utils/50_indian_users.json')
