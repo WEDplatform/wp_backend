@@ -194,8 +194,7 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
     const creationResponse=Promise.all(JSON.parse(users).map(async(user)=>{
         return await userModel.create(user)
     }))
-    resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))
-    
+    resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))    
     // resp.send({
     //     message:"run gen user"
     // });
