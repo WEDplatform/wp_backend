@@ -173,4 +173,5 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
     }))
     resp.status(200).send(new ApiResponse(200,null,"Vendors populated"))
 })
-export {vendorRegisterHandler,vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken,populateVendor}
+export {vendorRegisterHandler,
+    vendorLoginHandler,vendorUsernameAvailability,pseudoApi,logoutVendor,refreshAccessToken,populateVendor}
