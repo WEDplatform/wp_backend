@@ -178,4 +178,5 @@ export {vendorRegisterHandler,
     vendorUsernameAvailability,
     pseudoApi,
     logoutVendor,
-    refreshAccessToken,populateVendor}
+    refreshAccessToken,
+    populateVendor}
