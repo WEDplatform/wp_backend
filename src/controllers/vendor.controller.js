@@ -179,4 +179,4 @@ vendorUsernameAvailability,
 pseudoApi,
 logoutVendor,
 refreshAccessToken,
-    populateVendor}
+populateVendor}
