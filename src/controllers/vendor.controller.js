@@ -178,5 +178,5 @@ vendorLoginHandler,
 vendorUsernameAvailability,
 pseudoApi,
 logoutVendor,
-    refreshAccessToken,
+refreshAccessToken,
     populateVendor}
