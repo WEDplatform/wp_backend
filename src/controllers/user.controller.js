@@ -38,7 +38,6 @@ let incrementLoginCount=tryCatchWrapper(async(id)=>{
         })
         userFound=updatedUser
     }
-    //console.log(userFound);     
 })
 const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userExistense=await userModel.findOne({email:req.body.email})
