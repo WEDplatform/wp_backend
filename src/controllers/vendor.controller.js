@@ -176,7 +176,7 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
 export {vendorRegisterHandler,
 vendorLoginHandler,
 vendorUsernameAvailability,
-    pseudoApi,
+pseudoApi,
     logoutVendor,
     refreshAccessToken,
     populateVendor}
