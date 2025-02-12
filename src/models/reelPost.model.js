@@ -43,6 +43,7 @@ const videoSchema = new Schema({
   user: { type: String },
   userImageURL: { type: String },
 });
+
 // Export the model
 const videoPostModel = mongoose.model("video", videoSchema);
 const vendorReelSchema=new Schema({
