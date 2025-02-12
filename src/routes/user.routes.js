@@ -4,6 +4,7 @@ import { usernameAvailability } from "../controllers/user.controller.js";
 import { openapiMiddleware } from "../middlewares/openapi.middleware.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 const userRouter=Router();
+
 userRouter.route("/signup").post(userRegisterHandler)
 userRouter.route("/login").post(userLoginHandler)
 userRouter.route("/generateToken").post(refreshAccessToken)
