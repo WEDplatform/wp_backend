@@ -49,5 +49,6 @@ const vendorReelSchema=new Schema({
     vendorName:{type:String},
     videoData:[videoSchema]
 })
+
 const vendorReelModel=mongoose.model("vendorReel",vendorReelSchema) 
 export {videoPostModel,vendorReelModel}
