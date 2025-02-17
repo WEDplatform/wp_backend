@@ -11,6 +11,6 @@ export const connectDB=async()=>{
         }   
     } catch (error) {
         throw error
-        process.exit(1)       
+        //process.exit(1)       
     }
 }
