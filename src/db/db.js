@@ -8,8 +8,7 @@ export const connectDB=async()=>{
             console.log(`Connected to database at host : ${connection_instance.connections[0].host}`);
         }else{
             console.log("Unable to connect to database ready state is not 1");
-        }
-        
+        }   
     } catch (error) {
         throw error
         process.exit(1)
