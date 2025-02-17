@@ -186,7 +186,7 @@ export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
     if(!srchPage?.vendorName){
         resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
         return
-}
+ }
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
