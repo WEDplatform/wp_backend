@@ -10,7 +10,6 @@ export const connectDB=async()=>{
             console.log("Unable to connect to database ready state is not 1");
         }   
     } catch (error) {
-        throw error
-              
+        throw error          
     }
 }
