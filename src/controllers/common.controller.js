@@ -6,7 +6,6 @@ import { ApiError } from "../../utils/Apierror.js";
 import { ApiResponse } from "../../utils/Apiresponse.js";
 import { createClient } from "pexels";
 import fs from 'fs' // not needed
-
 import { bizName } from "../../utils/bizname.js";
 const client = createClient(process.env.PEXEL_API_KEY);
 import _ from "lodash"
