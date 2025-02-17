@@ -168,10 +168,9 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
      const vendors=fs.readFileSync('utils/cultureWeddingVendors.json')
-    Promise.all(JSON.parse(vendors).map(async(user)=>{
-        return await vendorModel.create(user)
-    }))
+    
     vnd=JSON.parse(vendors)
+    console.log(vnd[0]);
     
     resp.status(200).send(new ApiResponse(200,null,"Vendors populated"))
 })
