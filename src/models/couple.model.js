@@ -11,3 +11,4 @@ const coupleSchema=new Schema({
     }
 })
 const coupleModel = mongoose.model('couple',coupleSchema)
+export {coupleModel}
