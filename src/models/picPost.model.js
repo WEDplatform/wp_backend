@@ -44,5 +44,5 @@ const vendorPostPicSchema=new Schema({
     imageData:[picSectionSchema]
 })
 const picModel = mongoose.model('photo', photoSchema);
-const vendorPicModel=mongoose.model('vendorPic',vendorPostPicSchema)  
+const vendorPicModel=mongoose.model('vendorPic',photoSchema)  
 export {picModel,vendorPicModel}

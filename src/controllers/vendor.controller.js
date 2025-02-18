@@ -167,7 +167,7 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
         })
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
-     const vendors=fs.readFileSync('utils/cultureWeddingVendors.json')
+     const vendors=fs.readFileSync('utils/WedMeGoodVendors.json')
     
     let vnd=JSON.parse(vendors)
     console.log(vnd[0]);
