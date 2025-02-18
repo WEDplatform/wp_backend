@@ -12,7 +12,7 @@ const srcSchema = new Schema({
 const photoSchema = new Schema({
   name:{
     type:String,
-    required:true //this part sh
+    required:true //this part sho
   },
   rating:{
     type:String,
