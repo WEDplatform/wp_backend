@@ -1,5 +1,5 @@
-import { ApiResponse } from "../../utils/Apiresponse";
-import { tryCatchWrapper } from "../../utils/asyncHandler";
+import { ApiResponse } from "../../utils/Apiresponse.js";
+import { tryCatchWrapper } from "../../utils/asyncHandler.js";
 import fs from "fs"
 const populateCouple=tryCatchWrapper(async(requestAnimationFrame,resp)=>{
     const couples=fs.readFileSync('utils/WedMeGoodCouples.json')
