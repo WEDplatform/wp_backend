@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 import fs from "fs"
 
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
+import { vendorPicModel } from "../models/picPost.model.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await vendorModel.findOne({_id:id})
     let refreshToken=await userFound.generateRefreshToken()
@@ -171,7 +172,9 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
     
     let vnd=JSON.parse(vendors)
     console.log(vnd[0]);
-    
+    Promise.all(vnd.map(async(vendor)=>{
+        await vendorPicModel.create(vendor)
+    }))
     resp.status(200).send(new ApiResponse(200,null,"Vendors populated"))
 })
 export {vendorRegisterHandler,
