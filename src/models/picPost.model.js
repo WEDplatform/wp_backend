@@ -30,7 +30,6 @@ const photoSchema = new Schema({
   description:{
     type:String
   } 
-  
 });
 const picSectionSchema=new Schema({
     avg_color:{type:String},
