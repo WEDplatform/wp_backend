@@ -29,6 +29,7 @@ const photoSchema = new Schema({
   },
   description:{
     type:String
+    
   } 
   
 });
