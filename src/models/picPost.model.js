@@ -18,7 +18,9 @@ const photoSchema = new Schema({
     type:String,
     default:"0"
   },
-   
+  images:{
+    type:[String]
+  } ,
     
   
 });
