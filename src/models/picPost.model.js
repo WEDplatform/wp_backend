@@ -10,18 +10,17 @@ const srcSchema = new Schema({
   tiny: { type: String },
 });
 const photoSchema = new Schema({
-  vendorName:{type:String},
-  id: { type: Number },
-  width: { type: Number },
-  height: { type: Number },
-  url: { type: String },
-  photographer: { type: String },
-  photographer_url: { type: String },
-  photographer_id: { type: Number },
-  avg_color: { type: String },
-  src: { type: srcSchema },
-  liked: { type: Boolean, default: false },
-  alt: { type: String },
+  name:{
+    type:String,
+    required:true
+  },
+  rating:{
+    type:String,
+    default:"0"
+  },
+   
+    
+  
 });
 const picSectionSchema=new Schema({
     avg_color:{type:String},
