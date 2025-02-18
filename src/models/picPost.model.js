@@ -21,7 +21,15 @@ const photoSchema = new Schema({
   images:{
     type:[String]
   } ,
-    
+  prices:{
+    type:String
+  },
+  address:{
+    type:[String]
+  },
+  description:{
+    type:String
+  } 
   
 });
 const picSectionSchema=new Schema({
