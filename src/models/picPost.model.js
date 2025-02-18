@@ -1,4 +1,5 @@
 import mongoose,{ Schema } from "mongoose";
+import { type } from "os";
 const srcSchema = new Schema({
   original: { type: String },
   large2x: { type: String },
@@ -29,6 +30,9 @@ const photoSchema = new Schema({
   },
   description:{
     type:String
+  },
+  review:{
+    type:[[String]]
   },
   tags:{
     type:[String]
