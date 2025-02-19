@@ -174,7 +174,7 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
         return 
     }
-    let details=await vendorModel.findOne({businessName:query.vendorName})
+    let details=await vendorPicModel.findOne({name:query.vendorName})
     if(!details){ 
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
         return
