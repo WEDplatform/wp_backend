@@ -9,7 +9,7 @@ import { checkClientAuth,
     getVendorMediaPosts,
     getVendorMediaReels,
     getVendorReels,
-         groupVideos,
+    groupVideos,
          logout, 
          populatePhotoMedia, 
          profile } from "../controllers/common.controller.js";
