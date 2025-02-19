@@ -11,7 +11,7 @@ import { checkClientAuth,
     getVendorReels,
     groupVideos,
     logout, 
-         populatePhotoMedia, 
+    populatePhotoMedia, 
          profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
