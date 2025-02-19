@@ -2,8 +2,8 @@ import { Router } from "express";
 const commonRouter=Router() 
 import { checkClientAuth, 
     getCouplePost,
-     getPics,
-      getReels,
+    getPics,
+    getReels,
        getVendor, getVendorDetails, getVendorMediaPosts, getVendorMediaReels, getVendorReels, groupVideos, logout, populatePhotoMedia, profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
