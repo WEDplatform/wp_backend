@@ -11,6 +11,7 @@ const client = createClient(process.env.PEXEL_API_KEY);
 import _ from "lodash"
 import { picModel, vendorPicModel } from "../models/picPost.model.js";
 import { vendorReelModel, videoPostModel } from "../models/reelPost.model.js";
+import { coupleModel } from "../models/couple.model.js";
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
@@ -140,7 +141,34 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
         },"Pics found"))
     }
 })
-
+export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
+    const srchPage =req.query;
+    let numberOfdata=parseInt(srchPage.per_page)
+    if(!numberOfdata || numberOfdata<=0){
+        numberOfdata=3;
+    }
+    let page=parseInt(srchPage.searchIndex);
+    let pageBreak=numberOfdata;
+    if(page<0 || !page){
+        page=0;
+    }
+    let doc_count=await coupleModel.countDocuments()
+    let couplePosts=await coupleModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
+    
+    if(couplePosts.length==0 || !couplePosts){
+        resp.status(404).send(new ApiResponse(200,{
+            cposts:[],
+            hasMore:false 
+        },"No vendors found"))
+        return
+    }else{
+        resp.status(200).send(new ApiResponse(200,{
+            total:doc_count,
+            cposts:couplePosts,
+            hasMore:pageBreak<doc_count
+        },"Pics found"))
+    }
+})
 export const getReels=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     let numberOfdata=parseInt(srchPage.per_page)
