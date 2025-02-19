@@ -10,7 +10,7 @@ import { checkClientAuth,
     getVendorMediaReels,
     getVendorReels,
     groupVideos,
-         logout, 
+    logout, 
          populatePhotoMedia, 
          profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
