@@ -14,6 +14,7 @@ import { checkClientAuth,
     populatePhotoMedia, 
     profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
+import { getCoupleDetails } from "../controllers/couple.controller.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
 commonRouter.route("/profile").get(checkUserAuth,profile)
@@ -26,6 +27,7 @@ commonRouter.route('/groupVideos').get(groupVideos)
 commonRouter.route("/getPosts").get(getPics)
 commonRouter.route('/getReels').get(getReels)
 commonRouter.route('/getCouplePosts').get(getCouplePost)
+commonRouter.route('/getCoupleDetails').get(getCoupleDetails)
 commonRouter.route("/getVendorPosts").get(getVendorMediaPosts)
 commonRouter.route("/getVendorReels").get(getVendorMediaReels)
 export {commonRouter} 
