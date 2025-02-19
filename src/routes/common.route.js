@@ -4,7 +4,7 @@ import { checkClientAuth,
     getCouplePost,
     getPics,
     getReels,
-       getVendor, getVendorDetails, getVendorMediaPosts, getVendorMediaReels, getVendorReels, groupVideos, logout, populatePhotoMedia, profile } from "../controllers/common.controller.js";
+    getVendor, getVendorDetails, getVendorMediaPosts, getVendorMediaReels, getVendorReels, groupVideos, logout, populatePhotoMedia, profile } from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
