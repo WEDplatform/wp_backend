@@ -118,7 +118,6 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
     }
-    console.log(srchPage);
     let page=parseInt(srchPage.searchIndex);
     let pageBreak=numberOfdata;
     if(page<0 || !page){

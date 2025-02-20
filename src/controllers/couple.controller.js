@@ -17,6 +17,8 @@ const populateCouple=tryCatchWrapper(async(requestAnimationFrame,resp)=>{
 const getCoupleDetails=tryCatchWrapper(async(req,resp)=>{
     const coupleName=req.query.coupleName;
     const data=await coupleModel.findOne({coupleName:coupleName})
+    console.log(data,coupleName);
+    
     resp.status(200).send(new ApiResponse(200,data,'found'))
 })
 export {populateCouple,getCoupleDetails}
