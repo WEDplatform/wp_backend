@@ -18,7 +18,7 @@ import { getCoupleDetails } from "../controllers/couple.controller.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
 commonRouter.route("/profile").get(checkUserAuth,profile)
-commonRouter.route('/getVendorProfile').get(getVendorDetails)
+commonRouter.route('/getVendorProfile').get(checkUserAuth,getVendorDetails)
 commonRouter.route('/getPhotos').get(populatePhotoMedia)
 commonRouter.route('/groupVendor').get(getVendor)
 commonRouter.route("/getVideos").get(getVendorReels)
