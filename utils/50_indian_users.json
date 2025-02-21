@@ -8,7 +8,7 @@
         "isGoogleAuthenticated": false,
         "locationCity": "Delhi",
         "userPreference": [
-            {
+            { 
                 "title": "Wedding Attire",
                 "value": [
                     "Sherwani",
