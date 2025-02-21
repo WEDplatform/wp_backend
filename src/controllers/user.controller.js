@@ -194,6 +194,12 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
     }))
     resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))        
 })
+const likePost=tryCatchWrapper(async(req,resp)=>{
+    console.log(req.body);
+    
+    resp.status(200).send(new ApiResponse(200,req.body,'successful response'))
+})
+
 export {userRegisterHandler,
     userLoginHandler,
     usernameAvailability,
@@ -201,4 +207,5 @@ export {userRegisterHandler,
     logoutUser,
     refreshAccessToken,
     updateUserPreferences,
+    likePost,
 populateUser}
