@@ -36,6 +36,17 @@ const photoSchema = new Schema({
   },
   tags:{
     type:[String]
+  },
+  isLikedBy:{
+    type:[{
+      userId:{
+        type:Schema.Types.ObjectId
+      },
+      liked:{
+        type:Boolean,
+        default:false
+      }
+    }]
   }
 });
 const picSectionSchema=new Schema({

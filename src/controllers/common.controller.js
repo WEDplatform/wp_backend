@@ -114,6 +114,8 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
+    const userId=req.user._id
+    
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
@@ -128,11 +130,15 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
     
     if(vendorDetails.length==0 || !vendorDetails){
         resp.status(404).send(new ApiResponse(200,{
-            pics:[],
+            pics:[], 
             hasMore:false 
         },"No vendors found"))
-        return
+        return 
     }else{
+        vendorDetails = vendorDetails.map(vendor => ({
+            ...vendor._doc, // Spread existing fields
+            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked) 
+        }));
         resp.status(200).send(new ApiResponse(200,{
             total:doc_count,
             pics:vendorDetails,
@@ -142,6 +148,7 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
 })
 export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
+    const userId=req.user._id
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
@@ -161,6 +168,10 @@ export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
         },"No vendors found"))
         return
     }else{
+        couplePosts = couplePosts.map(vendor => ({
+            ...vendor._doc, // Spread existing fields
+            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked) 
+        }));
         resp.status(200).send(new ApiResponse(200,{
             total:doc_count,
             cposts:couplePosts,

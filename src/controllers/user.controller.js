@@ -6,6 +6,8 @@ import { ApiError } from "../../utils/Apierror.js";
 import jwt from "jsonwebtoken"
 import fs from "fs"
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
+import { vendorPicModel } from "../models/picPost.model.js";
+import { coupleModel } from "../models/couple.model.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await userModel.findOne({_id:id})
     let refreshToken=await userFound.generateRefreshToken()
@@ -195,9 +197,73 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,creationResponse,"Users populated"))        
 })
 const likePost=tryCatchWrapper(async(req,resp)=>{
+    let postStatus=req.body;
     console.log(req.body);
+    if(postStatus.isLiked){
+        if(postStatus.likeType=='post'){
+            const pushResponse=await vendorPicModel.findOneAndUpdate({
+                _id:req.body.postId
+            },{
+                $push:{
+                    isLikedBy:{
+                        userId:req.user._id,
+                        liked:true
+                    }
+                }
+            })
+            if(!pushResponse){
+                resp.status(500).send(new ApiResponse(500,null,"Internal server error occured and unable to like the post"))
+                return
+            }
+        }else if(postStatus.likeType=='couple'){
+            const pushResponse=await coupleModel.findOneAndUpdate({
+                _id:req.body.postId
+            },{
+                $push:{
+                    isLikedBy:{
+                        userId:req.user._id,
+                        liked:true
+                    }
+                }
+            })
+            if(!pushResponse){
+                resp.status(500).send(new ApiResponse(500,null,"Internal server error occured and unable to like the post"))
+                return
+            }
+        }
+    }else{
+        if(postStatus.likeType=='post'){
+            const pullResponse=await vendorPicModel.findOneAndUpdate({
+                _id:req.body.postId
+            },{
+                $pull:{
+                    isLikedBy:{
+                        userId:req.user._id
+                    }
+                }
+            })
+            if(!pullResponse){
+                resp.status(500).send(new ApiResponse(500,null,"Internal server error and unable to unlike the post"))
+                return
+            }
+        }else if(postStatus.likeType=='couple'){
+            const pullResponse=await coupleModel.findOneAndUpdate({
+                _id:req.body.postId
+            },{
+                $pull:{
+                    isLikedBy:{
+                        userId:req.user._id
+                    }
+                }
+            })
+            if(!pullResponse){
+                resp.status(500).send(new ApiResponse(500,null,"Internal server error and unable to unlike the post"))
+                return
+            }
+    }
     
-    resp.status(200).send(new ApiResponse(200,req.body,'successful response'))
+    resp.status(200).send(new ApiResponse(200,postStatus.isLiked,'actionDone'))
+    }
 })
 
 export {userRegisterHandler,
