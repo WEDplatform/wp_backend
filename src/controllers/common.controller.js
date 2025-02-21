@@ -208,17 +208,22 @@ export const getReels=tryCatchWrapper(async(req,resp)=>{
 })
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
+    const userId=req.user._id.toString()
        if(!query?.vendorName){
         resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
         return 
     }
     let details=await vendorPicModel.findOne({name:query.vendorName})
+    console.log(details);
+    
     if(!details){ 
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
-        return
+        return 
     }
-    resp.status(200).send(new ApiResponse(200,details,'found'))
-})
+    details = details.toObject(); // Convert Mongoose document to plain object
+    details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
+        resp.status(200).send(new ApiResponse(200,details,'found'))
+}) 
 export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     if(!srchPage?.vendorName){
