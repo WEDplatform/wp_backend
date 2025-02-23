@@ -115,11 +115,12 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     const userId=req.user._id
+    console.log(srchPage.searchStatus);
     
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
-    }
+    } 
     let page=parseInt(srchPage.searchIndex);
     let pageBreak=numberOfdata;
     if(page<0 || !page){
@@ -285,4 +286,24 @@ export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
         hasMore:page*numberOfdata<total,
         reels:postDetails
     },'found'))
+})
+export const searchPosts_Couples=tryCatchWrapper(async(req,resp)=>{
+    const searchList=req.body.searchArray;
+    const regexArray = searchList.map((str) => new RegExp(str, "i"));
+    const VendorList=await vendorPicModel.find({
+        $or: [
+            { name: { $in: regexArray } },
+            { tags:  { $elemMatch: { $in: regexArray } } },
+            { address: { $elemMatch: { $in: regexArray } } },
+            { description: { $in: regexArray } }
+          ]
+    }).limit(3)
+    // const CoupleList=await coupleModel.find({
+
+    // })
+    if(!VendorList){
+        resp.status(501).send(new ApiError(501,'intenal error'))
+    }else{
+        resp.status(203).send(new ApiResponse(203,VendorList,'found'))
+    }
 })
