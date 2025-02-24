@@ -25,7 +25,7 @@ commonRouter.route('/groupVendor').get(getVendor)
 commonRouter.route("/getVideos").get(getVendorReels)
 commonRouter.route('/groupVideos').get(groupVideos)
 //fetching of post data
-commonRouter.route("/getPosts").get(checkUserAuth,getPics)
+commonRouter.route("/getPosts").post(checkUserAuth,getPics)
 commonRouter.route('/getReels').get(getReels)
 commonRouter.route('/getCouplePosts').get(checkUserAuth,getCouplePost)
 commonRouter.route('/getCoupleDetails').get(getCoupleDetails)
