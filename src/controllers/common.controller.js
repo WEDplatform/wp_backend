@@ -115,7 +115,6 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     const userId=req.user._id
-    console.log(srchPage.searchStatus);
     
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
@@ -127,8 +126,25 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
         page=0;
     }
     let doc_count=await vendorPicModel.countDocuments()
-    let vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
+    let vendorDetails;
+    console.log(req.body);
+    let isSearched=srchPage.searchStatus
+    if(isSearched=="true"){
+    const searchList=req.body.searchArray;
+    const regexArray = req.body?.map((str) => new RegExp(str, "i"));
+    vendorDetails=await vendorPicModel.find({
+        $or: [
+            { name: { $in: regexArray } },
+            { tags:  { $elemMatch: { $in: regexArray } } },
+            { address: { $elemMatch: { $in: regexArray } } },
+            { description: { $in: regexArray } }
+          ]
+    })
+    console.log("data1 ",vendorDetails);
     
+    }else{ 
+        vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
+    }
     if(vendorDetails.length==0 || !vendorDetails){
         resp.status(404).send(new ApiResponse(200,{
             pics:[], 
