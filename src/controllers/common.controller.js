@@ -127,19 +127,18 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
     }
     let doc_count=await vendorPicModel.countDocuments()
     let vendorDetails;
-    console.log(req.body);
     let isSearched=srchPage.searchStatus
     if(isSearched=="true"){
     const searchList=req.body.searchArray;
     const regexArray = req.body?.map((str) => new RegExp(str, "i"));
     vendorDetails=await vendorPicModel.find({
-        $or: [
+        $or: [ 
             { name: { $in: regexArray } },
             { tags:  { $elemMatch: { $in: regexArray } } },
             { address: { $elemMatch: { $in: regexArray } } },
             { description: { $in: regexArray } }
           ]
-    })
+    }).limit(numberOfdata).skip(page*numberOfdata).exec()
     console.log("data1 ",vendorDetails);
     
     }else{ 
