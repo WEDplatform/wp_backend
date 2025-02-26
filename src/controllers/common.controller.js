@@ -115,7 +115,6 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     const userId=req.user._id
-    
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
         numberOfdata=3;
@@ -139,7 +138,6 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
             { description: { $in: regexArray } }
           ]
     }).limit(numberOfdata).skip(page*numberOfdata).exec()
-    
     }else{ 
         vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
     }
