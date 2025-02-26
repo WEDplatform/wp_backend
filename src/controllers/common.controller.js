@@ -115,6 +115,7 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     const userId=req.user._id
+    console.log(srchPage);
     
     let numberOfdata=parseInt(srchPage.per_page)
     if(!numberOfdata || numberOfdata<=0){
@@ -124,7 +125,7 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
     let pageBreak=numberOfdata;
     if(page<0 || !page){
         page=0;
-    }
+    }   
     let doc_count=await vendorPicModel.countDocuments()
     let vendorDetails;
     let isSearched=srchPage.searchStatus
