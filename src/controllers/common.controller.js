@@ -139,7 +139,6 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
             { description: { $in: regexArray } }
           ]
     }).limit(numberOfdata).skip(page*numberOfdata).exec()
-    console.log("data1 ",vendorDetails);
     
     }else{ 
         vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
