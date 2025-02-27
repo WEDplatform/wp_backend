@@ -74,7 +74,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
         let userProfile = { ...req.user };
         let vendor_and_coupleCollection=[];
         if (req.user.usertype == 'user') {
-             
 
             // Handle Vendor Liked
             if (req.user.vendorLiked.length > 0) {
