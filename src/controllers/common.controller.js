@@ -65,14 +65,53 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
         return
     }
 })
+ 
+export const profile = tryCatchWrapper(async (req, resp) => {
+    try {
+        const fieldsToExclude = ["refreshToken", "__v", "loginCounts", "_id"];
+        
+        // Clone req.user (Avoid directly modifying req.user)
+        let userProfile = { ...req.user };
+        let vendor_and_coupleCollection=[];
+        if (req.user.usertype == 'user') {
+             
 
-export const profile=tryCatchWrapper(async(req,resp)=>{
-   
-    const fieldsToExclude = ["refreshToken", "__v","loginCounts","_id"];
-    let filteredObject=_.omit(req.user, ["refreshToken"])
-    //console.log(filteredObject);
-    resp.status(200).send(new ApiResponse(200,req.user,"Profile found"))
-})
+            // Handle Vendor Liked
+            if (req.user.vendorLiked.length > 0) {
+                let likedVendorIds = req.user.vendorLiked.map(i => i.id); // `type` stores the ObjectId
+                let data = await vendorPicModel.find({ _id: { $in: likedVendorIds } });
+                data={type:"likedVendors",items:data}
+                // console.log(data);
+                
+                vendor_and_coupleCollection.push(data)
+            }
+
+            // Handle Couple Liked
+            if (req.user.coupleLiked.length > 0) {
+                let likedCoupleIds = req.user.coupleLiked.map(i => i.id);
+                let data = await coupleModel.find({ _id: { $in: likedCoupleIds } });
+                data={type:"likedCouples",items:data}
+                vendor_and_coupleCollection.push(data)
+            }
+
+            // Handle Vendor Followed
+            if (req.user.vendorFollowed.length > 0) {
+                let followedVendorIds = req.user.vendorFollowed.map(i => i.id);
+                let data = await vendorPicModel.find({ _id: { $in: followedVendorIds } });
+                data={type:"followedVendors",items:data}
+                vendor_and_coupleCollection.push(data)
+            }
+           
+        }
+
+        // Send the modified user profile instead of req.user
+        resp.status(200).send(new ApiResponse(200, {userProfile:req.user,vendor_and_coupleCollection}, "Profile found"));
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        resp.status(500).send(new ApiResponse(500, null, "Internal Server Error"));
+    }
+});
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -227,7 +266,6 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         return 
     }
     let details=await vendorPicModel.findOne({name:query.vendorName})
-    console.log(details);
     
     if(!details){ 
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
@@ -235,6 +273,9 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     }
     details = details.toObject(); // Convert Mongoose document to plain object
     details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
+     details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
+     console.log(details);
+     
         resp.status(200).send(new ApiResponse(200,details,'found'))
 }) 
 export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
