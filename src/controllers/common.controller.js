@@ -69,7 +69,6 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
 export const profile = tryCatchWrapper(async (req, resp) => {
     try {
         const fieldsToExclude = ["refreshToken", "__v", "loginCounts", "_id"];
-        
         // Clone req.user (Avoid directly modifying req.user)
         let userProfile = { ...req.user };
         let vendor_and_coupleCollection=[];
