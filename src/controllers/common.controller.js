@@ -93,7 +93,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
                 data={type:"likedCouples",items:data}
                 vendor_and_coupleCollection.push(data)
             }
-
             // Handle Vendor Followed
             if (req.user.vendorFollowed.length > 0) {
                 let followedVendorIds = req.user.vendorFollowed.map(i => i.id);
