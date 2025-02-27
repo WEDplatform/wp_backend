@@ -60,7 +60,16 @@ const userSchema=new Schema({
     isPreferencesSet:{
         type:Boolean,
         default:false
-    }
+    },
+    vendorLiked:[{
+        id:String
+    }],
+    coupleLiked:[{
+        id:String
+    }],
+    vendorFollowed:[{
+        id:String,
+    }]
 },{
     timestamps:true
 })
