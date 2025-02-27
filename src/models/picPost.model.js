@@ -10,6 +10,11 @@ const srcSchema = new Schema({
   landscape: { type: String },
   tiny: { type: String },
 });
+const followSchema=new Schema({
+    userId:String,
+},{
+    timestamps:true
+})
 const photoSchema = new Schema({
   name:{
     type:String,
@@ -47,7 +52,13 @@ const photoSchema = new Schema({
         default:false
       }
     }]
-  }
+  },
+  followedBy:[
+    {
+      username:{type:String},
+      userId:{type:String}
+    }
+  ]
 });
 const picSectionSchema=new Schema({
     avg_color:{type:String},
