@@ -8,6 +8,7 @@ import fs from "fs"
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
 import { vendorPicModel } from "../models/picPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
+import mongoose from "mongoose";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await userModel.findOne({_id:id})
     let refreshToken=await userFound.generateRefreshToken()
@@ -198,7 +199,7 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
 })
 const likePost=tryCatchWrapper(async(req,resp)=>{
     let postStatus=req.body;
-    console.log(req.body);
+    // console.log(req.body);
     if(postStatus.isLiked){
         if(postStatus.likeType=='post'){
             const pushResponse=await vendorPicModel.findOneAndUpdate({
@@ -208,6 +209,16 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
                     isLikedBy:{
                         userId:req.user._id,
                         liked:true
+                    }
+                }
+            })
+            await userModel.findOneAndUpdate({
+                _id:req.user._id
+            },{
+                $push:{
+                    vendorLiked:{
+                        id: req.body.postId,
+
                     }
                 }
             })
@@ -226,6 +237,15 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
                     }
                 }
             })
+            await userModel.findOneAndUpdate({
+                _id:req.user._id
+            },{
+                $push:{
+                    coupleLiked:{
+                        id: req.body.postId,
+                    }
+            }
+            })
             if(!pushResponse){
                 resp.status(500).send(new ApiResponse(500,null,"Internal server error occured and unable to like the post"))
                 return
@@ -242,6 +262,15 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
                     }
                 }
             })
+            await userModel.findOneAndUpdate({
+                _id:req.user._id
+            },{
+                $pull:{
+                    vendorLiked:{
+                        id: req.body.postId,
+                    }
+            }
+            })
             if(!pullResponse){
                 resp.status(500).send(new ApiResponse(500,null,"Internal server error and unable to unlike the post"))
                 return
@@ -256,6 +285,15 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
                     }
                 }
             })
+            await userModel.findOneAndUpdate({
+                _id:req.user._id
+            },{
+                $pull:{
+                    coupleLiked:{
+                        id: req.body.postId,
+                    }
+            }
+            })
             if(!pullResponse){
                 resp.status(500).send(new ApiResponse(500,null,"Internal server error and unable to unlike the post"))
                 return
@@ -265,7 +303,61 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,postStatus.isLiked,'actionDone'))
     }
 })
-
+const followVendor=tryCatchWrapper(async(req,resp)=>{
+    let {name,followStatus}=req.body
+     //console.log(req.user);
+    
+    let followResponse;
+    if(followStatus){
+         followResponse=await vendorPicModel.findOneAndUpdate({
+            name:name
+        },{
+            $push:{
+                followedBy:{
+                    userId:req.user._id,
+                    username:req.user.username
+                }
+        }
+        },{
+            new:true
+        })
+        await userModel.findOneAndUpdate({
+            _id:req.user._id
+        },{
+            $push:{
+                vendorFollowed:{
+                    id:followResponse._id
+                }
+            }
+        })
+    }else{
+         followResponse=await vendorPicModel.findOneAndUpdate({
+            name:name
+        },{
+            $pull:{
+                followedBy:{
+                    userId:req.user._id
+                }
+        }
+        },{
+            new:true
+        })
+        await userModel.findOneAndUpdate({
+            _id:req.user._id
+        },{
+            $pull:{
+                vendorFollowed:{
+                    id:followResponse._id
+                }
+            }
+        })
+    }
+    if(!followResponse){
+        resp.status(500).send(new ApiResponse(500,null,"Internal server error occured and unable to follow the vendor"))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200,followResponse,'actionDone'))
+}) 
 export {userRegisterHandler,
     userLoginHandler,
     usernameAvailability,
@@ -274,4 +366,5 @@ export {userRegisterHandler,
     refreshAccessToken,
     updateUserPreferences,
     likePost,
+    followVendor,
 populateUser}
