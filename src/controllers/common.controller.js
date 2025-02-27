@@ -99,7 +99,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
                 data={type:"followedVendors",items:data}
                 vendor_and_coupleCollection.push(data)
             }
-           
         }
 
         // Send the modified user profile instead of req.user
