@@ -65,7 +65,6 @@ export const logout=tryCatchWrapper(async(req,resp)=>{
         return
     }
 })
- 
 export const profile = tryCatchWrapper(async (req, resp) => {
     try {
         const fieldsToExclude = ["refreshToken", "__v", "loginCounts", "_id"];
