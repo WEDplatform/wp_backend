@@ -82,7 +82,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
                 let data = await vendorPicModel.find({ _id: { $in: likedVendorIds } });
                 data={type:"likedVendors",items:data}
                 // console.log(data);
-                
                 vendor_and_coupleCollection.push(data)
             }
             // Handle Couple Liked
