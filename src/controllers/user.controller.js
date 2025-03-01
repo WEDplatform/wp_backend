@@ -363,4 +363,4 @@ export {userRegisterHandler,
     updateUserPreferences,
     likePost,
     followVendor,
-populateUser}
+    populateUser}
