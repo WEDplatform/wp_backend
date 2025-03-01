@@ -299,7 +299,6 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
                 return
             }
     }
-    
     resp.status(200).send(new ApiResponse(200,postStatus.isLiked,'actionDone'))
     }
 })
