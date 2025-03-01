@@ -199,7 +199,6 @@ const populateUser=tryCatchWrapper(async(req,resp)=>{
 })
 const likePost=tryCatchWrapper(async(req,resp)=>{
     let postStatus=req.body;
-    // console.log(req.body);
     if(postStatus.isLiked){
         if(postStatus.likeType=='post'){
             const pushResponse=await vendorPicModel.findOneAndUpdate({
