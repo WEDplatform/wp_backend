@@ -305,7 +305,6 @@ const likePost=tryCatchWrapper(async(req,resp)=>{
 const followVendor=tryCatchWrapper(async(req,resp)=>{
     let {name,followStatus}=req.body
      //console.log(req.user);
-    
     let followResponse;
     if(followStatus){
          followResponse=await vendorPicModel.findOneAndUpdate({
