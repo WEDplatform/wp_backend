@@ -88,7 +88,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
                 vendor_and_coupleCollection.push(data)
             }
         }
-        // Send the modified user profile instead of req.user
         resp.status(200).send(new ApiResponse(200, {userProfile:req.user,vendor_and_coupleCollection}, "Profile found"));
     } catch (error) {
         console.error("Error fetching profile:", error);
