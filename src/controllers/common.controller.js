@@ -130,7 +130,6 @@ export const groupVideos=tryCatchWrapper(async(req,resp)=>{
        }))
     resp.status(200).send(new ApiResponse(200,null,"Videos found"))
 })
-
 export const getPics=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
     const userId=req.user._id
