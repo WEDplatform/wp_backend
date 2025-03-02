@@ -366,6 +366,7 @@ const savePost = tryCatchWrapper(async (req, resp) => {
                     }
                 }
             })
+            resp.status(203).send(new ApiResponse(203,null,"saved"))
         }else{
             const pullResponse = await vendorPicModel.findOneAndUpdate({
                 _id: postId
@@ -376,6 +377,7 @@ const savePost = tryCatchWrapper(async (req, resp) => {
                     }
                 }
             })
+            resp.status(203).send(new ApiResponse(203, null, "unsaved"))
         }
     } else {
 
