@@ -74,7 +74,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
                 data={type:"likedVendors",items:data}
                 vendor_and_coupleCollection.push(data)
             }
-            // Handle Couple Liked
             if (req.user.coupleLiked.length > 0) {
                 let likedCoupleIds = req.user.coupleLiked.map(i => i.id);
                 let data = await coupleModel.find({ _id: { $in: likedCoupleIds } });
