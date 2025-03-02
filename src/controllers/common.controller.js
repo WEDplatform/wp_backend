@@ -25,7 +25,6 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
            response.status(401).send(new ApiError(401,"Auth failed get new token"))
             return
         }
-        //console.log(user);
         
         response.status(200).send(new ApiResponse(200,user,"user authenticated"))  
     })
