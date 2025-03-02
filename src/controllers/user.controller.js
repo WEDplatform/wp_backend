@@ -393,5 +393,6 @@ export {
     updateUserPreferences,
     likePost,
     followVendor,
-    populateUser
+    populateUser,
+    savePost
 }
