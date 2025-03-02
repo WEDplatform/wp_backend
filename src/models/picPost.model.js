@@ -59,17 +59,19 @@ const photoSchema = new Schema({
       userId:{type:String}
     }
   ],
-  isSavedBy:[{
-    userId:{
-      type:String
-    },
-    username:{type:String},
-    isSavedAs:{
-      type:String,
-      default:"vendor",
-      Enumerators:["vendor","idea"]
-    }
-  }]
+  isSavedBy:{
+    type:[{
+      userId:{
+        type:String
+      },
+      username:{type:String},
+      isSavedAs:{
+        type:String,
+        default:"vendor",
+        Enumerators:["vendor","idea"]
+      }
+    }]
+  }
 });
 const picSectionSchema=new Schema({
     avg_color:{type:String},
