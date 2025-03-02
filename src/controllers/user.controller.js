@@ -19,7 +19,6 @@ let generateRefreshAndAccessToken=async(id)=>{
 let incrementLoginCount=tryCatchWrapper(async(id)=>{
     const currentDate = new Date().toISOString().split('T')[0];
     // let userFound=await userModel.findByIdAndUpdate({_id:id},{
-    //     $inc:{loginCounts:1}
     // })
     let userFound=await userModel.findOne({_id:id,
         loginCounts:{
