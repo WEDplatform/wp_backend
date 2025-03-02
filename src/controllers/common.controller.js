@@ -109,7 +109,6 @@ export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
 export const getVendor=tryCatchWrapper(async(req,resp)=>{
     //const vendors=fs.readFileSync('utils/vendorlist1.json')
     // const vendorDetails=await picModel.find({vendorName:"Rajendra Caterers"})
-    // await vendorPicMo
     Promise.all(bizName.map(async(user)=>{
      const vendorDetails=await picModel.find({vendorName:user})
     await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
