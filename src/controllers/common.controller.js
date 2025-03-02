@@ -114,7 +114,6 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     }))
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
-
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
     const {qr,pageIndex}=req.body;
     const videoResponse=await fetch(`https://pixabay.com/api/videos/?key=&q=${encodeURIComponent(qr)}&pretty=true&per_page=200&page=${pageIndex}`)
