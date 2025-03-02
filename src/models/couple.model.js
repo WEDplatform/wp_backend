@@ -19,6 +19,19 @@ const coupleSchema=new Schema({
             default:false
           }
         }]
+      },
+      isSavedBy:{
+        type:[{
+          userId:{
+            type:String
+          },
+          username:{type:String},
+          isSavedAs:{
+            type:String,
+            default:"vendor",
+            Enumerators:["vendor","idea"]
+          }
+        }]
       }
 })
 const coupleModel = mongoose.model('couple',coupleSchema)
