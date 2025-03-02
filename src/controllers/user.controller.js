@@ -52,7 +52,6 @@ const userRegisterHandler=tryCatchWrapper(async(req,resp)=>{
     let userSavingInstance=await userModel.create(req.body)
     
     if(!userSavingInstance){
-        //throw new ApiError(500,"internal server error")
         resp.status(500).send(new ApiResponse(500,null,"Internal server error"))
         return
     }
