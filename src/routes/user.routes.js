@@ -3,7 +3,6 @@ import { pseudoApi, refreshAccessToken, updateUserPreferences, userLoginHandler,
 import { usernameAvailability } from "../controllers/user.controller.js";
 import { openapiMiddleware } from "../middlewares/openapi.middleware.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
-import { useRouter } from "next/router.js";
 const userRouter=Router();
 userRouter.route("/signup").post(userRegisterHandler)
 userRouter.route("/login").post(userLoginHandler)
