@@ -70,21 +70,33 @@ export const profile = tryCatchWrapper(async (req, resp) => {
         if (req.user.usertype == 'user') {
             if (req.user.vendorLiked.length > 0) {
                 let likedVendorIds = req.user.vendorLiked.map(i => i.id); // `type` stores the ObjectId
-                let data = await vendorPicModel.find({ _id: { $in: likedVendorIds } });
+                let data = await vendorPicModel.find({ _id: { $in: likedVendorIds },isLikedBy:{$elemMatch:{userId:req.user._id}} }).select('-address -description -tags -review');
                 data={type:"likedVendors",items:data}
                 vendor_and_coupleCollection.push(data)
             }
             if (req.user.coupleLiked.length > 0) {
                 let likedCoupleIds = req.user.coupleLiked.map(i => i.id);
-                let data = await coupleModel.find({ _id: { $in: likedCoupleIds } });
+                let data = await coupleModel.find({ _id: { $in: likedCoupleIds },isLikedBy:{$elemMatch:{userId:req.user._id}} }).select('-address -description -tags -review');
                 data={type:"likedCouples",items:data}
                 vendor_and_coupleCollection.push(data)
             }
             // Handle Vendor Followed
             if (req.user.vendorFollowed.length > 0) {
                 let followedVendorIds = req.user.vendorFollowed.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: followedVendorIds } });
+                let data = await vendorPicModel.find({ _id: { $in: followedVendorIds } ,followedBy:{$elemMatch:{userId:req.user._id}}}).select('-address -description -tags -review');;
                 data={type:"followedVendors",items:data}
+                vendor_and_coupleCollection.push(data)
+            }
+            if(req.user.vendorSaved.length>0){
+                let savedVendorIds = req.user.vendorSaved.map(i => i.id);
+                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"idea"}} }).select('name isSavedBy');
+                data={type:"savedIdea",items:data}
+                vendor_and_coupleCollection.push(data)
+            }
+            if(req.user.vendorSaved.length>0){
+                let savedVendorIds = req.user.vendorSaved.map(i => i.id);
+                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"vendor"}} }).select('name isSavedBy');
+                data={type:"savedVendor",items:data}
                 vendor_and_coupleCollection.push(data)
             }
         }
