@@ -89,17 +89,17 @@ export const profile = tryCatchWrapper(async (req, resp) => {
             }
             if(req.user.vendorSaved.length>0){
                 let savedVendorIds = req.user.vendorSaved.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"idea"}} }).select('name isSavedBy');
+                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"idea"}} }).select('name isSavedBy images');
                 data={type:"savedIdea",items:data}
                 vendor_and_coupleCollection.push(data)
             }
             if(req.user.vendorSaved.length>0){
                 let savedVendorIds = req.user.vendorSaved.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"vendor"}} }).select('name isSavedBy');
+                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"vendor"}} }).select('name isSavedBy images');
                 data={type:"savedVendor",items:data}
                 vendor_and_coupleCollection.push(data)
             }
-        }
+        } 
         resp.status(200).send(new ApiResponse(200, {userProfile:req.user,vendor_and_coupleCollection}, "Profile found"));
     } catch (error) {
         console.error("Error fetching profile:", error);
