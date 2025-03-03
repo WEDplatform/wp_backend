@@ -366,6 +366,16 @@ const savePost = tryCatchWrapper(async (req, resp) => {
                     }
                 }
             })
+            await userModel.findOneAndUpdate({
+                _id:req.user._id
+            },{
+                $push:{
+                    vendorSaved:{
+                        id:postId
+                    }
+                }
+            }
+            )
             resp.status(203).send(new ApiResponse(203,null,"saved"))
         }else{
             const pullResponse = await vendorPicModel.findOneAndUpdate({
@@ -374,6 +384,15 @@ const savePost = tryCatchWrapper(async (req, resp) => {
                 $pull: {
                     isSavedBy: {
                         userId: req.user._id
+                    }
+                }
+            })
+            await userModel.findOneAndUpdate({
+                _id: req.user._id
+            }, {
+                $pull: {
+                    vendorSaved: {
+                        id: postId,
                     }
                 }
             })

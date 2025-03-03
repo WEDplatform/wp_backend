@@ -69,6 +69,9 @@ const userSchema=new Schema({
     }],
     vendorFollowed:[{
         id:String,
+    }],
+    vendorSaved:[{
+        id:String
     }]
 },{
     timestamps:true

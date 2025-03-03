@@ -250,7 +250,7 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     if(!details){ 
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
         return 
-    }
+    } 
     details = details.toObject(); // Convert Mongoose document to plain object
     details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
      details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
