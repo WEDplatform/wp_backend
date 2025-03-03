@@ -352,9 +352,9 @@ const followVendor = tryCatchWrapper(async (req, resp) => {
     resp.status(200).send(new ApiResponse(200, followResponse, 'actionDone'))
 })
 const savePost = tryCatchWrapper(async (req, resp) => {
-    let { postId, type, status,saveType } = req.body
+    let { postId, type, status_type,saveType } = req.body
     if (type == "post") {
-        if(status==true || status=="true"){
+        if(status_type==true || status_type=="true"){
             const pushResponse = await vendorPicModel.findOneAndUpdate({
                 _id: postId
             },{

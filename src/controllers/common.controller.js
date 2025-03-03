@@ -168,7 +168,8 @@ export const getPics=tryCatchWrapper(async(req,resp)=>{
     }else{
         vendorDetails = vendorDetails.map(vendor => ({
             ...vendor._doc, // Spread existing fields
-            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked) 
+            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked),
+            isSavedByUser: vendor.isSavedBy.some(user => user.userId.toString() === userId.toString() ) 
         }));
         resp.status(200).send(new ApiResponse(200,{
             total:doc_count,
