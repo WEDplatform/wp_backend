@@ -16,6 +16,7 @@ import { checkClientAuth,
     searchPosts_Couples} from "../controllers/common.controller.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 import { getCoupleDetails } from "../controllers/couple.controller.js";
+import { slmSearch } from "../../utils/slmSearch.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
 commonRouter.route("/profile").get(checkUserAuth,profile)
@@ -32,4 +33,7 @@ commonRouter.route('/getCoupleDetails').get(getCoupleDetails)
 commonRouter.route("/getVendorPosts").get(getVendorMediaPosts)
 commonRouter.route("/getVendorReels").get(getVendorMediaReels)
 commonRouter.route('/getSearchResults').get(searchPosts_Couples)
+
+//testing routes not for production rn
+commonRouter.route('/slmSearch').get(slmSearch)
 export {commonRouter} 
