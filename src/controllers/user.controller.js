@@ -9,6 +9,7 @@ import { accessTokenOption, refreshTokenOption } from "../constants.js"; //
 import { vendorPicModel } from "../models/picPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
 import mongoose from "mongoose";
+import { chatModel } from "../models/chat.model.js";
 let generateRefreshAndAccessToken = async (id) => {
     let userFound = await userModel.findOne({ _id: id })
     let refreshToken = await userFound.generateRefreshToken()
@@ -400,6 +401,20 @@ const savePost = tryCatchWrapper(async (req, resp) => {
         }
     } else {
 
+    }
+})
+const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
+    let {vendorName}=req.body;
+    let roomFind=await chatModel.findOne({roomName:vendorName})
+    if(!roomFind){
+       chatModel.create({roomName:vendorName}) 
+    }else{
+        let ischatforUserExists=await chatModel.findOne({roomName:vendorName,subsctibers:{
+            $elemMatch:{userId:req.user._id}
+        }})
+        if(!ischatforUserExists){
+            
+        }
     }
 })
 export {
