@@ -8,6 +8,7 @@ import fs from "fs"
 
 import { accessTokenOption, refreshTokenOption } from "../constants.js";
 import { vendorPicModel } from "../models/picPost.model.js";
+import { chatModel } from "../models/chat.model.js";
 let generateRefreshAndAccessToken=async(id)=>{
     let userFound=await vendorModel.findOne({_id:id})
     let refreshToken=await userFound.generateRefreshToken()
@@ -206,10 +207,16 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
     // }))
     resp.status(200).send(new ApiResponse(200,vendorObj,"Vendors populated"))
 })
+const getSubscribers=tryCatchWrapper(async(req,resp)=>{
+    let vendorName=req.user.businessName
+    let subsribedUsers=await chatModel.findOne({roomName:vendorName})
+    resp.status(200).send(new ApiResponse(200,subsribedUsers,"subscribed users"))
+})
 export {vendorRegisterHandler,
 vendorLoginHandler,
 vendorUsernameAvailability,
 pseudoApi,
 logoutVendor,
 refreshAccessToken,
+getSubscribers,
 populateVendor}
