@@ -12,6 +12,7 @@ import _ from "lodash"
 import { picModel, vendorPicModel } from "../models/picPost.model.js";
 import { vendorReelModel, videoPostModel } from "../models/reelPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
+import { chatModel } from "../models/chat.model.js";
 export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
     let credentials=req.get("wedoraCredentials")
     
@@ -351,3 +352,45 @@ export const searchPosts_Couples=tryCatchWrapper(async(req,resp)=>{
         resp.status(203).send(new ApiResponse(203,VendorList,'found'))
     }
 })
+export const populateMessage = tryCatchWrapper(async (packet) => {
+    const { roomID, payload } = packet;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to start of the day
+
+    const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
+
+    if (!chat) {
+        console.log("Chat room not found.");
+        return;
+    }
+
+    let updated = false;
+
+    // Iterate through subscribers to find the correct one
+    chat.subscribers.forEach((subscriber) => {
+        if (subscriber.uuid === roomID) {
+            let todayMessage = subscriber.messages.find(
+                (msg) => msg.chatDate.getTime() === today.getTime()
+            );
+
+            if (todayMessage) {
+                // If today's chat thread exists, push the new message
+                todayMessage.payloads.push(payload);
+            } else {
+                // If no chat thread for today, create one
+                subscriber.messages.push({
+                    chatDate: today,
+                    payloads: [payload],
+                });
+            }
+            updated = true;
+        }
+    });
+
+    if (updated) {
+        await chat.save();
+        console.log("Message updated successfully!");
+    } else {
+        console.log("No subscriber matched the given roomID.");
+    }
+});
