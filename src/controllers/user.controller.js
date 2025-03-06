@@ -442,7 +442,8 @@ const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
         return {
             roomName: vendor.roomName, // Include the room name
             subscriber: subscriber,
-            userId: userId     // Include the matched subscriber details
+            senderId: userId  ,
+            recieverId:vendor.vendorId   // Include the matched subscriber details
         };// Ensure you return the extracted subscriber
     });
     console.log(subscribedVendors);
