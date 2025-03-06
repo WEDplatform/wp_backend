@@ -165,17 +165,46 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
                 username:userFound.businessName,
                 email:userFound.businessEmail
             },"Refresh token"))
-        })
+        }) 
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
      const vendors=fs.readFileSync('utils/WedMeGoodVendors.json')
     
-    let vnd=JSON.parse(vendors)
-    console.log(vnd[0]);
-    Promise.all(vnd.map(async(vendor)=>{
-        await vendorPicModel.create(vendor)
+     let vnd=JSON.parse(vendors)
+     let vendorObj={
+        businessName:vnd[0].name,
+        businessEmail:(vnd[0].name).replace(/\s/g, "")+"@gmail.com",
+        businessPhone:`${Math.floor(Math.random() * 9000000000) + 1000000000}`,
+        password:(vnd[0].name).split(" ")[0],
+        city:vnd[0].address[0],
+        address:vnd[0].address.join(" "),
+        gstNumber:'GST0000000001IND',
+        usertype:"vendor",
+        isMobileVerified:false,
+        citiesActive:vnd[0].address,
+        servicesProvided:vnd[0].tags,
+     }
+    // console.log(vnd[0]);
+    // Promise.all(vnd.map(async(vendor)=>{
+    //     await vendorPicModel.create(vendor)
+    // }))
+    Promise.all(vnd.map(async(item,pos)=>{
+        let vendorObj={
+            businessName:item.name,
+            businessEmail:(item.name).replace(/\s/g, "")+"@gmail.com",
+            businessPhone:`${Math.floor(Math.random() * 9000000000) + 1000000000}`,
+            password:(item.name).replace(/\s/g, ""),
+            city:item.address[0],
+            address:item.address.join(" "),
+            gstNumber:'GST0000000001IND',
+            usertype:"vendor",
+            isMobileVerified:false,
+            citiesActive:item.address,
+            servicesProvided:item.tags,
+         }
+         await vendorModel.create(vendorObj)
     }))
-    resp.status(200).send(new ApiResponse(200,null,"Vendors populated"))
+    resp.status(200).send(new ApiResponse(200,vendorObj,"Vendors populated"))
 })
 export {vendorRegisterHandler,
 vendorLoginHandler,
