@@ -28,7 +28,9 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
             req.user=foundUser
             next()
         } 
-        if(user?.typeClient=="vendor"){
+        if(user?.typeClient=="vendor"){ 
+            console.log(user);
+            
             let foundVendor=await vendorModel.findById({_id:user._id})
             if(!foundVendor){
                response.status(404).send(new ApiError(404,"Vendor not found"))
@@ -38,7 +40,7 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
                 response.status(401).send(new ApiError(401,"Auth failed get new token"))
                 return
             }
-            req.user=foundVendor
+            req.user=foundVendor 
             next()
         } 
     })
