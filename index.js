@@ -3,8 +3,14 @@ import { connectDB } from './src/db/db.js';
 import { createServer } from "http"
 import { Server } from 'socket.io';
 import { app } from './src/app.js';
+import { MongoClient } from 'mongodb';
+import { createAdapter } from '@socket.io/mongo-adapter';
+import { dbname } from './src/constants.js';
+const mongo_uri=`${process.env.MONGO_URI}/${dbname}`
+const collection_name="chatspfp"
+const mongoClient = new MongoClient(mongo_uri);
 // ✅ Use `createServer` so both API and Socket.io share the same server
-const server = createServer(app);
+const server = createServer(app); 
 // ✅ Attach Socket.io to the same server
 const io = new Server(server, {
     cors: {
@@ -16,6 +22,16 @@ const io = new Server(server, {
         credentials: true,
     },
 });
+(async () => {
+    await mongoClient.connect();
+    console.log("✅ Connected to MongoDB for Socket.io Adapter");
+
+    const db = mongoClient.db();
+    const collection = db.collection(collection_name);
+
+    // ✅ Attach MongoDB Adapter to sync messages across multiple servers
+    io.adapter(createAdapter(collection));
+})();
 const nameSpac = io.of('/chatpen')
 // ✅ Handle Socket.io Connections
 nameSpac.on("connection", (socket) => {
@@ -28,10 +44,9 @@ nameSpac.on("connection", (socket) => {
     })
     socket.on('sendMessage',(payload)=>{
         console.log("Received Message:", payload);
-        
         if (socket.room) {
             nameSpac.to(socket.room).emit("recieveMessage", payload); // ✅ Emit to the correct room
-        } else {
+        } else { 
             console.log("Error: User is not in a room!");
         }
     })
@@ -43,7 +58,7 @@ nameSpac.on("connection", (socket) => {
 connectDB()
     .then(() => {
         server.listen(process.env.PORT || 5173, () => {
-            console.log(`Server is running at port ${process.env.PORT || 5173}`);
+            console.log(`🚀 Server is running at port ${process.env.PORT || 5173}`);
         })
     })
     .catch((err) => {
