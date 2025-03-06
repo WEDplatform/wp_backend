@@ -47,7 +47,7 @@ nameSpac.on("connection", (socket) => {
         console.log("Received Message:", payload); 
         await populateMessage(payload)
         if (socket.room) {
-            nameSpac.to(socket.room).emit("recieveMessage", payload); // ✅ Emit to the correct room
+            nameSpac.to(socket.room).emit("recieveMessage", payload.payload); // ✅ Emit to the correct room
         } else { 
             console.log("Error: User is not in a room!");
         }

@@ -352,10 +352,19 @@ export const searchPosts_Couples=tryCatchWrapper(async(req,resp)=>{
         resp.status(203).send(new ApiResponse(203,VendorList,'found'))
     }
 })
+const getTodayDate = () => {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Adjust for time zone
+    today.setHours(0, 0, 0, 0); // Normalize to start of the day
+    return today;
+};
+
 export const populateMessage = tryCatchWrapper(async (packet) => {
     const { roomID, payload } = packet;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Normalize to start of the day
+
+    // Get today's date correctly in local time
+    const today = getTodayDate();
+    console.log("Current Date:", today); // Debugging to check the correct date
 
     const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
 
@@ -366,11 +375,11 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
 
     let updated = false;
 
-    // Iterate through subscribers to find the correct one
+    // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
         if (subscriber.uuid === roomID) {
             let todayMessage = subscriber.messages.find(
-                (msg) => msg.chatDate.getTime() === today.getTime()
+                (msg) => new Date(msg.chatDate).setHours(0, 0, 0, 0) === today.getTime()
             );
 
             if (todayMessage) {
@@ -394,3 +403,20 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
         console.log("No subscriber matched the given roomID.");
     }
 });
+
+
+
+export const getMessages = tryCatchWrapper(async (req, resp) => {
+    const { roomID  }= req.body;
+    const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
+    if (!chat) {
+        console.log("Chat room not found.");  
+        return;
+    }
+    const subscriber = chat.subscribers.find((sub) => sub.uuid === roomID);
+    if (!subscriber) {
+        console.log("Subscriber not found in the chat room.");
+        return;
+    }
+    resp.status(200).send(new ApiResponse(200, subscriber.messages, "Messages found"));
+})
