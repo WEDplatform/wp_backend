@@ -405,12 +405,12 @@ const savePost = tryCatchWrapper(async (req, resp) => {
     }
 })
 const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
-    let {vendorName}=req.body;
+    let {vendorName,vendorId}=req.body;
     console.log(vendorName);
      
     let roomFind=await chatModel.findOne({roomName:vendorName})
     if(!roomFind){
-       await chatModel.create({roomName:vendorName}) 
+       await chatModel.create({roomName:vendorName,vendorId:vendorId}) 
        await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4()}}})
        resp.status(200).send(new ApiResponse(200,null,"room created / ready"))
 
@@ -441,7 +441,8 @@ const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
     
         return {
             roomName: vendor.roomName, // Include the room name
-            subscriber: subscriber     // Include the matched subscriber details
+            subscriber: subscriber,
+            userId: userId     // Include the matched subscriber details
         };// Ensure you return the extracted subscriber
     });
     console.log(subscribedVendors);
