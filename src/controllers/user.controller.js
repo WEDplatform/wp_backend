@@ -10,6 +10,7 @@ import { vendorPicModel } from "../models/picPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
 import mongoose from "mongoose";
 import { chatModel } from "../models/chat.model.js";
+import {v4 as uuidv4} from "uuid"
 let generateRefreshAndAccessToken = async (id) => {
     let userFound = await userModel.findOne({ _id: id })
     let refreshToken = await userFound.generateRefreshToken()
@@ -405,17 +406,47 @@ const savePost = tryCatchWrapper(async (req, resp) => {
 })
 const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
     let {vendorName}=req.body;
+    console.log(vendorName);
+     
     let roomFind=await chatModel.findOne({roomName:vendorName})
     if(!roomFind){
-       chatModel.create({roomName:vendorName}) 
+       await chatModel.create({roomName:vendorName}) 
+       await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4()}}})
+       resp.status(200).send(new ApiResponse(200,null,"room created / ready"))
+
+       return
     }else{
-        let ischatforUserExists=await chatModel.findOne({roomName:vendorName,subsctibers:{
+        let ischatforUserExists=await chatModel.findOne({roomName:vendorName,subscribers:{
             $elemMatch:{userId:req.user._id}
         }})
         if(!ischatforUserExists){
-            
+            await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4()}}})
+            resp.status(200).send(new ApiResponse(200,null,"room ready"))
+            return
+        }else{
+            resp.status(200).send(new ApiResponse(200,null,"user message space exists"))
         }
+        
     }
+})
+const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
+    let userId=req.user._id
+    let subscribedVendors = await chatModel.find({
+        subscribers: { $elemMatch: { userId: userId } }
+    });
+   
+    
+    subscribedVendors = subscribedVendors.map((vendor) => {
+        let subscriber = vendor.toObject().subscribers.find((user) => user.userId == userId);
+    
+        return {
+            roomName: vendor.roomName, // Include the room name
+            subscriber: subscriber     // Include the matched subscriber details
+        };// Ensure you return the extracted subscriber
+    });
+    console.log(subscribedVendors);
+    
+    resp.status(203).send(new ApiResponse(200,subscribedVendors,"subscribed vendors"))
 })
 export {
     userRegisterHandler,
@@ -428,5 +459,7 @@ export {
     likePost,
     followVendor,
     populateUser,
-    savePost
+    savePost,
+    handleUserMessage,
+    getSubscribedVendors
 }
