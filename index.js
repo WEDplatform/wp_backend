@@ -6,6 +6,7 @@ import { app } from './src/app.js';
 import { MongoClient } from 'mongodb';
 import { createAdapter } from '@socket.io/mongo-adapter';
 import { dbname } from './src/constants.js';
+import { populateMessage } from './src/controllers/common.controller.js';
 const mongo_uri=`${process.env.MONGO_URI}/${dbname}`
 const collection_name="chatspfp"
 const mongoClient = new MongoClient(mongo_uri);
@@ -42,8 +43,9 @@ nameSpac.on("connection", (socket) => {
         console.log(`${socket.id} joined room: ${payload}`);
 
     })
-    socket.on('sendMessage',(payload)=>{
-        console.log("Received Message:", payload);
+    socket.on('sendMessage',async(payload)=>{
+        console.log("Received Message:", payload); 
+        await populateMessage(payload)
         if (socket.room) {
             nameSpac.to(socket.room).emit("recieveMessage", payload); // ✅ Emit to the correct room
         } else { 
