@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { pseudoApi, refreshAccessToken, updateUserPreferences, userLoginHandler, userRegisterHandler,populateUser, likePost, followVendor, savePost } from "../controllers/user.controller.js";
+import { pseudoApi, refreshAccessToken, updateUserPreferences, userLoginHandler, userRegisterHandler,populateUser, likePost, followVendor, savePost, getSubscribedVendors, handleUserMessage } from "../controllers/user.controller.js";
 import { usernameAvailability } from "../controllers/user.controller.js";
 import { openapiMiddleware } from "../middlewares/openapi.middleware.js";
 import { checkUserAuth } from "../middlewares/userauth.middleware.js";
@@ -15,4 +15,6 @@ userRouter.route("/updatePreferences").post(checkUserAuth,updateUserPreferences)
 userRouter.route('/likePost').post(checkUserAuth,likePost)
 userRouter.route('/followVendor').post(checkUserAuth,followVendor)
 userRouter.route('/savePost').post(checkUserAuth,savePost)
+userRouter.route('/getSubscribers').get(checkUserAuth,getSubscribedVendors)
+userRouter.route('/handleUserMessage').post(checkUserAuth,handleUserMessage)
 export {userRouter}
