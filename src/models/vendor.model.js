@@ -18,7 +18,6 @@ const vendorSchema=new Schema({
     businessEmail:{
         type:String,
         required:true,
-        lowercase:true,
         trim:true
     },
     businessPhone:{
