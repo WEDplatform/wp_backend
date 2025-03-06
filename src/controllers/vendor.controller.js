@@ -188,22 +188,22 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
     // Promise.all(vnd.map(async(vendor)=>{
     //     await vendorPicModel.create(vendor)
     // }))
-    Promise.all(vnd.map(async(item,pos)=>{
-        let vendorObj={
-            businessName:item.name,
-            businessEmail:(item.name).replace(/\s/g, "")+"@gmail.com",
-            businessPhone:`${Math.floor(Math.random() * 9000000000) + 1000000000}`,
-            password:(item.name).replace(/\s/g, ""),
-            city:item.address[0],
-            address:item.address.join(" "),
-            gstNumber:'GST0000000001IND',
-            usertype:"vendor",
-            isMobileVerified:false,
-            citiesActive:item.address,
-            servicesProvided:item.tags,
-         }
-         await vendorModel.create(vendorObj)
-    }))
+    // Promise.all(vnd.map(async(item,pos)=>{
+    //     let vendorObj={
+    //         businessName:item.name,
+    //         businessEmail:(item.name).replace(/\s/g, "")+"@gmail.com",
+    //         businessPhone:`${Math.floor(Math.random() * 9000000000) + 1000000000}`,
+    //         password:(item.name).replace(/\s/g, ""),
+    //         city:item.address[0],
+    //         address:item.address.join(" "),
+    //         gstNumber:'GST0000000001IND',
+    //         usertype:"vendor",
+    //         isMobileVerified:false,
+    //         citiesActive:item.address,
+    //         servicesProvided:item.tags,
+    //      }
+    //      await vendorModel.create(vendorObj)
+    // }))
     resp.status(200).send(new ApiResponse(200,vendorObj,"Vendors populated"))
 })
 export {vendorRegisterHandler,
