@@ -33,6 +33,7 @@ const subsctibersSchema=new Schema({
 })
 const chatSchema=new Schema({
     roomName:String,
+    vendorId:String,
     subscribers:[subsctibersSchema]
 })
 const chatModel=mongoose.model('chatpen',chatSchema)
