@@ -209,7 +209,11 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
 })
 const getSubscribers=tryCatchWrapper(async(req,resp)=>{
     let vendorName=req.user.businessName
+    console.log(vendorName);
+    
     let subsribedUsers=await chatModel.findOne({roomName:vendorName})
+    subsribedUsers=subsribedUsers.toObject()
+    subsribedUsers.senderId=req.user._id
     resp.status(200).send(new ApiResponse(200,subsribedUsers,"subscribed users"))
 })
 export {vendorRegisterHandler,
