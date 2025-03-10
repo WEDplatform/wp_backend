@@ -344,7 +344,6 @@ export const searchPosts_Couples=tryCatchWrapper(async(req,resp)=>{
           ]
     }).limit(3)
     // const CoupleList=await coupleModel.find({
-
     // })
     if(!VendorList){
         resp.status(501).send(new ApiError(501,'intenal error'))
