@@ -367,7 +367,6 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
     console.log("Current Date:", today); // Debugging to check the correct date
 
     const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
-
     if (!chat) {
         console.log("Chat room not found.");
         return;
