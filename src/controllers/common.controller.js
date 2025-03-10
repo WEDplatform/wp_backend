@@ -358,7 +358,6 @@ const getTodayDate = () => {
     today.setHours(0, 0, 0, 0); // Normalize to start of the day
     return today;
 };
-
 export const populateMessage = tryCatchWrapper(async (packet) => {
     const { roomID, payload } = packet;
     // Get today's date correctly in local time
