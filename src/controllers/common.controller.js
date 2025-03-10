@@ -404,8 +404,6 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
     }
 });
 
-
-
 export const getMessages = tryCatchWrapper(async (req, resp) => {
     const { roomID  }= req.body;
     const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
