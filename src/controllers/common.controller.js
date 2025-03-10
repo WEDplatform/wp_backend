@@ -361,7 +361,6 @@ const getTodayDate = () => {
 
 export const populateMessage = tryCatchWrapper(async (packet) => {
     const { roomID, payload } = packet;
-
     // Get today's date correctly in local time
     const today = getTodayDate();
     console.log("Current Date:", today); // Debugging to check the correct date
