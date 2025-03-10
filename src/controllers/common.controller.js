@@ -372,7 +372,6 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
         console.log("Chat room not found.");
         return;
     }
-
     let updated = false;
     // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
