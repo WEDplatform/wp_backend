@@ -30,6 +30,8 @@ const subsctibersSchema=new Schema({
         type:String
     },
     messages:[messSchema]
+},{
+    timestamps:true
 })
 const chatSchema=new Schema({
     roomName:String,
