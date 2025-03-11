@@ -30,7 +30,8 @@ const subsctibersSchema=new Schema({
         type:String
     },
     messages:[messSchema],
-    lastMessage:String
+    lastMessage:String,
+    roomUsers:[String]
 },{
     timestamps:true
 })
