@@ -446,7 +446,7 @@ const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
             recieverId:vendor.vendorId   // Include the matched subscriber details
         };// Ensure you return the extracted subscriber
     });
-    console.log(subscribedVendors);
+   // console.log(subscribedVendors);
     
     resp.status(203).send(new ApiResponse(200,subscribedVendors,"subscribed vendors"))
 })
