@@ -44,7 +44,7 @@ nameSpac.on("connection", (socket) => {
 
     })
     socket.on('sendMessage',async(payload)=>{
-        console.log("Received Message:", payload); 
+        //console.log("Received Message:", payload); 
         await populateMessage(payload)
         if (socket.room) {
             nameSpac.to(socket.room).emit("recieveMessage", payload.payload); // ✅ Emit to the correct room
