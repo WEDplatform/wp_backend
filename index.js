@@ -28,7 +28,6 @@ import {io} from "./utils/io.js"
 (async () => {
     await mongoClient.connect();
     console.log("✅ Connected to MongoDB for Socket.io Adapter");
-
     const db = mongoClient.db();
     const collection = db.collection(collection_name);
 
