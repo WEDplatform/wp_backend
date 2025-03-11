@@ -30,7 +30,6 @@ import {io} from "./utils/io.js"
     console.log("✅ Connected to MongoDB for Socket.io Adapter");
     const db = mongoClient.db();
     const collection = db.collection(collection_name);
-
     // ✅ Attach MongoDB Adapter to sync messages across multiple servers
     io.adapter(createAdapter(collection));
 })();
