@@ -29,7 +29,8 @@ const subsctibersSchema=new Schema({
     userName:{
         type:String
     },
-    messages:[messSchema]
+    messages:[messSchema],
+    lastMessage:String
 },{
     timestamps:true
 })
