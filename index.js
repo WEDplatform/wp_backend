@@ -37,10 +37,12 @@ const nameSpac = io.of('/chatpen')
 // ✅ Handle Socket.io Connections
 nameSpac.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
-    socket.on('join_room', (payload) => {
+    socket.on('join_room', (payload,sender) => {
+        console.log(`user id ${sender} joined room ${payload}`);
+        
         socket.join(payload)
         socket.room = payload; // ✅ Attach room to socket object
-        console.log(`${socket.id} joined room: ${payload}`);
+        //console.log(`${socket.id} joined room: ${payload}`);
 
     })
     socket.on('sendMessage',async(payload)=>{
