@@ -11,18 +11,20 @@ const mongo_uri=`${process.env.MONGO_URI}/${dbname}`
 const collection_name="chatspfp"
 const mongoClient = new MongoClient(mongo_uri);
 // ✅ Use `createServer` so both API and Socket.io share the same server
-const server = createServer(app); 
-// ✅ Attach Socket.io to the same server
-const io = new Server(server, {
-    cors: {
-        origin: [
-            "http://localhost:3000",
-            "https://wed-frontend.vercel.app",
-            "https://wed-frontend.onrender.com",
-        ],
-        credentials: true,
-    },
-});
+// const server = createServer(app); 
+// // ✅ Attach Socket.io to the same server
+// const io = new Server(server, {
+//     cors: {
+//         origin: [
+//             "http://localhost:3000",
+//             "https://wed-frontend.vercel.app",
+//             "https://wed-frontend.onrender.com",
+//         ],
+//         credentials: true,
+//     },
+// });
+import {server} from "./utils/io.js"
+import {io} from "./utils/io.js"
 (async () => {
     await mongoClient.connect();
     console.log("✅ Connected to MongoDB for Socket.io Adapter");
