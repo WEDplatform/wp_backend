@@ -411,7 +411,7 @@ const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
     let roomFind=await chatModel.findOne({roomName:vendorName})
     if(!roomFind){
        await chatModel.create({roomName:vendorName,vendorId:vendorId}) 
-       await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4()}}})
+       await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4(),roomUsers:[vendorId,req.user._id]}}})
        resp.status(200).send(new ApiResponse(200,null,"room created / ready"))
 
        return
