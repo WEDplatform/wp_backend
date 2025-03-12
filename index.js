@@ -34,22 +34,50 @@ import {io} from "./utils/io.js"
     io.adapter(createAdapter(collection));
 })();
 const nameSpac = io.of('/chatpen')
+let currentRooms=[]
 // ✅ Handle Socket.io Connections
 nameSpac.on("connection", (socket) => {
+   
     console.log(`User connected: ${socket.id}`);
     socket.on('join_room', (payload,sender) => {
-        console.log(`user id ${sender} joined room ${payload}`);
-        
-        socket.join(payload)
-        socket.room = payload; // ✅ Attach room to socket object
+        const roomID = String(payload);
+        // Find if the room exists
+        const existingRoom = currentRooms.find(room => room.roomID === roomID);
+
+
+        if (!existingRoom) {
+            // Create new room if it doesn't exist  
+            currentRooms.push({
+              roomID: roomID,
+              currentUsers: [sender]
+            });
+          } else {
+            // Add user to existing room if not already present
+            if (!existingRoom.currentUsers.includes(sender)) {
+              existingRoom.currentUsers.push(sender);
+            } 
+          }
+        //console.log(currentRooms);
+         
+       
+         
+        socket.join(payload) 
+      // ✅ Attach room to socket object
         //console.log(`${socket.id} joined room: ${payload}`);
 
     })
-    socket.on('sendMessage',async(payload)=>{
+    socket.on('leave_room',(payload,sender)=>{
+        currentRooms.forEach(room => {
+            room.currentUsers = room.currentUsers.filter(user => user !== sender);
+          });
+          currentRooms=currentRooms.filter((room)=>room.currentUsers.length>0)
+        //console.log("user with id is elaving now",currentRooms);  
+    })
+    socket.on('sendMessage',async(payload,uid)=>{
         //console.log("Received Message:", payload); 
-        await populateMessage(payload)
-        if (socket.room) {
-            nameSpac.to(socket.room).emit("recieveMessage", payload.payload); // ✅ Emit to the correct room
+        await populateMessage(payload,currentRooms)
+        if (uid) {
+            nameSpac.to(uid).emit("recieveMessage", payload.payload); // ✅ Emit to the correct room
         } else { 
             console.log("Error: User is not in a room!");
         }
@@ -57,6 +85,7 @@ nameSpac.on("connection", (socket) => {
     // Handle user disconnection
     socket.on("disconnect", () => {
         console.log(`User disconnected: ${socket.id}`);
+       
     });
 });
 connectDB()
