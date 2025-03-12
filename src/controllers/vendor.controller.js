@@ -207,14 +207,36 @@ const populateVendor=tryCatchWrapper(async(req,resp)=>{
     // }))
     resp.status(200).send(new ApiResponse(200,vendorObj,"Vendors populated"))
 })
+function getUnseenMessages(data, userId) {
+    return data.flatMap(room => 
+        room.unseenMessages.filter(msg => msg.notSeenBy.includes(userId))
+    );
+}
+function addUnseenMessageCount(data, userId) {
+    return data.map(room => {
+        // Count messages where `notSeenBy` includes the userId
+        const numberofUnseenMess = room.unseenMessages.filter(msg => msg.notSeenBy.includes(userId)).length;
+        
+        // Return the updated room object with the unseen count
+        return { ...room, numberofUnseenMess };
+    });
+}
 const getSubscribers=tryCatchWrapper(async(req,resp)=>{
     let vendorName=req.user.businessName
-    console.log(vendorName);
+    //console.log(vendorName);
     
-    let subsribedUsers=await chatModel.findOne({roomName:vendorName})
+    let subsribedUsers=await chatModel.findOne({roomName:vendorName}) 
     subsribedUsers=subsribedUsers.toObject()
     subsribedUsers.senderId=req.user._id
-    resp.status(200).send(new ApiResponse(200,subsribedUsers,"subscribed users"))
+    let vendorUnseenMess = subsribedUsers.subscribers?.flatMap(user => 
+        user.unseenMessages.filter(msg => msg.notSeenBy.includes(req.user._id)) 
+    ); 
+    // console.log(req.user._id)
+     console.log(addUnseenMessageCount(subsribedUsers.subscribers,req.user._id.toString()));
+    
+    
+    
+    resp.status(200).send(new ApiResponse(200,addUnseenMessageCount(subsribedUsers.subscribers,req.user._id.toString()),"subscribed users"))  
 })
 export {vendorRegisterHandler,
 vendorLoginHandler,
