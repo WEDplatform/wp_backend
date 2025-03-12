@@ -55,8 +55,7 @@ nameSpac.on("connection", (socket) => {
               existingRoom.currentUsers.push(sender);
             } 
           }
-        //console.log(currentRooms);        
-         
+        //console.log(currentRooms);            
         socket.join(payload) 
       // ✅ Attach room to socket object
         //console.log(`${socket.id} joined room: ${payload}`);
