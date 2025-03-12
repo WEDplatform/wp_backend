@@ -383,7 +383,6 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
         if (subscriber.uuid === roomID) {
             let notConnectedUsers=filterNotInCommon(subscriber.roomUsers,currentRooms.find(room=>room.roomID==roomID).currentUsers)
             console.log(notConnectedUsers);
-            
             if(notConnectedUsers.length>0){
                 subscriber.unseenMessages.push({message:payload.text,notSeenBy:notConnectedUsers})
             }
