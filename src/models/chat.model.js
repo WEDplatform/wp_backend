@@ -31,6 +31,12 @@ const subsctibersSchema=new Schema({
     },
     messages:[messSchema],
     lastMessage:String,
+    unseenMessages:[
+        {
+            message:String,
+            notSeenBy:[String]
+        }
+    ],
     roomUsers:[String]
 },{
     timestamps:true
