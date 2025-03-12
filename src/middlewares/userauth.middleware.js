@@ -29,7 +29,7 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
             next()
         } 
         if(user?.typeClient=="vendor"){ 
-            console.log(user);
+            
             
             let foundVendor=await vendorModel.findById({_id:user._id})
             if(!foundVendor){
