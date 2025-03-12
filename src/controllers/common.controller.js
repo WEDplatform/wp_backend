@@ -379,7 +379,6 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
         return;
     }
     let updated = false;
-   
     // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
         if (subscriber.uuid === roomID) {
