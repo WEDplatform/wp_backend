@@ -43,7 +43,6 @@ nameSpac.on("connection", (socket) => {
         const roomID = String(payload);
         // Find if the room exists
         const existingRoom = currentRooms.find(room => room.roomID === roomID);
-
         if (!existingRoom) {
             // Create new room if it doesn't exist  
             currentRooms.push({
