@@ -389,7 +389,6 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
             let todayMessage = subscriber.messages.find(
                 (msg) => new Date(msg.chatDate).setHours(0, 0, 0, 0) === today.getTime()
             );
-
             if (todayMessage) {
                 // If today's chat thread exists, push the new message
                 todayMessage.payloads.push(payload);
