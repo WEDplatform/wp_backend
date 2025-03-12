@@ -264,7 +264,10 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
         return 
     } 
-    details = details.toObject(); // Convert Mongoose document to plain object
+    let sideDetails=await vendorModel.findOne({businessName:query.vendorName})
+    
+    details = details.toObject();
+    details.vid=sideDetails._id.toString() // Convert Mongoose document to plain object
     details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
      details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
      
@@ -357,9 +360,15 @@ const getTodayDate = () => {
     today.setHours(0, 0, 0, 0); // Normalize to start of the day
     return today;
 };
-export const populateMessage = tryCatchWrapper(async (packet) => {
+function filterNotInCommon(arr1, arr2) {
+    return [
+        ...arr1.filter(item => !arr2.includes(item)), 
+        ...arr2.filter(item => !arr1.includes(item))
+    ];
+}
+export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
     const { roomID, payload } = packet;
-    console.log(payload);
+    //console.log(currentRooms.find(room=>room.roomID==roomID));
     
     // Get today's date correctly in local time
     const today = getTodayDate();
@@ -370,9 +379,18 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
         return;
     }
     let updated = false;
+   
+    
     // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
+        
         if (subscriber.uuid === roomID) {
+            let notConnectedUsers=filterNotInCommon(subscriber.roomUsers,currentRooms.find(room=>room.roomID==roomID).currentUsers)
+            console.log(notConnectedUsers);
+            
+            if(notConnectedUsers.length>0){
+                subscriber.unseenMessages.push({message:payload.text,notSeenBy:notConnectedUsers})
+            }
             let todayMessage = subscriber.messages.find(
                 (msg) => new Date(msg.chatDate).setHours(0, 0, 0, 0) === today.getTime()
             );
@@ -394,7 +412,7 @@ export const populateMessage = tryCatchWrapper(async (packet) => {
 
     if (updated) {
         await chat.save();
-        console.log("Message updated successfully!");
+        //console.log("Message updated successfully!");
     } else {
         console.log("No subscriber matched the given roomID.");
     }
@@ -411,5 +429,10 @@ export const getMessages = tryCatchWrapper(async (req, resp) => {
         console.log("Subscriber not found in the chat room.");
         return;
     }
+    await chatModel.findOneAndUpdate({ "subscribers.uuid": roomID },{
+        $pull: {
+            "subscribers.$[].unseenMessages": { notSeenBy: req.user._id.toString() }
+        }
+    });
     resp.status(200).send(new ApiResponse(200, subscriber.messages, "Messages found"));
 })
