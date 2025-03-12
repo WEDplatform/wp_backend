@@ -409,7 +409,6 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
             updated = true;
         }
     });
-
     if (updated) {
         await chat.save();
         //console.log("Message updated successfully!");
