@@ -383,7 +383,6 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
     
     // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
-        
         if (subscriber.uuid === roomID) {
             let notConnectedUsers=filterNotInCommon(subscriber.roomUsers,currentRooms.find(room=>room.roomID==roomID).currentUsers)
             console.log(notConnectedUsers);
