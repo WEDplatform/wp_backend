@@ -414,13 +414,13 @@ const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
        await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4(),roomUsers:[vendorId,req.user._id]}}})
        resp.status(200).send(new ApiResponse(200,null,"room created / ready"))
 
-       return
+       return 
     }else{
         let ischatforUserExists=await chatModel.findOne({roomName:vendorName,subscribers:{
             $elemMatch:{userId:req.user._id}
         }})
         if(!ischatforUserExists){
-            await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4()}}})
+            await chatModel.findOneAndUpdate({roomName:vendorName},{$push:{subscribers:{userId:req.user._id,userName:req.user.username,uuid:uuidv4(),roomUsers:[vendorId,req.user._id]}}})
             resp.status(200).send(new ApiResponse(200,null,"room ready"))
             return
         }else{
@@ -430,7 +430,7 @@ const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
     }
 })
 const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
-    let userId=req.user._id
+    let userId=req.user._id.toString()
     let subscribedVendors = await chatModel.find({
         subscribers: { $elemMatch: { userId: userId } }
     });
@@ -438,15 +438,18 @@ const getSubscribedVendors=tryCatchWrapper(async(req,resp)=>{
     
     subscribedVendors = subscribedVendors.map((vendor) => {
         let subscriber = vendor.toObject().subscribers.find((user) => user.userId == userId);
+    // console.log(subscriber);
+     //console.log(subscriber.unseenMessages.filter(items=>items.notSeenBy.includes(userId))); 
     
         return {
             roomName: vendor.roomName, // Include the room name
             subscriber: subscriber,
             senderId: userId  ,
-            recieverId:vendor.vendorId   // Include the matched subscriber details
+            recieverId:vendor.vendorId,
+            numberofUnseenMess:subscriber.unseenMessages.filter(items=>items.notSeenBy.includes(userId)).length  // Include the matched subscriber details
         };// Ensure you return the extracted subscriber
     });
-   // console.log(subscribedVendors);
+   //console.log(subscribedVendors);
     
     resp.status(203).send(new ApiResponse(200,subscribedVendors,"subscribed vendors"))
 })
