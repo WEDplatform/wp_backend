@@ -37,7 +37,6 @@ const nameSpac = io.of('/chatpen')
 let currentRooms=[]
 // ✅ Handle Socket.io Connections
 nameSpac.on("connection", (socket) => {
-   
     console.log(`User connected: ${socket.id}`);
     socket.on('join_room', (payload,sender) => {
         const roomID = String(payload);
