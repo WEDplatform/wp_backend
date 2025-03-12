@@ -369,7 +369,6 @@ function filterNotInCommon(arr1, arr2) {
 export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
     const { roomID, payload } = packet;
     //console.log(currentRooms.find(room=>room.roomID==roomID));
-    
     // Get today's date correctly in local time
     const today = getTodayDate();
     console.log("Current Date:", today); // Debugging to check the correct date
