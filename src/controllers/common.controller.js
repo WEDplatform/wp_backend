@@ -412,6 +412,12 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
 });
 export const getMessages = tryCatchWrapper(async (req, resp) => {
     const { roomID  }= req.body;
+    
+    await chatModel.findOneAndUpdate({ "subscribers.uuid": roomID },{
+        $pull: {
+            "subscribers.$[].unseenMessages": { notSeenBy: req.user._id.toString() }
+        }
+    });
     const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
     if (!chat) {
         console.log("Chat room not found.");  
@@ -422,10 +428,5 @@ export const getMessages = tryCatchWrapper(async (req, resp) => {
         console.log("Subscriber not found in the chat room.");
         return;
     }
-    await chatModel.findOneAndUpdate({ "subscribers.uuid": roomID },{
-        $pull: {
-            "subscribers.$[].unseenMessages": { notSeenBy: req.user._id.toString() }
-        }
-    });
     resp.status(200).send(new ApiResponse(200, subscriber.messages, "Messages found"));
 })
