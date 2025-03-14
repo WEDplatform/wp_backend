@@ -1,7 +1,6 @@
 import { HfInference } from "@huggingface/inference";
 import { tryCatchWrapper } from "./asyncHandler.js";
 import { ApiResponse } from "./Apiresponse.js";
-
 const client = new HfInference(process.env.HUGGING_FACE_API_KEY);
 const slmSearch = tryCatchWrapper(async (req,resp) => {
     const chatCompletion = await client.chatCompletion({
