@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import { connectDB } from './src/db/db.js';
-import { Server } from 'socket.io';
 import { app } from './src/app.js';
 import { MongoClient } from 'mongodb';
 import { createAdapter } from '@socket.io/mongo-adapter';
