@@ -52,7 +52,6 @@ nameSpac.on("connection", (socket) => {
             } 
           }
         socket.join(payload) 
-        //console.log(`${socket.id} joined room: ${payload}`);
     })
     socket.on('leave_room',(payload,sender)=>{
         currentRooms.forEach(room => {
