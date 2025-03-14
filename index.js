@@ -52,7 +52,6 @@ nameSpac.on("connection", (socket) => {
             } 
           }
         socket.join(payload) 
-      // ✅ Attach room to socket object
         //console.log(`${socket.id} joined room: ${payload}`);
     })
     socket.on('leave_room',(payload,sender)=>{
