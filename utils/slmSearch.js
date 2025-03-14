@@ -14,9 +14,7 @@ const slmSearch = tryCatchWrapper(async (req,resp) => {
         provider: "together",
         max_tokens: 100, 
     });
-    
     console.log(chatCompletion.choices[0].message);
     resp.status(200).send(new ApiResponse(200,JSON.parse(chatCompletion.choices[0].message.content),"success"))
-    //return chatCompletion.choices[0].message
 })
 export {slmSearch}
