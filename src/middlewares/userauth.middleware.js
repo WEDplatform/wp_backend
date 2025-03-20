@@ -29,7 +29,6 @@ export const checkUserAuth=tryCatchWrapper(async(req,response,next)=>{
         } 
         if(user?.typeClient=="vendor"){ 
             
-            
             let foundVendor=await vendorModel.findById({_id:user._id})
             if(!foundVendor){
                response.status(404).send(new ApiError(404,"Vendor not found"))
