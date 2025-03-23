@@ -40,9 +40,7 @@ const videoSchema = new mongoose.Schema({
   },
   videoUrl: {
     type: String,
-    required: function () {
-      return this.type === 'Video';
-    }
+    
   },
   commentsCount: {
     type: Number,
