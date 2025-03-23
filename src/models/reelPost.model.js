@@ -9,42 +9,33 @@ const videoSchema = new mongoose.Schema({
     default: []
   },
   likesCount: {
-    type: Number,
-    required: true
+    type: Number
   },
   displayUrl: {
-    type: String,
-    required: true
+    type: String
   },
   videoDuration: {
-    type: Number,
-    required: true
+    type: Number
   },
   videoViewCount: {
-    type: Number,
-    required: true
+    type: Number
   },
   caption: {
     type: String,
-    required: true,
     set: (caption) => caption.replace(/\n/g, '')
   },
   ownerUsername: {
-    type: String,
-    required: true
+    type: String
   },
   type: {
-    type: String,
-    enum: ['Video', 'Image'],
-    required: true
+    type: String
   },
   videoUrl: {
     type: String,
     
   },
   commentsCount: {
-    type: Number,
-    required: true
+    type: Number
   }
 }, { timestamps: true });
 
