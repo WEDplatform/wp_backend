@@ -228,33 +228,29 @@ export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
         },"Pics found"))
     }
 })
-export const getReels=tryCatchWrapper(async(req,resp)=>{
-    const srchPage =req.query;
-    let numberOfdata=parseInt(srchPage.per_page)
-    if(!numberOfdata || numberOfdata<=0){
-        numberOfdata=3;
+export const getReels = tryCatchWrapper(async (req, resp) => {
+    let numberOfdata = parseInt(req.query.per_page) || 3; // Default 3 items
+    let doc_count = await videoPostModel.countDocuments();
+
+    if (doc_count === 0) {
+        return resp.status(404).send(new ApiResponse(200, {
+            hasMore: false,
+            reels: []
+        }, "No videos found"));
     }
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak=3;
-    if(page<0 || !page){
-        page=0;
-    }
-    let doc_count=await videoPostModel.countDocuments()
-    let vendorDetails=await videoPostModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
-    if(vendorDetails.length==0 || !vendorDetails){
-        resp.status(404).send(new ApiResponse(200,{
-            hasMore:false,
-            reels:[]
-        },"No vendors found"))
-        return
-    }else{
-        resp.status(200).send(new ApiResponse(200,{
-            total:doc_count,
-            hasMore:page*pageBreak<doc_count,
-            reels:vendorDetails
-        },"videos found"))
-    }
-})
+
+    let vendorDetails = await videoPostModel.aggregate([
+        { $match: { type: "Video" } }, // Ensure only 'Video' type is fetched
+        { $sample: { size: numberOfdata } } // Random selection
+    ]);
+
+    return resp.status(200).send(new ApiResponse(200, {
+        total: doc_count,
+        hasMore: numberOfdata < doc_count,
+        reels: vendorDetails
+    }, "Random videos found"));
+});
+
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
     const userId=req.user._id.toString()
