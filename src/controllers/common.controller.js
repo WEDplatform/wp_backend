@@ -231,7 +231,6 @@ export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
 export const getReels = tryCatchWrapper(async (req, resp) => {
     let numberOfdata = parseInt(req.query.per_page) || 3; // Default 3 items
     let doc_count = await videoPostModel.countDocuments();
-
     if (doc_count === 0) {
         return resp.status(404).send(new ApiResponse(200, {
             hasMore: false,
