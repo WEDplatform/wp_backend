@@ -1,49 +1,57 @@
 import mongoose,{Schema} from "mongoose"
-const videoSchema = new Schema({
-  id: { type: Number},
-  pageURL: { type: String },
-  type: { type: String },
-  tags: { type: String },
-  duration: { type: Number },
-  videos: {
-    large: {
-      url: { type: String },
-      width: { type: Number },
-      height: { type: Number },
-      size: { type: Number },
-      thumbnail: { type: String },
-    },
-    medium: {
-      url: { type: String },
-      width: { type: Number },
-      height: { type: Number },
-      size: { type: Number },
-      thumbnail: { type: String },
-    },
-    small: {
-      url: { type: String },
-      width: { type: Number },
-      height: { type: Number },
-      size: { type: Number },
-      thumbnail: { type: String },
-    },
-    tiny: {
-      url: { type: String },
-      width: { type: Number },
-      height: { type: Number },
-      size: { type: Number },
-      thumbnail: { type: String },
-    },
-  },
-  views: { type: Number },
-  downloads: { type: Number },
-  likes: { type: Number },
-  comments: { type: Number },
-  user_id: { type: Number },
-  user: { type: String },
-  userImageURL: { type: String },
-});
+
 // Export the model
+
+
+const videoSchema = new mongoose.Schema({
+  hashtags: {
+    type: [String],
+    default: []
+  },
+  likesCount: {
+    type: Number,
+    required: true
+  },
+  displayUrl: {
+    type: String,
+    required: true
+  },
+  videoDuration: {
+    type: Number,
+    required: true
+  },
+  videoViewCount: {
+    type: Number,
+    required: true
+  },
+  caption: {
+    type: String,
+    required: true,
+    set: (caption) => caption.replace(/\n/g, '')
+  },
+  ownerUsername: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    enum: ['Video', 'Image'],
+    required: true
+  },
+  videoUrl: {
+    type: String,
+    required: function () {
+      return this.type === 'Video';
+    }
+  },
+  commentsCount: {
+    type: Number,
+    required: true
+  }
+}, { timestamps: true });
+
+
+
 const videoPostModel = mongoose.model("video", videoSchema);
 const vendorReelSchema=new Schema({
     vendorName:{type:String},
