@@ -238,7 +238,6 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
             reels: []
         }, "No videos found"));
     }
-
     let vendorDetails = await videoPostModel.aggregate([
         { $match: { type: "Video" } }, // Ensure only 'Video' type is fetched
         { $sample: { size: numberOfdata } } // Random selection
