@@ -261,7 +261,6 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         return 
     } 
     let sideDetails=await vendorModel.findOne({businessName:query.vendorName})
-    
     details = details.toObject();
     details.vid=sideDetails._id.toString() // Convert Mongoose document to plain object
     details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
