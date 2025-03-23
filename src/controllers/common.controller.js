@@ -114,7 +114,7 @@ function getRandomInt(max) {
 export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
     const {qr,pageI}=req.body;
      const res=await client.photos.search({query:qr,per_page:80,page:pageI,orientation:'landscape'})
-     const Photos=res.photos;
+     const Photos=res.photos; 
      Photos.map((i,p)=>i.vendorName=bizName[getRandomInt(bizName.length)])
      const responseInsertion=await picModel.insertMany(Photos)
     resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
@@ -128,12 +128,7 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
-    const {qr,pageIndex}=req.body;
-    const videoResponse=await fetch(`https://pixabay.com/api/videos/?key=&q=${encodeURIComponent(qr)}&pretty=true&per_page=200&page=${pageIndex}`)
-    let videoResponseJSON=await videoResponse.json()
-    let data=videoResponseJSON.hits;
-    data.map((i,p)=>i.vendorName=bizName[getRandomInt(bizName.length)]) 
-    await videoPostModel.insertMany(data)
+    
     resp.status(200).send(new ApiResponse(200,videoResponseJSON,"Video found"))
 })
 export const groupVideos=tryCatchWrapper(async(req,resp)=>{
