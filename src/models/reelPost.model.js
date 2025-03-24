@@ -32,49 +32,68 @@ const CommentSchema = new mongoose.Schema({
     username: String,
   },
 });
-
-
-
-
-
-
-
-
 const videoSchema = new mongoose.Schema({
-  hashtags: {
-    type: [String],
-    default: []
-  },
-  likesCount: {
-    type: Number
-  },
-  displayUrl: {
-    type: String
-  },
-  videoDuration: {
-    type: Number
-  },
-  videoViewCount: {
-    type: Number
-  },
-  caption: {
-    type: String,
-    set: (caption) => caption.replace(/\n/g, '')
-  },
-  ownerUsername: {
-    type: String
-  },
-  type: {
-    type: String
-  },
-  videoUrl: {
-    type: String,
+  latestComments: [CommentSchema],
+  hashtags: [String],
+  images: [String],
+  commentsCount: Number,
+  videoPlayCount: Number,
+  caption: String,
+  dimensionsHeight: Number,
+  videoDuration: Number,
+  dimensionsWidth: Number,
+  videoUrl: String,
+  likesCount: Number,
+  displayUrl: String,
+  videoViewCount: Number,
+  type: String,
+  ownerUsername: String,
+  locationName: String,
+  ownerFullName: String,
+});
+
+
+
+
+
+
+
+
+// const videoSchema = new mongoose.Schema({
+//   hashtags: {
+//     type: [String],
+//     default: []
+//   },
+//   likesCount: {
+//     type: Number
+//   },
+//   displayUrl: {
+//     type: String
+//   },
+//   videoDuration: {
+//     type: Number
+//   },
+//   videoViewCount: {
+//     type: Number
+//   },
+//   caption: {
+//     type: String,
+//     set: (caption) => caption.replace(/\n/g, '')
+//   },
+//   ownerUsername: {
+//     type: String
+//   },
+//   type: {
+//     type: String
+//   },
+//   videoUrl: {
+//     type: String,
     
-  },
-  commentsCount: {
-    type: Number
-  }
-}, { timestamps: true });
+//   },
+//   commentsCount: {
+//     type: Number
+//   }
+// }, { timestamps: true });
 
 
 
