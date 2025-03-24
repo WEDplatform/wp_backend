@@ -1,7 +1,37 @@
 import mongoose,{Schema} from "mongoose"
 
 // Export the model
-
+const CommentSchema = new mongoose.Schema({
+  text: String,
+  ownerUsername: String,
+  ownerProfilePicUrl: String,
+  timestamp: Date,
+  repliesCount: Number,
+  replies: [
+    {
+      id: String,
+      text: String,
+      ownerUsername: String,
+      ownerProfilePicUrl: String,
+      timestamp: Date,
+      repliesCount: Number,
+      likesCount: Number,
+      owner: {
+        id: String,
+        is_verified: Boolean,
+        profile_pic_url: String,
+        username: String,
+      },
+    },
+  ],
+  likesCount: Number,
+  owner: {
+    id: String,
+    is_verified: Boolean,
+    profile_pic_url: String,
+    username: String,
+  },
+});
 
 const videoSchema = new mongoose.Schema({
   hashtags: {
