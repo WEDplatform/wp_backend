@@ -120,25 +120,28 @@ export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
 })
 export const getVendor=tryCatchWrapper(async(req,resp)=>{
-    //const vendors=fs.readFileSync('utils/vendorlist1.json')
-    Promise.all(bizName.map(async(user)=>{
-     const vendorDetails=await picModel.find({vendorName:user})
-    await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
-    }))
+    const vendors=fs.readFileSync('utils/igData/ajay_name_photogrophy.json')
+    // Promise.all(bizName.map(async(user)=>{
+    //  const vendorDetails=await picModel.find({vendorName:user})
+    // await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
+    // }))
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
-    // let sample = fs.readFileSync('utils/igData/aarushimalik_arts.json', 'utf-8'); // Specify encoding
-    // let jsonData = JSON.parse(sample);
+    
     let jsonFiles=fs.readdirSync('utils/igData')
+    let count=0;
     jsonFiles.map(async(file)=>{
         let sample = fs.readFileSync(`utils/igData/${file}`, 'utf-8'); // Specify encoding
         let jsonData = JSON.parse(sample);
-        Promise.all(jsonData.map(async(item)=>{
-            await videoPostModel.create(item)
-        }))
+        // Promise.all(jsonData.map(async(item)=>{
+        //     await videoPostModel.create(item)
+        // }))
+        count+=jsonData.length
     })
-    resp.status(200).send(new ApiResponse(200,null,"Video found"))
+    
+    //let cresp=await videoPostModel.create(jsonData[0])
+    resp.status(200).send(new ApiResponse(200,count,"Video found"))
 })
 export const groupVideos=tryCatchWrapper(async(req,resp)=>{
     Promise.all(bizName.map(async(user)=>{
