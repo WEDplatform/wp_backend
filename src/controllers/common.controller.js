@@ -120,28 +120,40 @@ export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
     resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
 })
 export const getVendor=tryCatchWrapper(async(req,resp)=>{
-    const vendors=fs.readFileSync('utils/igData/ajay_name_photogrophy.json')
-    // Promise.all(bizName.map(async(user)=>{
-    //  const vendorDetails=await picModel.find({vendorName:user})
-    // await vendorPicModel.create({vendorName:user,imageData:vendorDetails})
-    // }))
+    // let jsonFiles=fs.readdirSync('utils/igData')
+    // jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
+    // jsonFiles.map(async(user)=>{
+    //     let vendorObject={
+    //         businessName:user,
+    //         password:"1234567890",
+    //         businessEmail:`${user}@gmail.com`,
+    //         businessPhone:"1234567890",
+    //         gstNumber:"GST0000000001IND",
+    //     }
+    //     await vendorModel.create(vendorObject)
+    // })
+    
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
+function generatePhoneNumber() {
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+}
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
     
     let jsonFiles=fs.readdirSync('utils/igData')
-    let count=0;
-    jsonFiles.map(async(file)=>{
-        let sample = fs.readFileSync(`utils/igData/${file}`, 'utf-8'); // Specify encoding
-        let jsonData = JSON.parse(sample);
-        // Promise.all(jsonData.map(async(item)=>{
-        //     await videoPostModel.create(item)
-        // }))
-        count+=jsonData.length
+    jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
+    jsonFiles.map(async(user)=>{
+        let vendorObject={
+            businessName:user,
+            password:"1234567890",
+            businessEmail:`${user}@gmail.com`,
+            businessPhone: `${generatePhoneNumber()}`,
+            gstNumber:"GST0000000001IND",
+        }
+        //await vendorModel.findOneAndDelete({businessEmail:`${user}@gmail.com`})
+        await vendorModel.create(vendorObject)
     })
-    
-    //let cresp=await videoPostModel.create(jsonData[0])
-    resp.status(200).send(new ApiResponse(200,count,"Video found"))
+    resp.status(200).send(new ApiResponse(200,jsonFiles,"Video found"))
 })
 export const groupVideos=tryCatchWrapper(async(req,resp)=>{
     Promise.all(bizName.map(async(user)=>{
