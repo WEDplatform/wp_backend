@@ -23,7 +23,7 @@ const vendorSchema=new Schema({
     businessPhone:{
         type:String,
         required:true,
-        unique:true,
+       
         trim:true
     },
     password:{
@@ -33,7 +33,7 @@ const vendorSchema=new Schema({
     },
     city:{
         type:String,
-        required:true,
+        
         trim:true
     },
     address:{
