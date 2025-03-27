@@ -407,7 +407,7 @@ const savePost = tryCatchWrapper(async (req, resp) => {
 const handleUserMessage=tryCatchWrapper(async(req,resp)=>{
     let {vendorName,vendorId}=req.body;
     console.log(vendorName);
-     
+      
     let roomFind=await chatModel.findOne({roomName:vendorName})
     if(!roomFind){
        await chatModel.create({roomName:vendorName,vendorId:vendorId}) 
