@@ -264,7 +264,6 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
 });
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query; 
-    
     const userId=req.user._id.toString()
        if(!query?.vendorName){
         resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
