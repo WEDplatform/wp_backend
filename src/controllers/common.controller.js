@@ -290,7 +290,6 @@ export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
         details.vid=details._id.toString()
     }
     
-    
     details['isLikedByUser'] = details?.isLikedBy?.some(user => user.userId.toString() === userId && user.liked);
      details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
         resp.status(200).send(new ApiResponse(200,details,'found'))
