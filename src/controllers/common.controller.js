@@ -264,21 +264,34 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
 });
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
+    console.log(query);
+    
     const userId=req.user._id.toString()
        if(!query?.vendorName){
         resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
         return 
     }
-    let details=await vendorPicModel.findOne({name:query.vendorName})
-    
+    let details;
+    if(query.type=='post'){
+        details=await vendorPicModel.findOne({name:query.vendorName})
+    }else{
+        details=await vendorModel.findOne({businessName:query.vendorName})
+    }
     if(!details){ 
         resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
         return 
     } 
-    let sideDetails=await vendorModel.findOne({businessName:query.vendorName})
     details = details.toObject();
-    details.vid=sideDetails._id.toString() // Convert Mongoose document to plain object
-    details['isLikedByUser'] = details.isLikedBy.some(user => user.userId.toString() === userId && user.liked);
+    let sideDetails;
+    if(query.type=='post'){
+        sideDetails=await vendorModel.findOne({businessName:query.vendorName}) 
+        details.vid=sideDetails._id.toString() // Convert Mongoose document to plain object
+    }else{
+        details.vid=details._id.toString()
+    }
+    
+    
+    details['isLikedByUser'] = details?.isLikedBy?.some(user => user.userId.toString() === userId && user.liked);
      details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
         resp.status(200).send(new ApiResponse(200,details,'found'))
 }) 
