@@ -264,7 +264,7 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
 });
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
     const query=req.query;
-    console.log(query);
+    
     
     const userId=req.user._id.toString()
        if(!query?.vendorName){
