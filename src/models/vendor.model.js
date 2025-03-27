@@ -63,6 +63,12 @@ const vendorSchema=new Schema({
     refreshToken:{
         type:String
     },
+      followedBy:[
+        {
+          username:{type:String},
+          userId:{type:String}
+        }
+      ],
     loginCounts:[loginStats]
 },{
 },{
