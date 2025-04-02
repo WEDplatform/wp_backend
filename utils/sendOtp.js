@@ -1,6 +1,5 @@
 import { ApiResponse } from "./Apiresponse.js";
 import { tryCatchWrapper } from "./asyncHandler.js";
-
 const sendOtp = tryCatchWrapper(async (req, resp) => {
     const { target } = req.body;  // Extract target from request body
     if (!target) {
