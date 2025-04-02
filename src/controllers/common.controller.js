@@ -324,6 +324,8 @@ export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
 })
 export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
     const srchPage =req.query;
+    console.log(srchPage);
+    
     if(!srchPage?.vendorName){
         resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
         return
@@ -336,9 +338,9 @@ export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
     let pageBreak=numberOfdata;
     if(page<0 || !page){
         page=0;
-    }
-    const total=await videoPostModel.countDocuments({vendorName:srchPage?.vendorName})
-    const postDetails=await videoPostModel.find({vendorName:srchPage?.vendorName}).limit(numberOfdata).skip(page*numberOfdata)
+    } 
+    const total=await videoPostModel.countDocuments({ownerUsername:srchPage?.vendorName,type:"Video"})
+    const postDetails=await videoPostModel.find({ownerUsername:srchPage?.vendorName,type:"Video"}).limit(numberOfdata).skip(page*numberOfdata)
     if(postDetails.length==0 || !postDetails){
         resp.status(404).send(new ApiResponse(404,{
             total:total,
@@ -347,6 +349,8 @@ export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
         },'no data available'))
         return
     }
+    console.log(postDetails);
+    
     resp.status(200).send(new ApiResponse(200,{
         total:total,
         hasMore:page*numberOfdata<total,
