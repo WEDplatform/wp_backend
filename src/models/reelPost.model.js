@@ -1,5 +1,4 @@
 import mongoose,{Schema} from "mongoose"
-
 // Export the model
 const CommentSchema = new mongoose.Schema({
   text: String,
