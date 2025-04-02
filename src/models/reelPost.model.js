@@ -94,7 +94,6 @@ const videoSchema = new mongoose.Schema({
 //     type: Number
 //   }
 // }, { timestamps: true });
-
 const videoPostModel = mongoose.model("video", videoSchema);
 const vendorReelSchema=new Schema({
     vendorName:{type:String},
