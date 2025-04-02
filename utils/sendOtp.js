@@ -27,5 +27,4 @@ const sendOtp = tryCatchWrapper(async (req, resp) => {
         resp.status(500).send(new ApiResponse(500, null, "Failed to send OTP"));
     }
 });
-
 export {sendOtp}
