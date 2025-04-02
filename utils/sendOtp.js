@@ -7,7 +7,6 @@ const sendOtp = tryCatchWrapper(async (req, resp) => {
     if (!target) {
         return resp.status(400).json({ error: "Missing required parameter: target" });
     }
-
     const url = 'https://sms-verify3.p.rapidapi.com/send-numeric-verify';
     const options = {
         method: 'POST',
