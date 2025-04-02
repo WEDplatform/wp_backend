@@ -52,7 +52,6 @@ const videoSchema = new mongoose.Schema({
   ownerFullName: String,
 });
 
-
 // const videoSchema = new mongoose.Schema({
 //   hashtags: {
 //     type: [String],
