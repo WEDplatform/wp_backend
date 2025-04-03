@@ -232,8 +232,7 @@ const getSubscribers=tryCatchWrapper(async(req,resp)=>{
     ); 
     // console.log(req.user._id)
      console.log(addUnseenMessageCount(subsribedUsers.subscribers,req.user._id.toString()));
-    
-    
+      
     
     resp.status(200).send(new ApiResponse(200,addUnseenMessageCount(subsribedUsers.subscribers,req.user._id.toString()),"subscribed users"))  
 })
