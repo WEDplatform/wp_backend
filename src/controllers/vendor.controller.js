@@ -170,7 +170,7 @@ const refreshAccessToken=tryCatchWrapper(async(req,resp)=>{
 })
 const populateVendor=tryCatchWrapper(async(req,resp)=>{
      const vendors=fs.readFileSync('utils/WedMeGoodVendors.json')
-    
+  
      let vnd=JSON.parse(vendors)
      let vendorObj={
         businessName:vnd[0].name,
