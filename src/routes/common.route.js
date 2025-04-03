@@ -37,7 +37,6 @@ commonRouter.route("/getVendorPosts").get(getVendorMediaPosts)
 commonRouter.route("/getVendorReels").get(getVendorMediaReels)
 commonRouter.route('/getSearchResults').get(searchPosts_Couples)
 commonRouter.route('/getMessages').post(checkUserAuth,getMessages)
-
 //testing routes not for production rn
 commonRouter.route('/slmSearch').get(slmSearch)
 export {commonRouter} 
