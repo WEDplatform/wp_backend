@@ -8,7 +8,7 @@ const client = new ApifyClient({
 });
 // Prepare Actor input
 
-export const getInstaData = async(vendorName) =>{
+export const getInstaData = async(vendorName,contentLength) =>{
     const input = {
         "username": [
             `${vendorName}`
