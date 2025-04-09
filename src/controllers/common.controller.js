@@ -246,6 +246,7 @@ export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
 })
 export const getReels = tryCatchWrapper(async (req, resp) => {
      let numberOfdata = parseInt(req.query.per_page) || 3; // Default 3 items
+     let searchIndex=parseInt(req.query.searchIndex);
      let doc_count = await videoPostModel.countDocuments();
     // if (doc_count === 0) {
     //     return resp.status(404).send(new ApiResponse(200, {
@@ -257,7 +258,7 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
     //     { $match: { type: "Video" } }, // Ensure only 'Video' type is fetched
     //     { $sample: { size: numberOfdata } } // Random selection
     // ]);
-    const igData=await getInstaData(vendorName)
+    const igData=await getInstaData(vendorName,numberOfdata)
     
     return resp.status(200).send(new ApiResponse(200, {
         total: doc_count,
