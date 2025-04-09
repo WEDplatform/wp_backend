@@ -11,7 +11,7 @@ const client = new ApifyClient({
 export const getInstaData = async(vendorName) =>{
     const input = {
         "username": [
-            ""
+            ``
         ],
         "resultsLimit": 3
     };
