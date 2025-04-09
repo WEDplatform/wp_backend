@@ -13,7 +13,7 @@ export const getInstaData = async(vendorName) =>{
         "username": [
             `${vendorName}`
         ],
-        "resultsLimit": 3
+        "resultsLimit": 1
     };
     const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
 
