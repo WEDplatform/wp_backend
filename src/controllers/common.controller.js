@@ -259,11 +259,10 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
         { $sample: { size: numberOfdata } } // Random selection
     ]);
     const igData=await getInstaData(vendorName,numberOfdata)
-    await Promise.all([
-        vendorDetails.map((item)=>
-        getInstaData(item.ownerUsername,2)
-        )
-    ])
+    await Promise.all(
+        vendorDetails.map(item => getInstaData(item.ownerUsername, 2))
+      );
+      
     return resp.status(200).send(new ApiResponse(200, {
         total: doc_count,
         hasMore: numberOfdata < doc_count,
