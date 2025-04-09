@@ -253,19 +253,28 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
             hasMore: false,
             reels: []
         }, "No videos found"));
-    }
+    } 
     let vendorDetails = await videoPostModel.aggregate([
         { $match: { type: "Video" } }, // Ensure only 'Video' type is fetched
         { $sample: { size: numberOfdata } } // Random selection
     ]);
-    const igData=await getInstaData(vendorName,numberOfdata)
-    await Promise.all(
-        vendorDetails.map(item => getInstaData(item.ownerUsername, 2))
-      );  
+    const igData=await getInstaData(vendorDetails[0].ownerUsername,numberOfdata)
+    let aggregateData;
+    if(searchIndex==0){
+        aggregateData=await Promise.all(
+            vendorDetails.map(item => getInstaData(item.ownerUsername, 1))
+          );  
+    }else{
+        aggregateData=await Promise.all(
+            vendorDetails.map(item => getInstaData(item.ownerUsername, 3))
+          ); 
+    }
+      //console.log(aggregateData);
+      
     return resp.status(200).send(new ApiResponse(200, {
         total: doc_count,
         hasMore: numberOfdata < doc_count,
-        reels: igData 
+        reels: aggregateData 
     }, "Random videos found"));
 });
 export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
