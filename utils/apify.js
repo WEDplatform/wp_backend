@@ -7,13 +7,14 @@ const client = new ApifyClient({
     token: 'apify_api_SHw9Le3eAB7HOQYNb8LSEYgIv4qcfQ3aXdKR',
 });
 // Prepare Actor input
-const input = {
-    "username": [
-        "thefizzzphotography"
-    ],
-    "resultsLimit": 3
-};
-export const getInstaData = async() =>{
+
+export const getInstaData = async(vendorName) =>{
+    const input = {
+        "username": [
+            ""
+        ],
+        "resultsLimit": 3
+    };
     const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
 
     // Fetch and print Actor results from the run's dataset (if any)
