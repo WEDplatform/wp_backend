@@ -23,6 +23,13 @@ export const getInstaData = async(vendorName,contentLength) =>{
     //console.log(items);
     return items
 }
+export const syncIG_DB=()=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 // (async () => {
 //     // Run the Actor and wait for it to finish
 //     const run = await client.actor("shu8hvrXbJbY3Eb9W").call(input);
