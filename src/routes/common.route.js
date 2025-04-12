@@ -19,6 +19,7 @@ import { checkUserAuth } from "../middlewares/userauth.middleware.js";
 import { getCoupleDetails } from "../controllers/couple.controller.js";
 import { slmSearch } from "../../utils/slmSearch.js";
 import { sendOtp } from "../../utils/sendOtp.js";
+import { syncIG_DB } from "../../utils/apify.js";
 commonRouter.route("/checkClientAuth").get(checkClientAuth)
 commonRouter.route("/logout").post(checkUserAuth,logout)
 commonRouter.route("/profile").get(checkUserAuth,profile)
@@ -39,4 +40,8 @@ commonRouter.route('/getSearchResults').get(searchPosts_Couples)
 commonRouter.route('/getMessages').post(checkUserAuth,getMessages)
 //testing routes not for production rn
 commonRouter.route('/slmSearch').get(slmSearch)
+commonRouter.route('/getAPifyData').get(syncIG_DB)
+
+//
+
 export {commonRouter} 
