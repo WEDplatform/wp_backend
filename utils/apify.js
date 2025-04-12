@@ -20,6 +20,7 @@ export const getInstaData = async(vendorName,contentLength) =>{
     const { items } = await client.dataset(run.defaultDatasetId).listItems();
     console.log(items);
     return items
+    
 }
 export const syncIG_DB=()=>{
     try {
