@@ -1,6 +1,7 @@
 import { ApifyClient } from 'apify-client';
 import { tryCatchWrapper } from './asyncHandler.js';
 import { ApiResponse } from './Apiresponse.js';
+import { videoPostModel } from '../src/models/reelPost.model.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
@@ -22,22 +23,23 @@ export const getInstaData = async(vendorName,contentLength) =>{
     return items   
 }
 export const syncIG_DB=async(req,resp)=>{
-    try {
-        const input = {
-            "username": [
-                `natgeo`
-            ],
-            "resultsLimit": 0
-        };
-        const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
-        // Fetch and print Actor results from the run's dataset (if any)
-        console.log('Results from dataset');
-        const { items } = await client.dataset(run.defaultDatasetId).listItems();
-        console.log(items);
-        return items 
-    } catch (error) {
-        console.log(error);     
-    }
+    // try {
+    //     const input = {
+    //         "username": [
+    //             `natgeo`
+    //         ],
+    //         "resultsLimit": 0
+    //     };
+    //     const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
+    //     // Fetch and print Actor results from the run's dataset (if any)
+    //     console.log('Results from dataset');
+    //     const { items } = await client.dataset(run.defaultDatasetId).listItems();
+    //     console.log(items);
+    //     return items 
+    // } catch (error) {
+    //     console.log(error);     
+    // }
+    await videoPostModel.distinct('')
     resp.send("succ")
 }
 // (async () => {
