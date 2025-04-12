@@ -36,8 +36,7 @@ export const syncIG_DB=async(req,resp)=>{
         console.log(items);
         return items 
     } catch (error) {
-        console.log(error);
-        
+        console.log(error);     
     }
     resp.send("succ")
 }
