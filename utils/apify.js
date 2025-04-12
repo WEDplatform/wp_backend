@@ -16,7 +16,6 @@ export const getInstaData = async(vendorName,contentLength) =>{
         "resultsLimit": contentLength
     };
     const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
-
     // Fetch and print Actor results from the run's dataset (if any)
     console.log('Results from dataset');
     const { items } = await client.dataset(run.defaultDatasetId).listItems();
