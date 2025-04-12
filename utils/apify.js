@@ -1,7 +1,6 @@
 import { ApifyClient } from 'apify-client';
 import { tryCatchWrapper } from './asyncHandler.js';
 import { ApiResponse } from './Apiresponse.js';
-
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
     token: 'apify_api_SHw9Le3eAB7HOQYNb8LSEYgIv4qcfQ3aXdKR',
