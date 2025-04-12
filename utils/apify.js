@@ -18,7 +18,7 @@ export const getInstaData = async(vendorName,contentLength) =>{
     // Fetch and print Actor results from the run's dataset (if any)
     console.log('Results from dataset');
     const { items } = await client.dataset(run.defaultDatasetId).listItems();
-    //console.log(items);
+    console.log(items);
     return items
 }
 export const syncIG_DB=()=>{
