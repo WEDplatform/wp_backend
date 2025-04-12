@@ -4,7 +4,7 @@ import { ApiResponse } from './Apiresponse.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
-    token: 'apify_api_SHw9Le3eAB7HOQYNb8LSEYgIv4qcfQ3aXdKR',
+    token: 'apify_api_WdQeBTZpGIf30BuqLMahsFxPJXZWzd2G7FUd',
 });
 // Prepare Actor input
 export const getInstaData = async(vendorName,contentLength) =>{
