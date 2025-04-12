@@ -25,9 +25,9 @@ export const syncIG_DB=async(req,resp)=>{
     try {
         const input = {
             "username": [
-                `${vendorName}`
+                `natgeo`
             ],
-            "resultsLimit": contentLength
+            "resultsLimit": 0
         };
         const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
         // Fetch and print Actor results from the run's dataset (if any)
