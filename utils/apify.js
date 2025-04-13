@@ -39,8 +39,8 @@ export const syncIG_DB=async(req,resp)=>{
     // } catch (error) {
     //     console.log(error);     
     // }
-    const vendorsNames=await videoPostModel.distinct('ownerUsername')
-    resp.send(vendorsNames)
+    const vendorsNames=await videoPostModel.distinct('ownerFullName')
+    resp.status(200).send(new ApiResponse(200,vendorsNames.length,"succ"))
 }
 // (async () => {
 //     // Run the Actor and wait for it to finish
