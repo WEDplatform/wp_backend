@@ -6,7 +6,7 @@ const apifyCredentials=[]
 const client = new ApifyClient({
     token: 'apify_api_WdQeBTZpGIf30BuqLMahsFxPJXZWzd2G7FUd',
 });
-// Prepare Actor input
+
 export const getInstaData = async(vendorName,contentLength) =>{
     const input = {
         "username": [
