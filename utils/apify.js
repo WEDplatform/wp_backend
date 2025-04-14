@@ -27,7 +27,6 @@ function getCommonElements(arr1, arr2) {
     const set2 = new Set(arr2);
     // Filter arr1 for elements that are also in arr2
     const common = arr1.filter(item => set2.has(item));
-    
     // To return only unique common elements
     return [...new Set(common)];
   }
