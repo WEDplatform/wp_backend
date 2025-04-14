@@ -1,6 +1,7 @@
 import { ApifyClient } from 'apify-client';
 import { ApiResponse } from './Apiresponse.js';
 import { videoPostModel } from '../src/models/reelPost.model.js';
+import { vendorModel } from '../src/models/vendor.model.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
@@ -20,6 +21,17 @@ export const getInstaData = async(vendorName,contentLength) =>{
     console.log(items);
     return items   
 }
+function getCommonElements(arr1, arr2) {
+    // Convert one array to a Set for fast lookup
+    const set2 = new Set(arr2);
+    
+    // Filter arr1 for elements that are also in arr2
+    const common = arr1.filter(item => set2.has(item));
+    
+    // To return only unique common elements
+    return [...new Set(common)];
+  }
+  
 export const syncIG_DB=async(req,resp)=>{
     // try {
     //     const input = {
@@ -36,8 +48,11 @@ export const syncIG_DB=async(req,resp)=>{
     // } catch (error) {
     //     console.log(error);     
     // }
-    const vendorsNames=await videoPostModel.distinct('ownerFullName')
-    resp.status(200).send(new ApiResponse(200,vendorsNames.length,"succ"))
+    const vendorsNames=await videoPostModel.distinct('ownerUsername')
+    const vendorUserNames=await vendorModel.distinct('businessName')
+    console.log(getCommonElements(vendorUserNames,vendorsNames));
+    
+    resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
 // (async () => {
 //     // Run the Actor and wait for it to finish
