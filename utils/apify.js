@@ -2,6 +2,7 @@ import { ApifyClient } from 'apify-client';
 import { ApiResponse } from './Apiresponse.js';
 import { videoPostModel } from '../src/models/reelPost.model.js';
 import { vendorModel } from '../src/models/vendor.model.js';
+import { vendorNames } from '../src/constants.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
@@ -48,9 +49,9 @@ export const syncIG_DB=async(req,resp)=>{
     // } catch (error) {
     //     console.log(error);     
     // }
-    const vendorsNames=await videoPostModel.distinct('ownerUsername')
-    const vendorUserNames=await vendorModel.distinct('businessName')
-    console.log(getCommonElements(vendorUserNames,vendorsNames));
+    // const vendorsNames=await videoPostModel.distinct('ownerUsername')
+    // const vendorUserNames=await vendorModel.distinct('businessName')
+    // console.log(getCommonElements(vendorUserNames,vendorsNames));
     
     resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
