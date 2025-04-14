@@ -48,6 +48,7 @@ export const syncIG_DB=async(req,resp)=>{
     // console.log(getCommonElements(vendorUserNames,vendorsNames));
     resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
+
 // (async () => {
 //     // Run the Actor and wait for it to finish
 //     const run = await client.actor("shu8hvrXbJbY3Eb9W").call(input);
