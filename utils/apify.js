@@ -46,7 +46,6 @@ export const syncIG_DB=async(req,resp)=>{
     // const vendorsNames=await videoPostModel.distinct('ownerUsername')
     // const vendorUserNames=await vendorModel.distinct('businessName')
     // console.log(getCommonElements(vendorUserNames,vendorsNames));
-    
     resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
 // (async () => {
