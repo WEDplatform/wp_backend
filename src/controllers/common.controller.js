@@ -271,8 +271,7 @@ export const getReels = tryCatchWrapper(async (req, resp) => {
             vendorDetails.map(item => getInstaData(item.ownerUsername, 3))
           ); 
     }
-      console.log(aggregateData);
-      
+      console.log(aggregateData);     
     return resp.status(200).send(new ApiResponse(200, {
         total: doc_count,
         hasMore: numberOfdata < doc_count, 
