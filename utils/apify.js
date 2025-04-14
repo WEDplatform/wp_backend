@@ -23,7 +23,6 @@ export const getInstaData = async(vendorName,contentLength) =>{
     return items   
 }
 function getCommonElements(arr1, arr2) {
-    // Convert one array to a Set for fast lookup
     const set2 = new Set(arr2);
     const common = arr1.filter(item => set2.has(item));
     return [...new Set(common)];
