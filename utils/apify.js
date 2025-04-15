@@ -31,7 +31,6 @@ function getCommonElements(arr1, arr2) {
   } 
 export const syncIG_DB=async()=>{
     try {
-        
     } catch (error) {
         console.log(error);     
     }
