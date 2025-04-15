@@ -24,7 +24,6 @@ export const getInstaData = async(vendorName,contentLength) =>{
     console.log(items);
     return items   
 }
-
 export const syncIG_DB=async()=>{
     try {
     } catch (error) {
