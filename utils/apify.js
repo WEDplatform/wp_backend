@@ -5,12 +5,8 @@ import { vendorModel } from '../src/models/vendor.model.js';
 import { vendorNames } from '../src/constants.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
-const apiKeys=[
-    
-]
-const client = new ApifyClient({
-    token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
-});
+const apiKeys=process.env.APIFY_TOKENS?.split(",") ?? [];
+
 export const getInstaData = async(vendorName,contentLength) =>{
     const input = {
         "username": [
@@ -31,24 +27,27 @@ function getCommonElements(arr1, arr2) {
     return [...new Set(common)];
   } 
 export const syncIG_DB=async(req,resp)=>{
-    // try {
-    //     const input = {
-    //         "username": [
-    //             `natgeo`
-    //         ],
-    //         "resultsLimit": 0
-    //     };
-    //     const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
-    //     // Fetch and print Actor results from the run's dataset (if any)
-    //     console.log('Results from dataset');
-    //     const { items } = await client.dataset(run.defaultDatasetId).listItems();
-    //     return items 
-    // } catch (error) {
-    //     console.log(error);     
-    // }
-    // const vendorsNames=await videoPostModel.distinct('ownerUsername')
-    // const vendorUserNames=await vendorModel.distinct('businessName')
-    // console.log(getCommonElements(vendorUserNames,vendorsNames));
+    const client = new ApifyClient({
+        token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
+    });
+    try {
+        const input = {
+            "username": [
+                `natgeo`
+            ],
+            "resultsLimit": 0
+        };
+        const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
+        // Fetch and print Actor results from the run's dataset (if any)
+        console.log('Results from dataset');
+        const { items } = await client.dataset(run.defaultDatasetId).listItems();
+        return items 
+    } catch (error) {
+        console.log(error);     
+    }
+    const vendorsNames=await videoPostModel.distinct('ownerUsername')
+    const vendorUserNames=await vendorModel.distinct('businessName')
+    console.log(getCommonElements(vendorUserNames,vendorsNames));
     resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
 
