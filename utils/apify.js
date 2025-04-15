@@ -7,7 +7,7 @@ const apifyCredentials=[]
 const apiKeys=process.env.APIFY_TOKENS?.split(",") ?? [];
 export const getInstaData = async(vendorName,contentLength) =>{
     const client = new ApifyClient({
-        // token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
+        // //token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
         token: 'apify_api_uQoQNQwy0GGS3z0P4NwE07WTgWdznM1Bb1ZU',
     });
     const input = {
