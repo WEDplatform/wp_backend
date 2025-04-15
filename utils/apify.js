@@ -36,7 +36,6 @@ export const syncIG_DB=async()=>{
     } catch (error) {
         console.log(error);     
     }
-    resp.status(200).send(new ApiResponse(200,getCommonElements(vendorUserNames,vendorsNames),"succ"))
 }
 
 // (async () => {
