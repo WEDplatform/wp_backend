@@ -24,11 +24,7 @@ export const getInstaData = async(vendorName,contentLength) =>{
     console.log(items);
     return items   
 }
-function getCommonElements(arr1, arr2) {
-    const set2 = new Set(arr2);
-    const common = arr1.filter(item => set2.has(item));
-    return [...new Set(common)];
-  } 
+
 export const syncIG_DB=async()=>{
     try {
     } catch (error) {
