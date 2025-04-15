@@ -4,7 +4,6 @@ import { videoPostModel } from '../src/models/reelPost.model.js';
 import { vendorModel } from '../src/models/vendor.model.js';
 import { vendorNames } from '../src/constants.js';
 const apifyCredentials=[]
-
 const apiKeys=process.env.APIFY_TOKENS?.split(",") ?? [];
 export const getInstaData = async(vendorName,contentLength) =>{
     const client = new ApifyClient({
