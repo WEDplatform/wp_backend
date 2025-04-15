@@ -8,6 +8,9 @@ const apifyCredentials=[]
 const apiKeys=process.env.APIFY_TOKENS?.split(",") ?? [];
 
 export const getInstaData = async(vendorName,contentLength) =>{
+    const client = new ApifyClient({
+        token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
+    });
     const input = {
         "username": [
             `${vendorName}`
@@ -26,22 +29,10 @@ function getCommonElements(arr1, arr2) {
     const common = arr1.filter(item => set2.has(item));
     return [...new Set(common)];
   } 
-export const syncIG_DB=async(req,resp)=>{
-    const client = new ApifyClient({
-        token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
-    });
+export const syncIG_DB=async()=>{
+    
     try {
-        const input = {
-            "username": [
-                `natgeo`
-            ],
-            "resultsLimit": 0
-        };
-        const run = await client.actor("xMc5Ga1oCONPmWJIa").call(input);
-        // Fetch and print Actor results from the run's dataset (if any)
-        console.log('Results from dataset');
-        const { items } = await client.dataset(run.defaultDatasetId).listItems();
-        return items 
+        
     } catch (error) {
         console.log(error);     
     }
