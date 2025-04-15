@@ -6,10 +6,10 @@ import { vendorNames } from '../src/constants.js';
 const apifyCredentials=[]
 // Initialize the ApifyClient with API token
 const apiKeys=process.env.APIFY_TOKENS?.split(",") ?? [];
-
 export const getInstaData = async(vendorName,contentLength) =>{
     const client = new ApifyClient({
-        token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
+        // token: apiKeys[Math.floor(Math.random()*apiKeys.length)],
+        token: 'apify_api_uQoQNQwy0GGS3z0P4NwE07WTgWdznM1Bb1ZU',
     });
     const input = {
         "username": [
@@ -25,12 +25,16 @@ export const getInstaData = async(vendorName,contentLength) =>{
     return items   
 }
 export const syncIG_DB=async(req,resp)=>{
+    console.log(apiKeys);
+    
     try {
-        await Promise.all(
+        let igdata=await Promise.all(
             vendorNames.map(item => getInstaData(item,1))
         )
+        resp.status(200).send(new ApiResponse(200,igdata,"succ"))
     } catch (error) {
-        console.log(error);     
+        console.log(error);  
+        resp.status(500).send(new ApiResponse(500,null,"failed"))  
     }
 }
 // (async () => {
