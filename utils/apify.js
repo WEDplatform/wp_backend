@@ -26,7 +26,6 @@ export const getInstaData = async(vendorName,contentLength) =>{
 }
 export const syncIG_DB=async(req,resp)=>{
     console.log(apiKeys);
- 
     try {
         let igdata=await Promise.all(
             vendorNames.map(item => getInstaData(item,1))
