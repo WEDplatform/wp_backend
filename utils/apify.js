@@ -26,11 +26,11 @@ export const getInstaData = async(vendorName,contentLength) =>{
 }
 export const syncIG_DB=async()=>{
     try {
+        await Promise.all()
     } catch (error) {
         console.log(error);     
     }
 }
-
 // (async () => {
 //     // Run the Actor and wait for it to finish
 //     const run = await client.actor("shu8hvrXbJbY3Eb9W").call(input);
