@@ -24,7 +24,7 @@ export const getInstaData = async(vendorName,contentLength) =>{
     console.log(items);
     return items   
 }
-export const syncIG_DB=async()=>{
+export const syncIG_DB=async(req,resp)=>{
     try {
         await Promise.all()
     } catch (error) {
