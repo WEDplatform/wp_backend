@@ -30,7 +30,6 @@ function getCommonElements(arr1, arr2) {
     return [...new Set(common)];
   } 
 export const syncIG_DB=async()=>{
-    
     try {
         
     } catch (error) {
