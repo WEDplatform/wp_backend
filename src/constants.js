@@ -50,6 +50,6 @@ const vendorNames=[
     // "thefototatva",
     // "theweddingcompanyofficial",
     // "vivaahutsav",
-    // "weddingshadding"
+     "weddingshadding"
 ]
 export {accessTokenOption,refreshTokenOption,vendorNames}
