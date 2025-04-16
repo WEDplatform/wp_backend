@@ -48,7 +48,7 @@ const vendorNames=[
     // "team.rashmi.agra",
     // "thefizzzphotography",
     // "thefototatva",
-    // "theweddingcompanyofficial",
+     "theweddingcompanyofficial",
      "vivaahutsav",
      "weddingshadding"
 ]
