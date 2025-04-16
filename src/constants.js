@@ -49,7 +49,7 @@ const vendorNames=[
     // "thefizzzphotography",
     // "thefototatva",
     // "theweddingcompanyofficial",
-    // "vivaahutsav",
+     "vivaahutsav",
      "weddingshadding"
 ]
 export {accessTokenOption,refreshTokenOption,vendorNames}
