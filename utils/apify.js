@@ -35,6 +35,7 @@ export const syncIG_DB=async(req,resp)=>{
         resp.status(500).send(new ApiResponse(500,null,"failed"))  
     }
 }
+
 // (async () => {
 //     // Run the Actor and wait for it to finish
 //     const run = await client.actor("shu8hvrXbJbY3Eb9W").call(input);
