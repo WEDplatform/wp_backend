@@ -136,6 +136,7 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
 function generatePhoneNumber() {
     return Math.floor(1000000000 + Math.random() * 9000000000).toString();
 }
+//
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
     
     let jsonFiles=fs.readdirSync('utils/igData')
