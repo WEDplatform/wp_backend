@@ -118,6 +118,7 @@ export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
      const responseInsertion=await picModel.insertMany(Photos)
     resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
 })
+
 export const getVendor=tryCatchWrapper(async(req,resp)=>{
     // let jsonFiles=fs.readdirSync('utils/igData')
     // jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
