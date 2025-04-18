@@ -107,7 +107,6 @@ export const profile = tryCatchWrapper(async (req, resp) => {
         resp.status(500).send(new ApiResponse(500, null, "Internal Server Error"));
     }
 });
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
