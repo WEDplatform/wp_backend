@@ -29,6 +29,7 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
         response.status(200).send(new ApiResponse(200,user,"user authenticated"))  
     })
 })
+
 export const logout=tryCatchWrapper(async(req,resp)=>{
     if(req?.user?.usertype=="user"){
         let userInstance=await userModel.findOneAndUpdate({_id:req.user._id},{
