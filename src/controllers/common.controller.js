@@ -138,7 +138,6 @@ function generatePhoneNumber() {
 }
 // generate phone number
 export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
-    
     let jsonFiles=fs.readdirSync('utils/igData')
     jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
     jsonFiles.map(async(user)=>{
