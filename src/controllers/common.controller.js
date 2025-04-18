@@ -31,7 +31,6 @@ export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
 })
 export const logout=tryCatchWrapper(async(req,resp)=>{
     if(req?.user?.usertype=="user"){
- 
         let userInstance=await userModel.findOneAndUpdate({_id:req.user._id},{
             $set:{
                 refreshToken:""
