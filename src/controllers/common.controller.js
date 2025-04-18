@@ -8,7 +8,6 @@ import { createClient } from "pexels";
 import fs from 'fs'// not needed
 import { bizName } from "../../utils/bizname.js";
 const client = createClient(process.env.PEXEL_API_KEY);
-
 import { picModel, vendorPicModel } from "../models/picPost.model.js";
 import { vendorReelModel, videoPostModel } from "../models/reelPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
