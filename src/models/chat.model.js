@@ -9,6 +9,7 @@ const payLoad=new Schema({
     receiver:{
         type:String
     }
+    
 },{
     timestamps:true
 })
