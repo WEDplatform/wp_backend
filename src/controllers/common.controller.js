@@ -131,7 +131,6 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     //     }
     //     await vendorModel.create(vendorObject)
     // })
-    
     resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
 })
 function generatePhoneNumber() {
