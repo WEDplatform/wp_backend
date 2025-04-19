@@ -7,7 +7,6 @@ const interactionModel=new Schema({
         type:Number
     }
 })
-
 const postSchema=new Schema({
     postOwner:{
         type:Schema.Types.ObjectId,
