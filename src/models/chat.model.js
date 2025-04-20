@@ -12,6 +12,7 @@ const payLoad=new Schema({
 },{
     timestamps:true
 })
+
 const messSchema=new Schema({
     chatDate:{
         type:Date
