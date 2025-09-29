@@ -95,7 +95,7 @@ userSchema.methods.generateRefreshToken= function(){
         process.env.JWT_SECRET,{
             expiresIn: 3600
         });
-}
+}   
 userSchema.methods.generateAccessToken= function(){
     return jwt.sign(
         {
