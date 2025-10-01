@@ -62,12 +62,14 @@ const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
         businessName:userSavingInstance.businessName,
         businessEmail:userSavingInstance.businessEmail,
         isMobileVerified:userSavingInstance.isMobileVerified,
-        refreshToken:refreshToken
+        refreshToken:refreshToken,
+        typeClient:"vendor"
     },"User created successfully"))
     await incrementLoginCount(userSavingInstance._id)
 })
 const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
+     console.log(req.body);
      
     let loggedUser=await vendorModel.findOne({
         $or:[{businessEmail:userid},{businessName:userid}]
@@ -86,7 +88,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     //             isMobileVerified:loggedUser.isMobileVerified,
     //             username:loggedUser.username,
     //             isGoogleAuthenticated:loggedUser.isGoogleAuthenticated,
-    //             refreshToken:refreshToken
+    //             refreshToken:refreshToken 
     //         },"user found"))
     //         await incrementLoginCount(loggedUser._id)
     //         return
@@ -111,7 +113,8 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
                 email:loggedUser.businessEmail,
                 isMobileVerified:loggedUser.isMobileVerified,
                 username:loggedUser.businessName,
-                refreshToken:refreshToken
+                refreshToken:refreshToken,
+                typeClient:"vendor"
             },"user found"))
             await incrementLoginCount(loggedUser._id)
             return

@@ -65,7 +65,8 @@ const userRegisterHandler = tryCatchWrapper(async (req, resp) => {
             email: userSavingInstance.email,
             isMobileVerified: userSavingInstance.isMobileVerified,
             refreshToken: refreshToken,
-            isPreferencesSet: userSavingInstance.isPreferencesSet
+            isPreferencesSet: userSavingInstance.isPreferencesSet,
+            typeClient:"user"
         }, "User created successfully"))
     await incrementLoginCount(userSavingInstance._id)
 })
@@ -109,7 +110,8 @@ const userLoginHandler = tryCatchWrapper(async (req, resp) => {
             isMobileVerified: loggedUser.isMobileVerified,
             username: loggedUser.username,
             isGoogleAuthenticated: loggedUser.isGoogleAuthenticated,
-            refreshToken: refreshToken
+            refreshToken: refreshToken,
+            typeClient:"user"
         }, "user found"))
         await incrementLoginCount(loggedUser._id)
         return
