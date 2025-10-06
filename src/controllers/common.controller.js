@@ -13,112 +13,140 @@ import { vendorReelModel, videoPostModel } from "../models/reelPost.model.js";
 import { coupleModel } from "../models/couple.model.js";
 import { chatModel } from "../models/chat.model.js";
 import { getInstaData } from "../../utils/apify.js";
-export const checkClientAuth=tryCatchWrapper(async(req,response)=>{
-    let credentials=req.get("wedoraCredentials")
-    
-    if(!credentials){ 
-       response.status(401).send(new ApiError(401,"Unauthorized request"))
+export const checkClientAuth = tryCatchWrapper(async (req, response) => {
+    let credentials = req.get("wedoraCredentials")
+
+    if (!credentials) {
+        response.status(401).send(new ApiError(401, "Unauthorized request"))
         return
     }
-    jwt.verify(credentials,process.env.JWT_SECRET,async(err,user)=>{
-        if(err){
+    jwt.verify(credentials, process.env.JWT_SECRET, async (err, user) => {
+        if (err) {
             console.log(err);
-           response.status(401).send(new ApiError(401,"Auth failed get new token"))
+            response.status(401).send(new ApiError(401, "Auth failed get new token"))
             return
         }
-        response.status(200).send(new ApiResponse(200,user,"user authenticated"))  
+        response.status(200).send(new ApiResponse(200, user, "user authenticated"))
     })
 })
-export const logout=tryCatchWrapper(async(req,resp)=>{
-    if(req?.user?.usertype=="user"){
-        let userInstance=await userModel.findOneAndUpdate({_id:req.user._id},{
-            $set:{
-                refreshToken:""
+export const logout = tryCatchWrapper(async (req, resp) => {
+    if (req?.user?.usertype == "user") {
+        let userInstance = await userModel.findOneAndUpdate({ _id: req.user._id }, {
+            $set: {
+                refreshToken: ""
             }
         },
-        {
-            new:true
-        })
-        if(!userInstance){
-            resp.status(404).send(new ApiResponse(404,null,"User not found"))
+            {
+                new: true
+            })
+        if (!userInstance) {
+            resp.status(404).send(new ApiResponse(404, null, "User not found"))
             return
         }
-        resp.status(200).send(new ApiResponse(200,null,"Logout successful"))
+        resp.status(200).send(new ApiResponse(200, null, "Logout successful"))
         return
     }
-    if(req?.user?.usertype=="vendor"){
-        let userInstance=await vendorModel.findOneAndUpdate({_id:req.user._id},{
-            $set:{
-                refreshToken:""
+    if (req?.user?.usertype == "vendor") {
+        let userInstance = await vendorModel.findOneAndUpdate({ _id: req.user._id }, {
+            $set: {
+                refreshToken: ""
             }
         },
-        {
-            new:true
-        })
-        if(!userInstance){
-            resp.status(404).send(new ApiResponse(404,null,"User not found"))
+            {
+                new: true
+            })
+        if (!userInstance) {
+            resp.status(404).send(new ApiResponse(404, null, "User not found"))
             return
         }
-        resp.status(200).send(new ApiResponse(200,null,"Logout successful"))
+        resp.status(200).send(new ApiResponse(200, null, "Logout successful"))
         return
     }
 })
-export const profile = tryCatchWrapper(async (req, resp) => {
+export const profile = tryCatchWrapper(async (req, res) => {
     try {
-        const fieldsToExclude = ["refreshToken", "__v", "loginCounts", "_id"];
-        let userProfile = { ...req.user };
-        let vendor_and_coupleCollection=[];
-        if (req.user.usertype == 'user') {
-            if (req.user.vendorLiked.length > 0) {
-                let likedVendorIds = req.user.vendorLiked.map(i => i.id); // `type` stores the ObjectId
-                let data = await vendorPicModel.find({ _id: { $in: likedVendorIds },isLikedBy:{$elemMatch:{userId:req.user._id}} }).select('-address -description -tags -review');
-                data={type:"likedVendors",items:data}
-                vendor_and_coupleCollection.push(data)
-            }
-            if (req.user.coupleLiked.length > 0) {
-                let likedCoupleIds = req.user.coupleLiked.map(i => i.id);
-                let data = await coupleModel.find({ _id: { $in: likedCoupleIds },isLikedBy:{$elemMatch:{userId:req.user._id}} }).select('-address -description -tags -review');
-                data={type:"likedCouples",items:data}
-                vendor_and_coupleCollection.push(data)
-            }
-            // Handle Vendor Followed
-            if (req.user.vendorFollowed.length > 0) {
-                let followedVendorIds = req.user.vendorFollowed.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: followedVendorIds } ,followedBy:{$elemMatch:{userId:req.user._id}}}).select('-address -description -tags -review');;
-                data={type:"followedVendors",items:data}
-                vendor_and_coupleCollection.push(data)
-            }
-            if(req.user.vendorSaved.length>0){
-                let savedVendorIds = req.user.vendorSaved.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"idea"}} }).select('name isSavedBy images');
-                data={type:"savedIdea",items:data}
-                vendor_and_coupleCollection.push(data)
-            }
-            if(req.user.vendorSaved.length>0){
-                let savedVendorIds = req.user.vendorSaved.map(i => i.id);
-                let data = await vendorPicModel.find({ _id: { $in: savedVendorIds },isSavedBy:{$elemMatch:{userId:req.user._id,isSavedAs:"vendor"}} }).select('name isSavedBy images');
-                data={type:"savedVendor",items:data}
-                vendor_and_coupleCollection.push(data)
-            }
-        } 
-        resp.status(200).send(new ApiResponse(200, {userProfile:req.user,vendor_and_coupleCollection}, "Profile found"));
+        const { user } = req;
+        const { usertype, _id } = user;
+
+        const vendor_and_coupleCollection = [];
+
+        if (usertype === 'user') {
+            const queries = [];
+
+            const addQuery = async (condition, model, label, projection) => {
+                if (!condition || condition.length === 0) return;
+                const ids = condition.map(i => i.id);
+                const data = await model
+                    .find({ _id: { $in: ids }, ...projection.extraMatch })
+                    .select(projection.fields);
+                if (data.length > 0)
+                    vendor_and_coupleCollection.push({ type: label, items: data });
+            };
+
+            await Promise.all([
+                addQuery(user.vendorLiked, vendorPicModel, 'likedVendors', {
+                    fields: '-address -description -tags -review',
+                    extraMatch: { isLikedBy: { $elemMatch: { userId: _id } } },
+                }),
+                addQuery(user.coupleLiked, coupleModel, 'likedCouples', {
+                    fields: '-address -description -tags -review',
+                    extraMatch: { isLikedBy: { $elemMatch: { userId: _id } } },
+                }),
+                addQuery(user.vendorFollowed, vendorPicModel, 'followedVendors', {
+                    fields: '-address -description -tags -review',
+                    extraMatch: { followedBy: { $elemMatch: { userId: _id } } },
+                }),
+                addQuery(user.vendorSaved, vendorPicModel, 'savedIdea', {
+                    fields: 'name isSavedBy images',
+                    extraMatch: { isSavedBy: { $elemMatch: { userId: _id, isSavedAs: 'idea' } } },
+                }),
+                addQuery(user.vendorSaved, vendorPicModel, 'savedVendor', {
+                    fields: 'name isSavedBy images',
+                    extraMatch: { isSavedBy: { $elemMatch: { userId: _id, isSavedAs: 'vendor' } } },
+                }),
+            ]);
+            return res
+                .status(200)
+                .send(
+                    new ApiResponse(
+                        200,
+                        { userProfile: user, vendor_and_coupleCollection },
+                        'Profile found'
+                    )
+                );
+        }
+        if (usertype == "vendor") {
+            return res
+                .status(200)
+                .send(
+                    new ApiResponse(
+                        200,
+                        { userProfile: user },
+                        'Profile found'
+                    )
+                );
+        }
+
     } catch (error) {
-        console.error("Error fetching profile:", error);
-        resp.status(500).send(new ApiResponse(500, null, "Internal Server Error"));
+        console.error('Error fetching profile:', error);
+        return res
+            .status(500)
+            .send(new ApiResponse(500, null, 'Internal Server Error'));
     }
 });
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-export const populatePhotoMedia=tryCatchWrapper(async(req,resp)=>{
-    const {qr,pageI}=req.body;
-     const res=await client.photos.search({query:qr,per_page:80,page:pageI,orientation:'landscape'})
-     const Photos=res.photos; 
-     Photos.map((i,p)=>i.vendorName=bizName[getRandomInt(bizName.length)])
-     const responseInsertion=await picModel.insertMany(Photos)
-    resp.status(200).send(new ApiResponse(200,responseInsertion,"Photo media populated"))
+export const populatePhotoMedia = tryCatchWrapper(async (req, resp) => {
+    const { qr, pageI } = req.body;
+    const res = await client.photos.search({ query: qr, per_page: 80, page: pageI, orientation: 'landscape' })
+    const Photos = res.photos;
+    Photos.map((i, p) => i.vendorName = bizName[getRandomInt(bizName.length)])
+    const responseInsertion = await picModel.insertMany(Photos)
+    resp.status(200).send(new ApiResponse(200, responseInsertion, "Photo media populated"))
 })
-export const getVendor=tryCatchWrapper(async(req,resp)=>{
+export const getVendor = tryCatchWrapper(async (req, resp) => {
     // let jsonFiles=fs.readdirSync('utils/igData')
     // jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
     // jsonFiles.map(async(user)=>{
@@ -131,259 +159,259 @@ export const getVendor=tryCatchWrapper(async(req,resp)=>{
     //     }
     //     await vendorModel.create(vendorObject)
     // })
-    resp.status(200).send(new ApiResponse(200,null,"Vendor found"))
+    resp.status(200).send(new ApiResponse(200, null, "Vendor found"))
 })
 function generatePhoneNumber() {
     return Math.floor(1000000000 + Math.random() * 9000000000).toString();
 }
-export const getVendorReels=tryCatchWrapper(async(req,resp)=>{
-    let jsonFiles=fs.readdirSync('utils/igData')
-    jsonFiles=jsonFiles.map((i)=>i.replace('.json',''))
-    jsonFiles.map(async(user)=>{
-        let vendorObject={
-            businessName:user,
-            password:"1234567890",
-            businessEmail:`${user}@gmail.com`,
+export const getVendorReels = tryCatchWrapper(async (req, resp) => {
+    let jsonFiles = fs.readdirSync('utils/igData')
+    jsonFiles = jsonFiles.map((i) => i.replace('.json', ''))
+    jsonFiles.map(async (user) => {
+        let vendorObject = {
+            businessName: user,
+            password: "1234567890",
+            businessEmail: `${user}@gmail.com`,
             businessPhone: `${generatePhoneNumber()}`,
-            gstNumber:"GST0000000001IND",
+            gstNumber: "GST0000000001IND",
         }
         //await vendorModel.findOneAndDelete({businessEmail:`${user}@gmail.com`})
         await vendorModel.create(vendorObject)
     })
-    resp.status(200).send(new ApiResponse(200,jsonFiles,"Video found"))
+    resp.status(200).send(new ApiResponse(200, jsonFiles, "Video found"))
 })
-export const groupVideos=tryCatchWrapper(async(req,resp)=>{
-    Promise.all(bizName.map(async(user)=>{
-        const vendorDetails=await videoPostModel.find({vendorName:user})
-       await vendorReelModel.create({vendorName:user,videoData:vendorDetails})
-       }))
-    resp.status(200).send(new ApiResponse(200,null,"Videos found"))
+export const groupVideos = tryCatchWrapper(async (req, resp) => {
+    Promise.all(bizName.map(async (user) => {
+        const vendorDetails = await videoPostModel.find({ vendorName: user })
+        await vendorReelModel.create({ vendorName: user, videoData: vendorDetails })
+    }))
+    resp.status(200).send(new ApiResponse(200, null, "Videos found"))
 })
-export const getPics=tryCatchWrapper(async(req,resp)=>{
-    const srchPage =req.query;
-    const userId=req.user._id
-    let numberOfdata=parseInt(srchPage.per_page)
-    if(!numberOfdata || numberOfdata<=0){
-        numberOfdata=3;
-    } 
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak=numberOfdata;
-    if(page<0 || !page){
-        page=0;
-    }   
-    let doc_count=await vendorPicModel.countDocuments()
-    let vendorDetails;
-    let isSearched=srchPage.searchStatus
-    if(isSearched=="true"){
-    const searchList=req.body.searchArray;
-    const regexArray = req.body?.map((str) => new RegExp(str, "i"));
-    vendorDetails=await vendorPicModel.find({
-        $or: [ 
-            { name: { $in: regexArray } },
-            { tags:  { $elemMatch: { $in: regexArray } } },
-            { address: { $elemMatch: { $in: regexArray } } },
-            { description: { $in: regexArray } }
-          ]
-    }).limit(numberOfdata).skip(page*numberOfdata).exec()
-    }else{ 
-        vendorDetails=await vendorPicModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
+export const getPics = tryCatchWrapper(async (req, resp) => {
+    const srchPage = req.query;
+    const userId = req.user._id
+    let numberOfdata = parseInt(srchPage.per_page)
+    if (!numberOfdata || numberOfdata <= 0) {
+        numberOfdata = 3;
     }
-    if(vendorDetails.length==0 || !vendorDetails){
-        resp.status(404).send(new ApiResponse(200,{
-            pics:[], 
-            hasMore:false 
-        },"No vendors found"))
-        return 
-    }else{
+    let page = parseInt(srchPage.searchIndex);
+    let pageBreak = numberOfdata;
+    if (page < 0 || !page) {
+        page = 0;
+    }
+    let doc_count = await vendorPicModel.countDocuments()
+    let vendorDetails;
+    let isSearched = srchPage.searchStatus
+    if (isSearched == "true") {
+        const searchList = req.body.searchArray;
+        const regexArray = req.body?.map((str) => new RegExp(str, "i"));
+        vendorDetails = await vendorPicModel.find({
+            $or: [
+                { name: { $in: regexArray } },
+                { tags: { $elemMatch: { $in: regexArray } } },
+                { address: { $elemMatch: { $in: regexArray } } },
+                { description: { $in: regexArray } }
+            ]
+        }).limit(numberOfdata).skip(page * numberOfdata).exec()
+    } else {
+        vendorDetails = await vendorPicModel.find({}).limit(numberOfdata).skip(page * numberOfdata).exec()
+    }
+    if (vendorDetails.length == 0 || !vendorDetails) {
+        resp.status(404).send(new ApiResponse(200, {
+            pics: [],
+            hasMore: false
+        }, "No vendors found"))
+        return
+    } else {
         vendorDetails = vendorDetails.map(vendor => ({
             ...vendor._doc, // Spread existing fields
             isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked),
-            isSavedByUser: vendor.isSavedBy.some(user => user.userId.toString() === userId.toString() ) 
+            isSavedByUser: vendor.isSavedBy.some(user => user.userId.toString() === userId.toString())
         }));
-        resp.status(200).send(new ApiResponse(200,{
-            total:doc_count,
-            pics:vendorDetails,
-            hasMore:pageBreak<doc_count
-        },"Pics found"))
+        resp.status(200).send(new ApiResponse(200, {
+            total: doc_count,
+            pics: vendorDetails,
+            hasMore: pageBreak < doc_count
+        }, "Pics found"))
     }
 })
-export const getCouplePost=tryCatchWrapper(async(req,resp)=>{
-    const srchPage =req.query;
-    const userId=req.user._id
-    let numberOfdata=parseInt(srchPage.per_page)
-    if(!numberOfdata || numberOfdata<=0){
-        numberOfdata=3;
+export const getCouplePost = tryCatchWrapper(async (req, resp) => {
+    const srchPage = req.query;
+    const userId = req.user._id
+    let numberOfdata = parseInt(srchPage.per_page)
+    if (!numberOfdata || numberOfdata <= 0) {
+        numberOfdata = 3;
     }
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak=numberOfdata;
-    if(page<0 || !page){
-        page=0;
+    let page = parseInt(srchPage.searchIndex);
+    let pageBreak = numberOfdata;
+    if (page < 0 || !page) {
+        page = 0;
     }
-    let doc_count=await coupleModel.countDocuments()
-    let couplePosts=await coupleModel.find({}).limit(numberOfdata).skip(page*numberOfdata).exec()
-    
-    if(couplePosts.length==0 || !couplePosts){
-        resp.status(404).send(new ApiResponse(200,{
-            cposts:[],
-            hasMore:false 
-        },"No vendors found"))
+    let doc_count = await coupleModel.countDocuments()
+    let couplePosts = await coupleModel.find({}).limit(numberOfdata).skip(page * numberOfdata).exec()
+
+    if (couplePosts.length == 0 || !couplePosts) {
+        resp.status(404).send(new ApiResponse(200, {
+            cposts: [],
+            hasMore: false
+        }, "No vendors found"))
         return
-    }else{
+    } else {
         couplePosts = couplePosts.map(vendor => ({
             ...vendor._doc, // Spread existing fields
-            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked) 
+            isLikedByUser: vendor.isLikedBy.some(user => user.userId.toString() === userId.toString() && user.liked)
         }));
-        resp.status(200).send(new ApiResponse(200,{
-            total:doc_count,
-            cposts:couplePosts,
-            hasMore:pageBreak<doc_count
-        },"Pics found"))
+        resp.status(200).send(new ApiResponse(200, {
+            total: doc_count,
+            cposts: couplePosts,
+            hasMore: pageBreak < doc_count
+        }, "Pics found"))
     }
 })
 export const getReels = tryCatchWrapper(async (req, resp) => {
-     let numberOfdata = parseInt(req.query.per_page) || 3; // Default 3 items
-     let searchIndex=parseInt(req.query.searchIndex);
-     console.log(searchIndex);
-     
-     let doc_count = await videoPostModel.countDocuments();
+    let numberOfdata = parseInt(req.query.per_page) || 3; // Default 3 items
+    let searchIndex = parseInt(req.query.searchIndex);
+    console.log(searchIndex);
+
+    let doc_count = await videoPostModel.countDocuments();
     if (doc_count === 0) {
         return resp.status(404).send(new ApiResponse(200, {
             hasMore: false,
             reels: []
         }, "No videos found"));
-    } 
+    }
     let vendorDetails = await videoPostModel.aggregate([
         { $match: { type: "Video" } }, // Ensure only 'Video' type is fetched
         { $sample: { size: numberOfdata } } // Random selection
     ]);
     //const igData=await getInstaData(vendorDetails[0].ownerUsername,numberOfdata)
     let aggregateData;
-    if(searchIndex==0){
-        aggregateData=await Promise.all(
+    if (searchIndex == 0) {
+        aggregateData = await Promise.all(
             vendorDetails.map(item => getInstaData(item.ownerUsername, 1))
-          );  
-    }else{
-        aggregateData=await Promise.all(
+        );
+    } else {
+        aggregateData = await Promise.all(
             vendorDetails.map(item => getInstaData(item.ownerUsername, 3))
-          ); 
+        );
     }
-      console.log(aggregateData);     
+    console.log(aggregateData);
     return resp.status(200).send(new ApiResponse(200, {
         total: doc_count,
-        hasMore: numberOfdata < doc_count, 
-        reels: aggregateData?.flat() 
+        hasMore: numberOfdata < doc_count,
+        reels: aggregateData?.flat()
     }, "Random videos found"));
 });
-export const getVendorDetails=tryCatchWrapper(async(req,resp)=>{
-    const query=req.query; 
-    const userId=req.user._id.toString()
-       if(!query?.vendorName){
-        resp.status(403).send(new ApiResponse(403,null,'invalid query strings'))
-        return 
+export const getVendorDetails = tryCatchWrapper(async (req, resp) => {
+    const query = req.query;
+    const userId = req.user._id.toString()
+    if (!query?.vendorName) {
+        resp.status(403).send(new ApiResponse(403, null, 'invalid query strings'))
+        return
     }
     let details;
-    if(query.type=='post'){
-        details=await vendorPicModel.findOne({name:query.vendorName})
-    }else{
-        details=await vendorModel.findOne({businessName:query.vendorName})
+    if (query.type == 'post') {
+        details = await vendorPicModel.findOne({ name: query.vendorName })
+    } else {
+        details = await vendorModel.findOne({ businessName: query.vendorName })
     }
-    if(!details){ 
-        resp.status(404).send(new ApiResponse(404,null,'no vendor found'))
-        return 
-    } 
+    if (!details) {
+        resp.status(404).send(new ApiResponse(404, null, 'no vendor found'))
+        return
+    }
     details = details.toObject();
     let sideDetails;
-    if(query.type=='post'){
-        sideDetails=await vendorModel.findOne({businessName:query.vendorName}) 
-        details.vid=sideDetails._id.toString() // Convert Mongoose document to plain object
-    }else{
-        details.vid=details._id.toString()
+    if (query.type == 'post') {
+        sideDetails = await vendorModel.findOne({ businessName: query.vendorName })
+        details.vid = sideDetails._id.toString() // Convert Mongoose document to plain object
+    } else {
+        details.vid = details._id.toString()
     }
     details['isLikedByUser'] = details?.isLikedBy?.some(user => user.userId.toString() === userId && user.liked);
-    details['isFollowed']=details?.followedBy?.some(user=>user.userId.toString()===userId) || false
-        resp.status(200).send(new ApiResponse(200,details,'found'))
-}) 
-export const getVendorMediaPosts=tryCatchWrapper(async(req,resp)=>{
-    const srchPage =req.query;
-    if(!srchPage?.vendorName){
-        resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
-        return
-    }
-    let numberOfdata=parseInt(srchPage.per_page)
-    if(!numberOfdata || numberOfdata<=0){
-        numberOfdata=3;
-    }
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak=numberOfdata;
-    if(page<0 || !page){
-        page=0;
-    }
-    const total=await picModel.countDocuments({vendorName:srchPage?.vendorName})
-    const postDetails=await picModel.find({vendorName:srchPage?.vendorName}).limit(numberOfdata).skip(page*numberOfdata)
-    if(postDetails.length==0 || !postDetails){
-        resp.status(404).send(new ApiResponse(404,{
-            total:total,
-            hasMore:false,
-            pics:[]
-        },'no data available'))
-        return
-    }
-    resp.status(200).send(new ApiResponse(200,{
-        total:total,
-        hasMore:page*numberOfdata<total,
-        pics:postDetails
-    },'found'))
+    details['isFollowed'] = details?.followedBy?.some(user => user.userId.toString() === userId) || false
+    resp.status(200).send(new ApiResponse(200, details, 'found'))
 })
-export const getVendorMediaReels=tryCatchWrapper(async(req,resp)=>{
-    const srchPage =req.query;
-    console.log(srchPage);
-    
-    if(!srchPage?.vendorName){
-        resp.status(404).send(new ApiResponse(404,null,'invallid vendor name'))
+export const getVendorMediaPosts = tryCatchWrapper(async (req, resp) => {
+    const srchPage = req.query;
+    if (!srchPage?.vendorName) {
+        resp.status(404).send(new ApiResponse(404, null, 'invallid vendor name'))
         return
     }
-    let numberOfdata=parseInt(srchPage.per_page)
-    if(!numberOfdata || numberOfdata<=0){
-        numberOfdata=3;
+    let numberOfdata = parseInt(srchPage.per_page)
+    if (!numberOfdata || numberOfdata <= 0) {
+        numberOfdata = 3;
     }
-    let page=parseInt(srchPage.searchIndex);
-    let pageBreak=numberOfdata;
-    if(page<0 || !page){
-        page=0;
-    } 
-    const total=await videoPostModel.countDocuments({ownerUsername:srchPage?.vendorName,type:"Video"})
-    const postDetails=await videoPostModel.find({ownerUsername:srchPage?.vendorName,type:"Video"}).limit(numberOfdata).skip(page*numberOfdata)
-    if(postDetails.length==0 || !postDetails){
-        resp.status(404).send(new ApiResponse(404,{
-            total:total,
-            hasMore:false,
-            pics:[]
-        },'no data available'))
+    let page = parseInt(srchPage.searchIndex);
+    let pageBreak = numberOfdata;
+    if (page < 0 || !page) {
+        page = 0;
+    }
+    const total = await picModel.countDocuments({ vendorName: srchPage?.vendorName })
+    const postDetails = await picModel.find({ vendorName: srchPage?.vendorName }).limit(numberOfdata).skip(page * numberOfdata)
+    if (postDetails.length == 0 || !postDetails) {
+        resp.status(404).send(new ApiResponse(404, {
+            total: total,
+            hasMore: false,
+            pics: []
+        }, 'no data available'))
+        return
+    }
+    resp.status(200).send(new ApiResponse(200, {
+        total: total,
+        hasMore: page * numberOfdata < total,
+        pics: postDetails
+    }, 'found'))
+})
+export const getVendorMediaReels = tryCatchWrapper(async (req, resp) => {
+    const srchPage = req.query;
+    console.log(srchPage);
+
+    if (!srchPage?.vendorName) {
+        resp.status(404).send(new ApiResponse(404, null, 'invallid vendor name'))
+        return
+    }
+    let numberOfdata = parseInt(srchPage.per_page)
+    if (!numberOfdata || numberOfdata <= 0) {
+        numberOfdata = 3;
+    }
+    let page = parseInt(srchPage.searchIndex);
+    let pageBreak = numberOfdata;
+    if (page < 0 || !page) {
+        page = 0;
+    }
+    const total = await videoPostModel.countDocuments({ ownerUsername: srchPage?.vendorName, type: "Video" })
+    const postDetails = await videoPostModel.find({ ownerUsername: srchPage?.vendorName, type: "Video" }).limit(numberOfdata).skip(page * numberOfdata)
+    if (postDetails.length == 0 || !postDetails) {
+        resp.status(404).send(new ApiResponse(404, {
+            total: total,
+            hasMore: false,
+            pics: []
+        }, 'no data available'))
         return
     }
     console.log(postDetails);
-    
-    resp.status(200).send(new ApiResponse(200,{
-        total:total,
-        hasMore:page*numberOfdata<total,
-        reels:postDetails
-    },'found'))
+
+    resp.status(200).send(new ApiResponse(200, {
+        total: total,
+        hasMore: page * numberOfdata < total,
+        reels: postDetails
+    }, 'found'))
 })
-export const searchPosts_Couples=tryCatchWrapper(async(req,resp)=>{
-    const searchList=req.body.searchArray;
+export const searchPosts_Couples = tryCatchWrapper(async (req, resp) => {
+    const searchList = req.body.searchArray;
     const regexArray = searchList.map((str) => new RegExp(str, "i"));
-    const VendorList=await vendorPicModel.find({
+    const VendorList = await vendorPicModel.find({
         $or: [
             { name: { $in: regexArray } },
-            { tags:  { $elemMatch: { $in: regexArray } } },
+            { tags: { $elemMatch: { $in: regexArray } } },
             { address: { $elemMatch: { $in: regexArray } } },
             { description: { $in: regexArray } }
-          ]
+        ]
     }).limit(3)
-    if(!VendorList){
-        resp.status(501).send(new ApiError(501,'intenal error'))
-    }else{
-        resp.status(203).send(new ApiResponse(203,VendorList,'found'))
+    if (!VendorList) {
+        resp.status(501).send(new ApiError(501, 'intenal error'))
+    } else {
+        resp.status(203).send(new ApiResponse(203, VendorList, 'found'))
     }
 })
 const getTodayDate = () => {
@@ -394,17 +422,17 @@ const getTodayDate = () => {
 };
 function filterNotInCommon(arr1, arr2) {
     return [
-        ...arr1.filter(item => !arr2.includes(item)), 
+        ...arr1.filter(item => !arr2.includes(item)),
         ...arr2.filter(item => !arr1.includes(item))
     ];
 }
-export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
+export const populateMessage = tryCatchWrapper(async (packet, currentRooms) => {
     const { roomID, payload } = packet;
     //console.log(currentRooms.find(room=>room.roomID==roomID));
     // Get today's date correctly in local time
     const today = getTodayDate();
     console.log("Current Date:", today); // Debugging to check the correct date
-    const chat = await chatModel.findOne({ "subscribers.uuid": roomID});
+    const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
     if (!chat) {
         console.log("Chat room not found.");
         return;
@@ -413,10 +441,10 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
     // Iterate through subscribers to find the correct one 
     chat.subscribers.forEach((subscriber) => {
         if (subscriber.uuid === roomID) {
-            let notConnectedUsers=filterNotInCommon(subscriber.roomUsers,currentRooms.find(room=>room.roomID==roomID).currentUsers)
+            let notConnectedUsers = filterNotInCommon(subscriber.roomUsers, currentRooms.find(room => room.roomID == roomID).currentUsers)
             console.log(notConnectedUsers);
-            if(notConnectedUsers.length>0){
-                subscriber.unseenMessages.push({message:payload.text,notSeenBy:notConnectedUsers})
+            if (notConnectedUsers.length > 0) {
+                subscriber.unseenMessages.push({ message: payload.text, notSeenBy: notConnectedUsers })
             }
             let todayMessage = subscriber.messages.find(
                 (msg) => new Date(msg.chatDate).setHours(0, 0, 0, 0) === today.getTime()
@@ -443,16 +471,16 @@ export const populateMessage = tryCatchWrapper(async (packet,currentRooms) => {
     }
 });
 export const getMessages = tryCatchWrapper(async (req, resp) => {
-    const { roomID  }= req.body;
-    
-    await chatModel.findOneAndUpdate({ "subscribers.uuid": roomID },{
+    const { roomID } = req.body;
+
+    await chatModel.findOneAndUpdate({ "subscribers.uuid": roomID }, {
         $pull: {
             "subscribers.$[].unseenMessages": { notSeenBy: req.user._id.toString() }
         }
     });
     const chat = await chatModel.findOne({ "subscribers.uuid": roomID });
     if (!chat) {
-        console.log("Chat room not found.");  
+        console.log("Chat room not found.");
         return;
     }
     const subscriber = chat.subscribers.find((sub) => sub.uuid === roomID);
