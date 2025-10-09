@@ -69,7 +69,7 @@ const vendorRegisterHandler=tryCatchWrapper(async(req,resp)=>{
 })
 const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     const {userid,password}=req.body;   
-     console.log(req.body);
+    
      
     let loggedUser=await vendorModel.findOne({
         $or:[{businessEmail:userid},{businessName:userid}]
@@ -80,6 +80,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
         },"no user found"))
         return
     }
+    
     // if(loggedUser.isGoogleAuthenticated){
         
     //     let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
@@ -94,7 +95,7 @@ const vendorLoginHandler=tryCatchWrapper(async(req,resp)=>{
     //         return
     // }
     let passComp=await loggedUser.validatePassword(password)
-    
+    console.log(passComp);
     if(passComp){
         let {refreshToken}=await generateRefreshAndAccessToken(loggedUser._id)
         if(!(loggedUser.isMobileVerified)){
