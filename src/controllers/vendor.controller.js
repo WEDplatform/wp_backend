@@ -219,7 +219,7 @@ function addUnseenMessageCount(data, userId) {
     return data.map(room => {
         // Count messages where `notSeenBy` includes the userId
         const numberofUnseenMess = room.unseenMessages.filter(msg => msg.notSeenBy.includes(userId)).length;
-        
+         
         // Return the updated room object with the unseen count
         return { ...room, numberofUnseenMess };
     });
