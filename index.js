@@ -77,7 +77,7 @@ nameSpac.on("connection", (socket) => {
 });
 connectDB()
     .then(() => {
-        server.listen(process.env.PORT || 5173, () => {
+        server.listen(process.env.PORT || 5173, '0.0.0.0',() => {
             console.log(`🚀 Server is running at port ${process.env.PORT || 5173}`);
         })
     })
