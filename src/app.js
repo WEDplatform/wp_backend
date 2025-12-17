@@ -25,6 +25,6 @@ app.use("/api/v1/user",userRouter);
 app.use("/api/v1/vendor",vendorRouter)
 app.use("/api/v1/cmn",commonRouter)
 app.get("/",(req,resp)=>{
-    resp.status(200).send("Running")
+    resp.status(200).send("OK")
 })
 export {app}
